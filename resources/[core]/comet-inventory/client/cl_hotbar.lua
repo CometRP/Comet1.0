@@ -74,7 +74,7 @@ AddEventHandler('baseevents:onPlayerKilled', function(killedBy, data)
 		local weapon = GetSelectedPedWeapon(killer)
 		for i,v in ipairs(weaponCheck) do
 			if v == weapon then
-				-- local cid = exports["isPed"]:isPed("cid")
+				-- local cid = exports["comet-base"]:isPed("cid")
                 local cid = "a"
 				local DNA = "DNA-"..cid
 				TriggerServerEvent('Evidence:DNAWeapon',GetPlayerServerId(GetClosestPlayer()),DNA)
@@ -263,7 +263,7 @@ end)
 -- 	end
 -- 	TriggerEvent("evidence:bulletInformation", currentInformation)
 
--- 	local dead = exports["isPed"]:isPed("dead")
+-- 	local dead = exports["comet-base"]:isPed("dead")
 -- 	if dead then
 -- 		return
 -- 	end
@@ -611,7 +611,7 @@ function unholster1h(weaponHash)
 
 	local dict = "reaction@intimidation@1h"
 	local anim = "intro"
-	-- local myJob = exports["isPed"]:isPed("myJob")
+	-- local myJob = exports["comet-base"]:isPed("myJob")
     local myJob = "police"
 	local ped = PlayerPedId()
 
@@ -801,7 +801,7 @@ function holster1h()
 	unholsteringactive = true
 	local dict = "reaction@intimidation@1h"
 	local anim = "outro"
-	-- local myJob = exports["isPed"]:isPed("myJob")
+	-- local myJob = exports["comet-base"]:isPed("myJob")
     local myJob = "police"
 	if myJob == "police" then
 		copholster()
@@ -861,7 +861,7 @@ function grab2h(weaponHash)
 	SetCurrentPedWeapon(ped, weaponHash, 1)
     ClearPedTasks(ped)
 
-    -- local myJob = exports["isPed"]:isPed("myJob")
+    -- local myJob = exports["comet-base"]:isPed("myJob")
     local myJob = "police"
 	if myJob == "police" then
 	    if weaponHash == 2210333304 then

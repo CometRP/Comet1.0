@@ -157,15 +157,15 @@ function ScanJailContainers() {
 
 RegisterNetEvent('comet-base:playerSpawned')
 on('comet-base:playerSpawned', (broughtData) => {
-    // exports["isPed"]:isPed("cid")
-	let cid = exports['isPed'].isPed("cid")
+    // exports["comet-base"]:isPed("cid")
+	let cid = exports['comet-base'].isPed("cid")
 	emitNet("server-request-update",cid)
 	SendNuiMessage(JSON.stringify({ response: "SendItemList", list: itemList}))
 })
 
 RegisterNuiCallbackType("updateMyQuality");
 on("__cfx_nui:updateMyQuality", (data, cb) => {
-	let cid = exports['isPed'].isPed("cid")
+	let cid = exports['comet-base'].isPed("cid")
 	emitNet("server-item-quality-update", cid, data)
 })
 
@@ -263,7 +263,7 @@ on('inventory-bar', (toggle) => {
 
 RegisterNetEvent('inventory:removeItem');
 on('inventory:removeItem', (id, amount) => {
-    let cid = exports['isPed'].isPed("cid");
+    let cid = exports['comet-base'].isPed("cid");
     RemoveItem(id, amount);
     emit('hud-display-item', id, 'Removed', amount);
     emitNet("server-inventory-refresh",cid);
@@ -271,12 +271,12 @@ on('inventory:removeItem', (id, amount) => {
 });
 
 function RemoveItem(id, amount) {
-    cid = exports['isPed'].isPed("cid");
+    cid = exports['comet-base'].isPed("cid");
     emitNet('server-remove-item', cid, id, amount, openedInv);
 }
 
 function UpdateItem(id, slot, data) {
-    cid = exports['isPed'].isPed("cid");
+    cid = exports['comet-base'].isPed("cid");
     emitNet('server-update-item', cid, id, slot, data);
 }
 
@@ -400,7 +400,7 @@ on('inventory-open-request', () => {
     let ContainerFound = ScanExtraStashes();
     let JailBinFound = ScanJailContainers();
     let targetid = 0;
-    cid = exports['isPed'].isPed("cid")
+    cid = exports['comet-base'].isPed("cid")
 
     if (openedInv) {
         CloseGui()
@@ -465,7 +465,7 @@ on('inventory-open-request', () => {
                     emit("toggle-animation", true);
 
                     let foodtruck = false
-                    if (exports['isPed'].isPed("myjob") == "foodtruck") {
+                    if (exports['comet-base'].isPed("myjob") == "foodtruck") {
                         foodtruck = true
                     }
 
@@ -782,7 +782,7 @@ on('nui-toggle', (toggle) => {
 
 RegisterNetEvent('inventory-bind');
 on('inventory-bind', (slot) => {
-    let cid = exports['isPed'].isPed("cid");
+    let cid = exports['comet-base'].isPed("cid");
     let inventoryUsedName = 'ply-' + cid;
     let itemid = boundItems[slot];
     let isWeapon = true;
@@ -817,7 +817,7 @@ on('closeInventoryGui2', () => {
 
 RegisterNuiCallbackType('ServerCloseInventory');
 on('__cfx_nui:ServerCloseInventory', (data, cb) => {
-    let cid = exports['isPed'].isPed("cid");
+    let cid = exports['comet-base'].isPed("cid");
     if (data.name != 'none') {
 		emitNet("server-inventory-close", cid, data.name)
 		emitNet("server-inventory-refresh",cid);
@@ -855,7 +855,7 @@ on('__cfx_nui:swap', (data, cb) => {
 
 RegisterNetEvent('server-inventory-open');
 on('server-inventory-open', (target, name) => {
-    cid = exports['isPed'].isPed("cid");
+    cid = exports['comet-base'].isPed("cid");
     emitNet('server-inventory-open', GetEntityCoords(PlayerPedId()), cid, target, name);
 });
 
@@ -956,7 +956,7 @@ function GiveItem(itemid, amount, generateInformation, nonStacking, itemdata, re
         generateInformation = true;
     }
     if (slot != 0) {
-        cid = exports['isPed'].isPed("cid");
+        cid = exports['comet-base'].isPed("cid");
         emitNet(
             'server-inventory-give',
             cid,
@@ -1000,11 +1000,11 @@ async function OpenGui() {
     //Center cursor
     SetCursorLocation(0.5, 0.5);
 
-    cash = exports['isPed'].isPed("mycash")
+    cash = exports['comet-base'].isPed("mycash")
 
     let brought = hadBrought[cid]
     let cop = false
-    if (exports['isPed'].isPed("myjob") == "police") {
+    if (exports['comet-base'].isPed("myjob") == "police") {
         cop = true
     }
     await Delay(250);
@@ -1021,7 +1021,7 @@ function PopulateGuiSingle(playerinventory, itemCount, invName) {
 let TrapOwner = false;
 
 function PopulateGui(playerinventory, itemCount, invName, targetinventory, targetitemCount, targetinvName, cash, targetInvWeight, targetInvSlots) {
-    let cid = exports['isPed'].isPed("cid");
+    let cid = exports['comet-base'].isPed("cid");
     let StoreOwner = false;
 
     if (targetinvName.indexOf('PlayerStore') > -1) {

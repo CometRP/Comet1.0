@@ -796,7 +796,7 @@ end
     end
 
     if (itemid == "lockpick") then
-        local myJob = exports['isPed'].isPed("myjob")
+        local myJob = exports['comet-base'].isPed("myjob")
         if myJob ~= "news" then
             TriggerEvent("inv:lockPick",false,inventoryName,slot)
 
@@ -1095,7 +1095,7 @@ end)
 
 RegisterNetEvent('SniffRequestCID')
 AddEventHandler('SniffRequestCID', function(src)
-    local cid = exports['isPed'].isPed("cid")
+    local cid = exports['comet-base'].isPed("cid")
     TriggerServerEvent("SniffCID",cid,src)
 end)
 
@@ -1700,7 +1700,7 @@ AddEventHandler('inv:lockPick', function(isForced,inventoryName,slot)
             carTimer = math.ceil(carTimer / 3)
 
 
-            local myJob = exports['isPed'].isPed("myjob")
+            local myJob = exports['comet-base'].isPed("myjob")
             if myjob == "towtruck" then
                 carTimer = 4000
             end
@@ -1840,7 +1840,7 @@ AddEventHandler('veh:repairing', function(inventoryName,slot,itemid)
 
             if finished == 100 then
                 
-                local myJob = exports['isPed'].isPed("myjob")
+                local myJob = exports['comet-base'].isPed("myjob")
                 if myJob == "towtruck" then
 
                     SetVehicleEngineHealth(targetVehicle, 1000.0)

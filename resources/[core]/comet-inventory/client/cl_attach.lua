@@ -2,7 +2,7 @@
 
 -- print(`weapon_assaultrifle`)
 function generalInventory()
-    -- local dead = exports["isPed"]:isPed("dead")
+    -- local dead = exports["comet-base"]:isPed("dead")
     -- if not insidePrompt and not inventoryDisabled and not focusTaken and not dead and not promptCurrent then
     --     TriggerEvent("inventory-open-request")
     -- end
