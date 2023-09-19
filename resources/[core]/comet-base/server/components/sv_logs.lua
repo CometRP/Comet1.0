@@ -1,7 +1,7 @@
 Components.Logs = Components.Logs or {}
 
 Components.Logs.SendDiscord = function(wh, pSrc, reason, pBanReason, pLogData)
-    local user = Components.Player.GetUser(pSrc)
+    local user = Components.Player:GetUser(pSrc)
     if user ~= false then
         hexId = user:getVar("hexid")
     else

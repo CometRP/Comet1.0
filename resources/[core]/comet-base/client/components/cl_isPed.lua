@@ -34,7 +34,7 @@ activeTasks = {
   --[1] = { ["Gang"] = 2, ["TaskType"] = 1, ["TaskState"] = 2, ["TaskOwner"] = 12(cid), ["TaskInfo"] = , ["location"] = { ['x'] = -1248.52,['y'] = -1141.12,['z'] = 7.74,['h'] = 284.71, ['info'] = 'Down at Smokies on the Beach' }, }
 }
 
-Components.isPed = Components.isPed = {}
+Components.isPed = Components.isPed or {}
 
 
 --local NearNPC = exports["isPed"]:GetClosestNPC()

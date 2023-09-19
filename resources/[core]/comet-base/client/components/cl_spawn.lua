@@ -66,7 +66,7 @@ Components.Spawn.InitialSpawn = function(self)
 end
 
 AddEventHandler("comet-base:firstSpawn", function()
-    Components.Spawn.InitialSpawn()
+    Components.Spawn:InitialSpawn()
 end)
 
 RegisterNetEvent('comet-base:clearStates')

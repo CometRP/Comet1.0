@@ -79,7 +79,7 @@ local function AddMethod(player)
 
         GetUser(self).character.dirty_money = amt
 
-        Components.Database.UpdateCharacterDirtyMoney(GetUser(self), characterId, amt, function(updatedMoney, err)
+        Components.Database:UpdateCharacterDirtyMoney(GetUser(self), characterId, amt, function(updatedMoney, err)
             if updatedMoney then
                 --We are good here.
             end
@@ -91,7 +91,7 @@ local function AddMethod(player)
 
         GetUser(self).character.stress_level = amt
 
-        Components.Database.UpdateCharacterStressLevel(GetUser(self), characterId, amt, function(updatedMoney, err)
+        Components.Database:UpdateCharacterStressLevel(GetUser(self), characterId, amt, function(updatedMoney, err)
             if updatedMoney then
                 --We are good here.
             end
@@ -103,7 +103,7 @@ local function AddMethod(player)
 
         GetUser(self).character.dirty_money = 0
 
-        Components.Database.UpdateCharacterDirtyMoney(GetUser(self), characterId, 0, function(updatedMoney, err)
+        Components.Database:UpdateCharacterDirtyMoney(GetUser(self), characterId, 0, function(updatedMoney, err)
             if updatedMoney then
                 --We are good here.
             end
@@ -120,11 +120,11 @@ local function AddMethod(player)
 
         GetUser(self).character.cash = cash
 
-        Components.Database.UpdateCharacterMoney(GetUser(self), characterId, cash, function(updatedMoney, err) 
+        Components.Database:UpdateCharacterMoney(GetUser(self), characterId, cash, function(updatedMoney, err) 
             if updatedMoney then
                 TriggerClientEvent("banking:addCash", GetUser(self).source, amt)
                 TriggerClientEvent("banking:updateCash", GetUser(self).source, GetUser(self):getCash(), amt)
-                -- exports["ez-base"]:AddLog("Cash Added", GetUser(self), "Money added to user, amount: " .. tostring(amt))
+                -- exports["comet-base"]:AddLog("Cash Added", GetUser(self), "Money added to user, amount: " .. tostring(amt))
             end
         end)
     end
@@ -140,11 +140,11 @@ local function AddMethod(player)
         GetUser(self).character.cash = GetUser(self).character.cash - amt
 
 
-            Components.Database.UpdateCharacterMoney(GetUser(self), characterId, cash, function(updatedMoney, err) 
+            Components.Database:UpdateCharacterMoney(GetUser(self), characterId, cash, function(updatedMoney, err) 
                 if updatedMoney then
                     TriggerClientEvent("banking:removeCash", GetUser(self).source, amt)
                     TriggerClientEvent("banking:updateCash", GetUser(self).source, GetUser(self):getCash(), amt)
-                    -- exports["ez-base"]:AddLog("Cash Removed", GetUser(self), "Money removed from user, amount: " .. tostring(amt))
+                    -- exports["comet-base"]:AddLog("Cash Removed", GetUser(self), "Money removed from user, amount: " .. tostring(amt))
                 end
             end)
     end
@@ -160,11 +160,11 @@ local function AddMethod(player)
 
         GetUser(self).character.bank = GetUser(self).character.bank - amt
 
-        Components.Database.UpdateCharacterBank(GetUser(self), characterId, bank, function(updatedMoney, err) 
+        Components.Database:UpdateCharacterBank(GetUser(self), characterId, bank, function(updatedMoney, err) 
             if updatedMoney then
                 TriggerClientEvent("banking:removeBalance", GetUser(self).source, amt)
                 TriggerClientEvent("banking:updateBalance", GetUser(self).source, GetUser(self):getBalance(), amt)
-                -- exports["ez-base"]:AddLog("Bank Removed", GetUser(self), "Bank removed from user, amount: " .. tostring(amt))
+                -- exports["comet-base"]:AddLog("Bank Removed", GetUser(self), "Bank removed from user, amount: " .. tostring(amt))
             end
         end)
     end
@@ -179,11 +179,11 @@ local function AddMethod(player)
 
         GetUser(self).character.bank = bank
 
-        Components.Database.UpdateCharacterBank(GetUser(self), characterId, bank, function(updatedMoney, err) 
+        Components.Database:UpdateCharacterBank(GetUser(self), characterId, bank, function(updatedMoney, err) 
             if updatedMoney then
                 TriggerClientEvent("banking:addBalance", GetUser(self).source, amt)
                 TriggerClientEvent("banking:updateBalance", GetUser(self).source, GetUser(self):getBalance(), amt)
-                -- exports["ez-base"]:AddLog("Bank Added", GetUser(self), "Bank added to user, amount: " .. tostring(amt))
+                -- exports["comet-base"]:AddLog("Bank Added", GetUser(self), "Bank added to user, amount: " .. tostring(amt))
             end
         end)
     end
@@ -273,8 +273,8 @@ function Components.Player.CreatePlayer(self, src, recrate)
 end
 
 local pos = {}
-RegisterServerEvent('ez-base:updatecoords')
-AddEventHandler('ez-base:updateCoords', function(x,y,z)
+RegisterServerEvent('comet-base:updatecoords')
+AddEventHandler('comet-base:updateCoords', function(x,y,z)
     local src = source
     pos[src] = {x,y,z}
 end)
@@ -282,7 +282,7 @@ end)
 RegisterServerEvent("retreive:licenes:server")
 AddEventHandler("retreive:licenes:server", function()
     local src = source
-    local user = exports["ez-base"]:getModule("Player"):GetUser(src)
+    local user = exports["comet-base"]:FetchComponent("Player"):GetUser(src)
     local characterId = user:getVar("character").id
     exports.oxmysql:execute('SELECT * FROM user_licenses WHERE owner = ? AND type = ?', {characterId, "Firearm"}, function(callback)
         TriggerClientEvent("wtflols", src, callback[1].status)
@@ -307,16 +307,16 @@ AddEventHandler("playerDropped", function(reason)
     local posE = json.encode(pos[src])
     pos[src] = nil
 
-    local pUser = exports["ez-base"]:getModule("Player"):GetUser(src)
+    local pUser = exports["comet-base"]:FetchComponent("Player"):GetUser(src)
     local char = pUser:getVar("character")
     local userjob = user:getVar("job") or "Unemployed"
     if userjob == "police" then
-        exports['ez-emergencyjobs']:DisconnectJobUpdater(userjob)
-        TriggerEvent("ez-emergencyjobs:log:update", src, "clockoff")
+        exports['comet-emergencyjobs']:DisconnectJobUpdater(userjob)
+        TriggerEvent("comet-emergencyjobs:log:update", src, "clockoff")
     elseif userjob == "ems" then
-        exports['ez-emergencyjobs']:DisconnectJobUpdater(userjob)
+        exports['comet-emergencyjobs']:DisconnectJobUpdater(userjob)
     end
 
     Components.Users[src] = nil
-    TriggerEvent('ez-base:playerDropped', src, user)
+    TriggerEvent('comet-base:playerDropped', src, user)
 end)

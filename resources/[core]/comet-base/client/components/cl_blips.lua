@@ -65,7 +65,7 @@ local blips = {
 AddEventHandler("comet-base:playerSessionStarted", function()
     Citizen.CreateThread(function()
         for k,v in ipairs(blips) do
-            Components.Blips.CreateBlip(v.id, v)
+            Components.Blips:CreateBlip(v.id, v)
         end
     end)
 end)

@@ -85,10 +85,11 @@ function Components.Base.WaitForExports(self)
         while true do
             Citizen.Wait(0)
             if exports and exports["comet-base"] then
-                TriggerEvent("comet-base:refreshComponents")
+                TriggerEvent("comet-base:exportsReady")
                 Components.Base.ExportsReady = true
                 return
             end
         end
     end)
 end
+Components.Base:WaitForExports()

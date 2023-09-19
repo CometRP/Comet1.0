@@ -24,7 +24,7 @@ function Components.Base.LoginPlayer(self, args, src, callback)
             return
         end
 
-        Components.Database.FetchPlayerData(src, function(data, err)
+        Components.Database:FetchPlayerData(src, function(data, err)
             if err then
                 data = {
                     err = true,
@@ -41,14 +41,14 @@ function Components.Base.LoginPlayer(self, args, src, callback)
     end
 
 
-	Components.Database.PlayerExistsDB(src, function(exists, err)
+	Components.Database:PlayerExistsDB(src, function(exists, err)
 		if err then
 			fetchData("Error checking player existence, there is a problem with the database")
 			return -- my stepsister stuck
 		end -- my mother stuck
 
 		if not exists then
-			Components.Database.CreateNewPlayer(src, function(created)
+			Components.Database:CreateNewPlayer(src, function(created)
 				if not created then
 					fetchData("Error creating new user, there is a problem with the database")
 					return
@@ -70,7 +70,7 @@ function Components.Base.FetchPlayerCharacters(self, args, src, callback)
 
 	if not user then return end
 
-	Components.Database.FetchCharacterData(user, function(data, err)
+	Components.Database:FetchCharacterData(user, function(data, err)
 		if err then
 			data = {
 				err = true,
@@ -104,7 +104,7 @@ function Components.Base.CreatePhoneNumber(self, src, callback)
 			if phoneNumber then 
 				phoneNumber = tostring(phoneNumber)
 				if phoneNumber then
-					Components.Database.PhoneNumberExists(src, phoneNumber, function(exists, err)
+					Components.Database:PhoneNumberExists(src, phoneNumber, function(exists, err)
 						if err then callback(false, true) success = true querying = false return end
 						if not exists then callback(phoneNumber) success = true end
 						querying = false
@@ -154,7 +154,7 @@ function Components.Base.CreateCharacter(self, charData, src, callback)
 				end
 				local hexId = user:getVar("hexid")
 				charData.phonenumber = phoneNumber
-				Components.Database.CreateNewCharacter(user, charData, hexId, phoneNumber, function(created, err)
+				Components.Database:CreateNewCharacter(user, charData, hexId, phoneNumber, function(created, err)
 					if not created or err then
 						created = {
 							err = true,
@@ -182,7 +182,7 @@ function Components.Base.DeleteCharacter(self, id, src, callback)
 
 	if not ownsCharacter then return end
 
-	Components.Database.DeleteCharacter(user, id, function(deleted)
+	Components.Database:DeleteCharacter(user, id, function(deleted)
 		callback(deleted)
 	end)
 end

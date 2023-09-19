@@ -24,5 +24,6 @@ client_scripts {
 server_scripts {
     'server/sv_base.lua',
     -- 'server/sv_components.lua',
+    'server/components/sv_events.lua',
     'server/components/sv_*.lua',
 }

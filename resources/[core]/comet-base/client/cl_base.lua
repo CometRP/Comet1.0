@@ -43,7 +43,7 @@ AddEventHandler("comet-base:playerSessionStarted", function()
         Wait(100)
     end
     ShutdownLoadingScreen()
-    Components.SpawnManager.Initialize()
+    Components.Spawn:Initialize()
 end)
 
 RegisterNetEvent("comet-base:waitForExports", function()

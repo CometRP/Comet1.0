@@ -1,7 +1,7 @@
 -- RegisterNetEvent('paycheck:collect:log')
 -- AddEventHandler('paycheck:collect:log', function()
 --     local src = source
---     local user = exports["comet-base"]:getModule("Player"):GetUser(src)
+--     local user = exports["comet-base"]:FetchComponent("Player"):GetUser(src)
 --     local hexId = user:getVar("hexid")
 --     local pName = GetPlayerName(source)
 --     local pDiscord = GetPlayerIdentifiers(src)[3]
