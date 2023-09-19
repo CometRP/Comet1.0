@@ -1,14 +1,14 @@
 Components.Database = Components.Database or {}
 
 function Components.Database.CreateNewPlayer(self, src, callback)
-    local hexid = Eazy.Util:GetHexId(src)
+    local hexid = Components.Util.GetHexId(src)
     callback = callback and callback or function() return end
 
     local data = {
         hexid = hexid,
-        communityid = Eazy.Util:HexIdToComId(hexid),
-        steamid = Eazy.Util:HexIdToSteamId(hexid),
-        license = Eazy.Util:GetLicense(src),
+        communityid = Components.Util.HexIdToComId(hexid),
+        steamid = Components.Util.HexIdToSteamId(hexid),
+        license = Components.Util.GetLicense(src),
         name = GetPlayerName(src),
         rank = "user"
     }
@@ -75,7 +75,7 @@ end
 
     
 function Components.Database.PlayerExistsDB(self, src, callback)
-    local hexId = Eazy.Util:GetHexId(src)
+    local hexId = Components.Util.GetHexId(src)
     callback = callback and callback or function() return end
     
     if not hexId or hexId == "" then callback(false, true) return end
@@ -122,7 +122,7 @@ end
 
 
 function Components.Database.FetchPlayerData(self, src, callback)
-    local hexId = Eazy.Util:GetHexId(src)
+    local hexId = Components.Util.GetHexId(src)
     callback = callback and callback or function() return end
 
     if not hexId or hexId == "" then callback(false, true) return end

@@ -1,4 +1,4 @@
-Components.Spawn = {}
+Components.Spawn = Components.Spawn or {}
 
 Components.Spawn.Initialize = function(self)
     Citizen.CreateThread(function()
@@ -28,8 +28,8 @@ Components.Spawn.Initialize = function(self)
 
         Citizen.Wait(10000)
 
-        TriggerEvent("ez-base:spawnInitialized")
-        TriggerServerEvent("ez-base:spawnInitialized")
+        TriggerEvent("comet-base:spawnInitialized")
+        TriggerServerEvent("comet-base:spawnInitialized")
 
     end)
 end
@@ -44,7 +44,7 @@ Components.Spawn.InitialSpawn = function(self)
             Citizen.Wait(0)
         end
 
-        local character = Eazy.LocalPlayer:getCurrentCharacter()
+        local character = Components.LocalPlayer:getCurrentCharacter()
 
 
         --Tells raid clothes to set ped to correct skin
@@ -69,8 +69,8 @@ AddEventHandler("comet-base:firstSpawn", function()
     Components.Spawn.InitialSpawn()
 end)
 
-RegisterNetEvent('ez-base:clearStates')
-AddEventHandler('ez-base:clearStates', function()
+RegisterNetEvent('comet-base:clearStates')
+AddEventHandler('comet-base:clearStates', function()
     TriggerServerEvent("reset:blips")
     TriggerEvent("nowEMSDeathOff")
     TriggerEvent("nowCopDeathOff")

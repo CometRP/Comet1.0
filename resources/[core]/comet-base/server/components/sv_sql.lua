@@ -1,4 +1,4 @@
-Components.SQL = {}
+Components.SQL = Components.SQL or {}
 
 Components.SQL.scalar = function(qyery, ...)
     local qPromise = promise:new()

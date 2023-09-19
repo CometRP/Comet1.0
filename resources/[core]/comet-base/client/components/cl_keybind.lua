@@ -238,7 +238,7 @@ function pBindString(group,key,bool)
     end
 end
 
-Components.Keybinds = {}
+Components.Keybinds = Components.Keybinds or {}
 
 Components.Keybinds.Add = function(cmdCategory, keyDownCmd, keyUpCmd, cmdDesc, device, bind)
     if not bind then bind = "" end

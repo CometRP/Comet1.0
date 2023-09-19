@@ -1,5 +1,6 @@
 Shared = Shared or {}
-Components = {}
+Components = Components or {}
+Components.Base = Components.Base or {}
 
 DoesComponentExist = function(i)
     if Components[i] ~= nil then 
@@ -77,3 +78,17 @@ LoadComponents = function(comps, cb)
     end)
 end
 exports("LoadComponents", LoadComponents)
+
+Components.Base.ExportsReady = false
+function Components.Base.WaitForExports(self)
+    Citizen.CreateThread(function()
+        while true do
+            Citizen.Wait(0)
+            if exports and exports["comet-base"] then
+                TriggerEvent("comet-base:refreshComponents")
+                Components.Base.ExportsReady = true
+                return
+            end
+        end
+    end)
+end

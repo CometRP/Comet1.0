@@ -11,11 +11,11 @@ shared_scripts {
 }
 
 client_scripts {
-    -- '@PolyZone/client.lua',
-    -- '@PolyZone/BoxZone.lua',
-    -- '@PolyZone/CircleZone.lua',
-    -- '@PolyZone/ComboZone.lua',
-    -- '@PolyZone/EntityZone.lua',
+    '@PolyZone/client.lua',
+    '@PolyZone/BoxZone.lua',
+    '@PolyZone/CircleZone.lua',
+    '@PolyZone/ComboZone.lua',
+    '@PolyZone/EntityZone.lua',
 
     'client/cl_base.lua',
     -- 'client/cl_components.lua',

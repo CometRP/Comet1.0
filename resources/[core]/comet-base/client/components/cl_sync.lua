@@ -1,4 +1,4 @@
-Components.Sync = {}
+Components.Sync = Components.Sync or {}
 
 TriggerServerEvent("comet-base:sync:ready")
 

@@ -79,7 +79,7 @@ local function AddMethod(player)
 
         GetUser(self).character.dirty_money = amt
 
-        Components.DB:UpdateCharacterDirtyMoney(GetUser(self), characterId, amt, function(updatedMoney, err)
+        Components.Database.UpdateCharacterDirtyMoney(GetUser(self), characterId, amt, function(updatedMoney, err)
             if updatedMoney then
                 --We are good here.
             end
@@ -91,7 +91,7 @@ local function AddMethod(player)
 
         GetUser(self).character.stress_level = amt
 
-        Components.DB:UpdateCharacterStressLevel(GetUser(self), characterId, amt, function(updatedMoney, err)
+        Components.Database.UpdateCharacterStressLevel(GetUser(self), characterId, amt, function(updatedMoney, err)
             if updatedMoney then
                 --We are good here.
             end
@@ -103,7 +103,7 @@ local function AddMethod(player)
 
         GetUser(self).character.dirty_money = 0
 
-        Components.DB:UpdateCharacterDirtyMoney(GetUser(self), characterId, 0, function(updatedMoney, err)
+        Components.Database.UpdateCharacterDirtyMoney(GetUser(self), characterId, 0, function(updatedMoney, err)
             if updatedMoney then
                 --We are good here.
             end
@@ -120,7 +120,7 @@ local function AddMethod(player)
 
         GetUser(self).character.cash = cash
 
-        Components.DB:UpdateCharacterMoney(GetUser(self), characterId, cash, function(updatedMoney, err) 
+        Components.Database.UpdateCharacterMoney(GetUser(self), characterId, cash, function(updatedMoney, err) 
             if updatedMoney then
                 TriggerClientEvent("banking:addCash", GetUser(self).source, amt)
                 TriggerClientEvent("banking:updateCash", GetUser(self).source, GetUser(self):getCash(), amt)
@@ -140,7 +140,7 @@ local function AddMethod(player)
         GetUser(self).character.cash = GetUser(self).character.cash - amt
 
 
-            Components.DB:UpdateCharacterMoney(GetUser(self), characterId, cash, function(updatedMoney, err) 
+            Components.Database.UpdateCharacterMoney(GetUser(self), characterId, cash, function(updatedMoney, err) 
                 if updatedMoney then
                     TriggerClientEvent("banking:removeCash", GetUser(self).source, amt)
                     TriggerClientEvent("banking:updateCash", GetUser(self).source, GetUser(self):getCash(), amt)
@@ -160,7 +160,7 @@ local function AddMethod(player)
 
         GetUser(self).character.bank = GetUser(self).character.bank - amt
 
-        Components.DB:UpdateCharacterBank(GetUser(self), characterId, bank, function(updatedMoney, err) 
+        Components.Database.UpdateCharacterBank(GetUser(self), characterId, bank, function(updatedMoney, err) 
             if updatedMoney then
                 TriggerClientEvent("banking:removeBalance", GetUser(self).source, amt)
                 TriggerClientEvent("banking:updateBalance", GetUser(self).source, GetUser(self):getBalance(), amt)
@@ -179,7 +179,7 @@ local function AddMethod(player)
 
         GetUser(self).character.bank = bank
 
-        Components.DB:UpdateCharacterBank(GetUser(self), characterId, bank, function(updatedMoney, err) 
+        Components.Database.UpdateCharacterBank(GetUser(self), characterId, bank, function(updatedMoney, err) 
             if updatedMoney then
                 TriggerClientEvent("banking:addBalance", GetUser(self).source, amt)
                 TriggerClientEvent("banking:updateBalance", GetUser(self).source, GetUser(self):getBalance(), amt)

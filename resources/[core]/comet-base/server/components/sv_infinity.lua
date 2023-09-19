@@ -1,4 +1,4 @@
-Components.Infinity = {}
+Components.Infinity = Components.Infinity or {}
 
 pCoordsActivePlayers = {}
 

@@ -1,4 +1,4 @@
-Components.Callback = {}
+Components.Callback = Components.Callback or {}
 
 local res, promises, functions, callIden = GetCurrentResourceName(), {}, {}, 0
 

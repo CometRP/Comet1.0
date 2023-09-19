@@ -1,4 +1,4 @@
-Components.Status = {}
+Components.Status = Components.Status or {}
 
 Shared.Status = {
     
