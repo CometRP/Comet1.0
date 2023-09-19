@@ -2,7 +2,7 @@ local CreditCard = false
 
 Player = nil
 
-RegisterNetEvent("comet-base:refreshComponents", function()
+AddEventHandler("comet-base:refreshComponents", function()
     exports['comet-base']:LoadComponents({
         "Player",
     }, function(pass)

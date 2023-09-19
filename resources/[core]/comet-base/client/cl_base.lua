@@ -19,7 +19,7 @@ function Components.Base.Initialize(self)
         end
     end)
 end
-Components.Base.Initialize()
+Components.Base:Initialize()
 
 -- CreateThread(function()
 --     while true do

@@ -4,13 +4,14 @@ Inventory.AddItem = function(source, id, amount, generateInformation, itemdata, 
     TriggerClientEvent("player:receiveItem", source, id, amount, generateInformation, itemdata, returnData, devItem)
 end
 exports("AddItem", Inventory.AddItem)
-
-exports['comet-base']:CreateComponent("Inventory", Inventory)
+AddEventHandler("comet-base:exportsReady", function()
+    exports['comet-base']:CreateComponent("Inventory", Inventory)
+end)
 -- Load Framework
 
 Callback, Player = nil
 
-RegisterNetEvent("comet-base:refreshComponents", function()
+AddEventHandler("comet-base:refreshComponents", function()
     exports['comet-base']:LoadComponents({
         "Callback",
         "Player",

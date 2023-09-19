@@ -49,6 +49,6 @@
 -- end
 -- exports("RefreshComponents", RefreshComponents)
 
--- RegisterNetEvent("comet-base:refreshComponents", function()
+-- AddEventHandler("comet-base:refreshComponents", function()
 
 -- end)

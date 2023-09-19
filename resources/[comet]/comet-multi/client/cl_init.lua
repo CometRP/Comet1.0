@@ -1,7 +1,7 @@
 LocalPlayer, Events, Util, isPed = nil, nil, nil
 
 
-RegisterNetEvent("comet-base:refreshComponents", function()
+AddEventHandler("comet-base:refreshComponents", function()
     exports['comet-base']:LoadComponents({
         "LocalPlayer",
         "Events",

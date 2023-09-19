@@ -29,6 +29,7 @@ AddExtraComponent = function(comp, name, func)
         return false
     end
     Components[comp][name] = func
+    RefreshComponents()
 end
 exports("AddExtraComponent", AddExtraComponent)
 
@@ -45,6 +46,7 @@ RefreshComponents = function()
     TriggerEvent("comet-base:refreshComponents")
 end
 exports("RefreshComponents", RefreshComponents)
+CreateThread(RefreshComponents)
 
 LoadComponents = function(comps, cb)
     local resourceName = GetInvokingResource() or GetCurrentResourceName()

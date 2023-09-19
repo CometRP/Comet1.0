@@ -1,5 +1,5 @@
 Player = nil
-RegisterNetEvent("comet-base:refreshComponents", function()
+AddEventHandler("comet-base:refreshComponents", function()
     print("test")
     exports['comet-base']:LoadComponents({
         "Player",

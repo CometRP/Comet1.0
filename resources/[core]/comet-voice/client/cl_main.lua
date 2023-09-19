@@ -17,7 +17,7 @@ RegisterNetEvent('comet-base:client:on-logout', function()
     TriggerEvent('comet-voice:client:voice-state', false)
 end)
 
-RegisterNetEvent("comet-base:refreshComponents", function()
+AddEventHandler("comet-base:refreshComponents", function()
     exports['comet-base']:LoadComponents({
         "Infinity",
         "Keybinds",
