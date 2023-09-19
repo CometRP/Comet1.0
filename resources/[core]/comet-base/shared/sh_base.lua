@@ -2,6 +2,8 @@ Shared = Shared or {}
 Components = Components or {}
 Components.Base = Components.Base or {}
 
+local Dependencies = {}
+
 DoesComponentExist = function(i)
     if Components[i] ~= nil then 
         return true
@@ -11,10 +13,12 @@ end
 exports("DoesComponentExist", DoesComponentExist)
 
 CreateComponent = function(comp, funcs)
+    local resourceName = GetInvokingResource() or GetCurrentResourceName()
     if DoesComponentExist(comp) then
         print("[COMPONENTS] Component with this name already exist")
         return false
     end
+    Dependencies[resourceName] = true
     Components[comp] = funcs
 end
 exports("CreateComponent", CreateComponent)
@@ -48,10 +52,9 @@ end
 exports("RefreshComponents", RefreshComponents)
 -- CreateThread(RefreshComponents)
 AddEventHandler('onResourceStart', function(resourceName)
-    if (GetCurrentResourceName() ~= resourceName) then
-      return
+    if Dependencies[resourceName] then 
+        RefreshComponents()
     end
-    RefreshComponents()
 end)
 
 LoadComponents = function(comps, cb)
