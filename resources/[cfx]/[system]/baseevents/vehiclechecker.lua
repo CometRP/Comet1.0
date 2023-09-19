@@ -126,6 +126,10 @@ Citizen.CreateThread(function()
     end
 end)
 
+function isThisDoorOpen(pVehicle, pDoorIndex)
+    return GetVehicleDoorAngleRatio(pVehicle, pDoorIndex) > 0.1
+end
+
 hotreload = hotreload .. 'Stop'
 
 Citizen.CreateThread(function()
@@ -142,6 +146,10 @@ Citizen.CreateThread(function()
             CurrentSpeed = GetEntitySpeed(CurrentVehicle)
             CurrentVelocity = GetEntityVelocity(CurrentVehicle)
             CurrentBodyHealth = GetVehicleBodyHealth(CurrentVehicle)
+
+            if GetEntitySpeed(CurrentVehicle) > 5 and isThisDoorOpen(CurrentVehicle, 5) then
+                SetVehicleDoorShut(CurrentVehicle, 5, true)
+            end
 
             local healthChange = PreviousBodyHealth ~= nil and (PreviousBodyHealth - CurrentBodyHealth) or 0.0
             local heavyImpact = (PreviousSpeed and PreviousSpeed > 25.0 and CurrentSpeed < (PreviousSpeed * 0.75))
