@@ -65,7 +65,7 @@ LoadComponents = function(comps, cb)
                     if not checked[k] then checked[k] = true end
                 else
                     if attempts[k] > 50 then
-                        print("^5[COMPONENTS/" .. (resourceName) .. "]^7 Failed to fetch module ^2[" .. v .. "]^7 (Maximum Attempts of 50 Exceeded)")
+                        print("^5[COMPONENTS/" .. (resourceName) .. "]^7 Failed to fetch componenents ^2[" .. v .. "]^7 (Maximum Attempts of 50 Exceeded)")
                         failed = true
                         cb(false)
                         return
