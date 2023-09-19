@@ -86,7 +86,7 @@ exports("LoadComponents", LoadComponents)
 -- exports['comet-base']:LoadComponents("test")
 
 
-CreateThread(RefreshComponents)
+-- CreateThread(RefreshComponents)
 -- RefreshComponents()
 
 -- CreateComponent("Admin", {
