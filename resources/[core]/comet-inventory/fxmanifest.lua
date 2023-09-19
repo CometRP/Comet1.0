@@ -23,10 +23,10 @@ files {
 
 shared_script "shared_list.js"
 client_scripts {
-	"client/client.js"
-	"client/functions.lua"
-	"client/cl_attach.lua"
-	"client/cl_hotbar.lua"
+	"client/client.js",
+	"client/functions.lua",
+	"client/cl_attach.lua",
+	"client/cl_hotbar.lua",
 }
 server_scripts {
 	"server/sv_functions.lua",

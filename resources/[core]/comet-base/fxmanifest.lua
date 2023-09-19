@@ -6,7 +6,8 @@ description 'CometRP Framework'
 version '1.0.0'
 
 shared_scripts {
-    'shared/sh_base.lua'
+    'shared/sh_base.lua',
+    'shared/components/sh_*.lua',
 }
 
 client_scripts {
@@ -17,11 +18,11 @@ client_scripts {
     -- '@PolyZone/EntityZone.lua',
 
     'client/cl_base.lua',
-    'client/cl_components.lua',
+    -- 'client/cl_components.lua',
     'client/components/cl_*.lua',
 }
 server_scripts {
     'server/sv_base.lua',
-    'server/sv_components.lua',
+    -- 'server/sv_components.lua',
     'server/components/sv_*.lua',
 }
