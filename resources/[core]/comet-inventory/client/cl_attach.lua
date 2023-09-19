@@ -20,11 +20,13 @@ end
 Citizen.CreateThread(function()
     RegisterCommand('+generalInventory', generalInventory, false)
     RegisterCommand('-generalInventory', function() end, false)
-	exports["jay-interactions"]:AddKeyMapping("Inventory", "+generalInventory", "-generalInventory", "Open", "keyboard", "TAB")
+	Keybinds.Add("Inventory", "+generalInventory", "-generalInventory", "Open", "keyboard", "TAB")
+	-- exports["jay-interactions"]:AddKeyMapping("Inventory", "+generalInventory", "-generalInventory", "Open", "keyboard", "TAB")
 
     RegisterCommand('+generalEscapeMenu', generalEscapeMenu, false)
     RegisterCommand('-generalEscapeMenu', function() end, false)
-	exports["jay-interactions"]:AddKeyMapping("Player", "+generalEscapeMenu", "-generalEscapeMenu", "Escape Menu", "keyboard", "ESCAPE")
+	Keybinds.Add("Inventory", "+generalEscapeMenu", "-generalEscapeMenu", "Escape Menu", "keyboard", "ESCAPE")
+	-- exports["jay-interactions"]:AddKeyMapping("Player", "+generalEscapeMenu", "-generalEscapeMenu", "Escape Menu", "keyboard", "ESCAPE")
 end)
 
 RegisterCommand("ak", function(s,args)

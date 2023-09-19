@@ -704,9 +704,9 @@ function actionBarUp()
 end
 
 Citizen.CreateThread(function()
-	exports["jay-interactions"]:AddKeyMapping("Player", "+actionBar", "-actionBar", "Action Bar", "keyboard","K")
 	RegisterCommand('+actionBar', actionBarDown, false)
 	RegisterCommand('-actionBar', actionBarUp, false)
+	Keybinds.Add("Inventory", "+actionBar", "-actionBar", "Use Action Bar", "keyboard", "K")
 end)
 
 

@@ -1,9 +1,29 @@
+-- Create Componenet
 Inventory = {}
 Inventory.AddItem = function(source, id, amount, generateInformation, itemdata, returnData, devItem)
     TriggerClientEvent("player:receiveItem", source, id, amount, generateInformation, itemdata, returnData, devItem)
 end
-exports['comet-base']:CreateComponent("Inventory", Inventory)
 exports("AddItem", Inventory.AddItem)
+
+exports['comet-base']:CreateComponent("Inventory", Inventory)
+-- Load Framework
+
+Callback, Player = nil
+
+RegisterNetEvent("comet-base:refreshComponents", function()
+    exports['comet-base']:LoadComponents({
+        "Callback",
+        "Player",
+    }, function(pass)
+        if not pass then return end
+        Callback = exports['comet-base']:FetchComponent("Callback")
+        Player = exports['comet-base']:FetchComponent("Player")
+    end)
+end)
+
+
+
+
 
 Citizen.CreateThread(function()
      TriggerEvent("inv:playerSpawned");

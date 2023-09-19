@@ -1,3 +1,18 @@
+Keybinds, Callback = nil, nil
+
+RegisterNetEvent("comet-base:refreshComponents", function()
+    exports['comet-base']:LoadComponents({
+        "Keybinds",
+        "Callback",
+    }, function(pass)
+        if not pass then return end
+        Keybinds = exports['comet-base']:FetchComponent("Keybinds")
+        Callback = exports['comet-base']:FetchComponent("Callback")
+    end)
+end)
+
+
+
 local fixingvehicle = false
 local justUsed = false
 local retardCounter = 0
@@ -249,12 +264,12 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon)
         local finished = exports['comet-hud']:beginProgress(10, 'Learning!', true)
         if (finished) then
             if (hasEnoughOfItem('hpblueprint', 1, false)) then
-                -- local msg = RPC.execute('comet-blueprints:alterPrintState', 'HPISTOL_BP')
+                local msg = Callback.Execute('comet-blueprints:alterPrintState', 'HPISTOL_BP')
 
-                -- if (msg) then
-                --     TriggerEvent('cl_SendNotify', msg)
-                --     remove = true
-                -- end
+                if (msg) then
+                    TriggerEvent('cl_SendNotify', msg)
+                    remove = true
+                end
             end
         end
     end
@@ -263,12 +278,12 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon)
         local finished = exports['comet-hud']:beginProgress(10, 'Learning!', true)
         if (finished) then
             if (hasEnoughOfItem('uziblueprint', 1, false)) then
-                -- local msg = RPC.execute('comet-blueprints:alterPrintState', 'UZI_BP')
+                local msg = Callback.Execute('comet-blueprints:alterPrintState', 'UZI_BP')
 
-                -- if (msg) then
-                --     TriggerEvent('cl_SendNotify', msg)
-                --     remove = true
-                -- end
+                if (msg) then
+                    TriggerEvent('cl_SendNotify', msg)
+                    remove = true
+                end
             end
         end
     end
@@ -277,12 +292,12 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon)
         local finished = exports['comet-hud']:beginProgress(10, 'Learning!', true)
         if (finished) then
             if (hasEnoughOfItem('tec9bp', 1, false)) then
-                -- local msg = RPC.execute('comet-blueprints:alterPrintState', 'TEC9_BP')
+                local msg = Callback.Execute('comet-blueprints:alterPrintState', 'TEC9_BP')
 
-                -- if (msg) then
-                --     TriggerEvent('cl_SendNotify', msg)
-                --     remove = true
-                -- end
+                if (msg) then
+                    TriggerEvent('cl_SendNotify', msg)
+                    remove = true
+                end
             end
         end
     end
