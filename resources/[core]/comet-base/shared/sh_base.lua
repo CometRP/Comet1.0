@@ -46,7 +46,13 @@ RefreshComponents = function()
     TriggerEvent("comet-base:refreshComponents")
 end
 exports("RefreshComponents", RefreshComponents)
-CreateThread(RefreshComponents)
+-- CreateThread(RefreshComponents)
+AddEventHandler('onResourceStart', function(resourceName)
+    if (GetCurrentResourceName() ~= resourceName) then
+      return
+    end
+    RefreshComponents()
+end)
 
 LoadComponents = function(comps, cb)
     local resourceName = GetInvokingResource() or GetCurrentResourceName()

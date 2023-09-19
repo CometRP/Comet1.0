@@ -9,6 +9,10 @@ barberShops = {
 }
 
 Citizen.CreateThread(function()
+	while not PolyZone do
+		Citizen.Wait(25)
+	end
+
 	PolyZone.AddBoxZone("barber_shop", vector3(1931.27, 3730.69, 32.84), 4.8, 4.6, {
 		heading=30,
 		minZ=31.84,

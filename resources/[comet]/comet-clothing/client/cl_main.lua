@@ -742,7 +742,7 @@ RegisterNUICallback('escape', function(data, cb)
     local shouldSave = data['save'] or false
     if shouldSave and currentPrice > 0 then
         TriggerServerEvent("clothing:checkMoney", currentPrice)
-        if exports["isPed"]:isPed("mycash") < currentPrice then 
+        if exports["comet-base"]:isPed("mycash") < currentPrice then 
             shouldSave = false
         end
     end
@@ -872,7 +872,7 @@ function Save(save, close)
             TriggerEvent("clothing:close")
             Wait(1000)
             OpenMenu("barber_shop")
-            exports["comet-hud"]:toggleHud(true)
+            -- exports["comet-hud"]:toggleHud(true)
             return
         end
         
@@ -891,7 +891,7 @@ function Save(save, close)
     TriggerEvent("facewear:update")
     TriggerEvent('comet-weapons:getAmmo')
     CustomCamera('torso',true)
-    TriggerEvent("e-blips:updateAfterPedChange",exports["isPed"]:isPed("myjob"))
+    TriggerEvent("e-blips:updateAfterPedChange",exports["comet-base"]:isPed("myjob"))
     startingMenu = false
 end
 
@@ -965,7 +965,7 @@ AddEventHandler("comet-clothing:setclothes", function(data,alreadyExist)
     TriggerServerEvent("comet-clothing:get_character_face")
     TriggerServerEvent("comet-clothing:retrieve_tats")
 	TriggerServerEvent("police:SetMeta")
-    TriggerEvent("e-blips:updateAfterPedChange",exports["isPed"]:isPed("myjob"))
+    TriggerEvent("e-blips:updateAfterPedChange",exports["comet-base"]:isPed("myjob"))
 end)
 
 RegisterNetEvent("comet-clothing:AdminSetModel")
@@ -1180,7 +1180,7 @@ end)
 
 RegisterNetEvent("facewear:adjust")
 AddEventHandler("facewear:adjust",function(faceType,remove)
-	local handcuffed = exports["isPed"]:isPed("handcuffed")
+	local handcuffed = exports["comet-base"]:isPed("handcuffed")
 	if handcuffed then return end
 	local AnimSet = "none"
 	local AnimationOn = "none"

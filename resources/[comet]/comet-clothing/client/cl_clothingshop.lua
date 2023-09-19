@@ -1,5 +1,8 @@
 
 Citizen.CreateThread(function()
+	while not PolyZone do
+		Citizen.Wait(25)
+	end
   PolyZone.AddBoxZone("clothing_shop", vector3(1098.07, 203.27, -49.44), 1.8, 2.4, {
 		heading=315,
 		minZ=-50.44,

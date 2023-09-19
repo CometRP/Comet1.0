@@ -282,7 +282,7 @@ end)
 RegisterServerEvent("retreive:licenes:server")
 AddEventHandler("retreive:licenes:server", function()
     local src = source
-    local user = exports["comet-base"]:FetchComponent("Player"):GetUser(src)
+    local user = Components.Player:GetUser(src)
     local characterId = user:getVar("character").id
     exports.oxmysql:execute('SELECT * FROM user_licenses WHERE owner = ? AND type = ?', {characterId, "Firearm"}, function(callback)
         TriggerClientEvent("wtflols", src, callback[1].status)
@@ -307,14 +307,14 @@ AddEventHandler("playerDropped", function(reason)
     local posE = json.encode(pos[src])
     pos[src] = nil
 
-    local pUser = exports["comet-base"]:FetchComponent("Player"):GetUser(src)
+    local pUser = Components.Player:GetUser(src)
     local char = pUser:getVar("character")
     local userjob = user:getVar("job") or "Unemployed"
     if userjob == "police" then
-        exports['comet-emergencyjobs']:DisconnectJobUpdater(userjob)
+        -- exports['comet-emergencyjobs']:DisconnectJobUpdater(userjob)
         TriggerEvent("comet-emergencyjobs:log:update", src, "clockoff")
     elseif userjob == "ems" then
-        exports['comet-emergencyjobs']:DisconnectJobUpdater(userjob)
+        -- exports['comet-emergencyjobs']:DisconnectJobUpdater(userjob)
     end
 
     Components.Users[src] = nil

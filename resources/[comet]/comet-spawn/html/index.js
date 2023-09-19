@@ -63,7 +63,7 @@ $(document).ready(function(){
         }
         if (pos != null) {
             $(".container").fadeOut(500)
-            $.post('http://comet-spawn/spawn', JSON.stringify({coords: pos, id: current}));
+            $.post('https://comet-spawn/spawn', JSON.stringify({coords: pos, id: current}));
             $('#info').hide()
         }
     });

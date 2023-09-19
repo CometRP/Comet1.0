@@ -6,7 +6,9 @@ tattoosShops = {
 }
 
 Citizen.CreateThread(function()
-
+	while not PolyZone do
+		Citizen.Wait(25)
+	end
 	PolyZone.AddBoxZone("tattoo_shop", vector3(1323.0, -1652.8, 52.28), 4.2, 6.8, {
 		heading=40,
 		minZ=51.95,

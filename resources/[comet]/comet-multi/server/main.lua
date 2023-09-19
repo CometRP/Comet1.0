@@ -1,15 +1,15 @@
 Player, Inventory = nil, nil
 
-AddEventHandler("comet-base:refreshComponents", function()
-    exports['comet-base']:LoadComponents({
-        "Player",
-        "Inventory",
-    }, function(pass)
-        if not pass then return end
-        Player = exports['comet-base']:FetchComponent("Player")
-        Inventory = exports['comet-base']:FetchComponent("Inventory")
-    end)
-end)
+-- AddEventHandler("comet-base:refreshComponents", function()
+--     exports['comet-base']:LoadComponents({
+--         "Player",
+--         "Inventory",
+--     }, function(pass)
+--         if not pass then return end
+--         Player = exports['comet-base']:FetchComponent("Player")
+--         Inventory = exports['comet-base']:FetchComponent("Inventory")
+--     end)
+-- end)
 
 
 function Login.decode(tableString)
@@ -23,7 +23,7 @@ end
 RegisterServerEvent("login:getCharModels")
 AddEventHandler("login:getCharModels", function(charlist, isReset)
     local src = source
-    local user = Player:GetUser(src)
+    local user = exports['comet-base']:FetchComponent("Player"):GetUser(src)
 
     local list = ""
     for i=1,#charlist do
@@ -73,31 +73,31 @@ end)
 RegisterServerEvent("comet-multi:licenses")
 AddEventHandler("comet-multi:licenses", function()
     local src = source
-    local user = Player:GetUser(src)
+    local user = exports['comet-base']:FetchComponent("Player"):GetUser(src)
     local char = user:getVar("character")
     exports.oxmysql:execute("INSERT INTO user_licenses (type, owner) VALUES (@type, @owner)", {['@type'] = "Firearm",['@owner'] = char.id})
     exports.oxmysql:execute("INSERT INTO user_licenses (type, owner, status) VALUES (@type, @owner, @status)", {['@type'] = "Driver", ['@owner'] = char.id, ['@status'] = "1"})
     exports.oxmysql:execute("INSERT INTO user_licenses (type, owner) VALUES (@type, @owner)", {['@type'] = "Hunting",['@owner'] = char.id})
     exports.oxmysql:execute("INSERT INTO user_licenses (type, owner) VALUES (@type, @owner)", {['@type'] = "Fishing",['@owner'] = char.id})
-    Inventory.Add(src, "backpack", 1)
-    -- TriggerClientEvent("player:receiveItem", src, "backpack", 1)
+    -- Inventory.AddItem(src, "backpack", 1)
+    TriggerClientEvent("player:receiveItem", src, "backpack", 1)
 end)
 
 RegisterServerEvent("backpack:give:items")
 AddEventHandler("backpack:give:items", function()
     local src = source
-    Inventory.Add(src, "mobilephone", 1)
-    Inventory.Add(src, "radio", 1)
-    Inventory.Add(src, "idcard", 1)
-    Inventory.Add(src, "water", 2)
-    Inventory.Add(src, "sandwich", 2)
+    -- Inventory.AddItem(src, "mobilephone", 1)
+    -- Inventory.AddItem(src, "radio", 1)
+    -- Inventory.AddItem(src, "idcard", 1)
+    -- Inventory.AddItem(src, "water", 2)
+    -- Inventory.AddItem(src, "sandwich", 2)
 
 
-    -- TriggerClientEvent("player:receiveItem", src, "mobilephone", 1)
-    -- TriggerClientEvent("player:receiveItem", src, "radio", 1)
-    -- TriggerClientEvent("player:receiveItem", src, "idcard", 1)
-    -- TriggerClientEvent("player:receiveItem", src, "water", 2)
-    -- TriggerClientEvent("player:receiveItem", src, "sandwich", 2)
+    TriggerClientEvent("player:receiveItem", src, "mobilephone", 1)
+    TriggerClientEvent("player:receiveItem", src, "radio", 1)
+    TriggerClientEvent("player:receiveItem", src, "idcard", 1)
+    TriggerClientEvent("player:receiveItem", src, "water", 2)
+    TriggerClientEvent("player:receiveItem", src, "sandwich", 2)
 end)
 
 RegisterServerEvent("SpawnCustomPeds")
