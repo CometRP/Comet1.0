@@ -9,7 +9,7 @@ AddEventHandler("comet-base:exportsReady", function()
 end)
 -- Load Framework
 
-Callback, Player = nil
+Callback, Player = nil, nil
 
 AddEventHandler("comet-base:refreshComponents", function()
     exports['comet-base']:LoadComponents({
