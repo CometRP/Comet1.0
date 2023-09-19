@@ -1,6 +1,6 @@
 local PhoneVolume, IsOnPhoneCall, CurrentCall = 0.5, false, nil
 
-RegisterNetEvent("comet-voice/client/call-start", function(ServerId, CallId)
+RegisterNetEvent("comet-voice:client:call-start", function(ServerId, CallId)
     if not IsOnPhoneCall then
         IsOnPhoneCall = true
         CurrentCall = {CallId = CallId, TargetId = ServerId}
@@ -23,7 +23,7 @@ RegisterNetEvent("comet-voice/client/call-start", function(ServerId, CallId)
     end
 end)
 
-RegisterNetEvent("comet-voice/client/call-stop", function(ServerId, CallId)
+RegisterNetEvent("comet-voice:client:call-stop", function(ServerId, CallId)
     if IsOnPhoneCall or CurrentCall ~= nil and CurrentCall.CallId == CallId then
         IsOnPhoneCall, CurrentCall = false, nil
         RemovePlayerFromTargetList(ServerId, "Phone", true, true)
@@ -31,7 +31,7 @@ RegisterNetEvent("comet-voice/client/call-stop", function(ServerId, CallId)
     end
 end)
 
-RegisterNetEvent('comet-preferences/client/update', function(PreferencesData)
+RegisterNetEvent('comet-preferences:client:update', function(PreferencesData)
     SetPhoneVolume((PreferencesData.Voice.PhoneVolume + 0.0) / 100)
 end)
 

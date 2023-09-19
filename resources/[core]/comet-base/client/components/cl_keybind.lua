@@ -240,7 +240,7 @@ end
 
 Components.Keybinds = {}
 
-Components.Keybinds.NewKeybind = function(cmdCategory, keyDownCmd, keyUpCmd, cmdDesc, device, bind)
+Components.Keybinds.Add = function(cmdCategory, keyDownCmd, keyUpCmd, cmdDesc, device, bind)
     if not bind then bind = "" end
     if not device then device = "keyboard" end
 
@@ -276,6 +276,12 @@ Components.Keybinds.NewKeybind = function(cmdCategory, keyDownCmd, keyUpCmd, cmd
 
 end
 
+Components.Keybinds.Key = function(keyDownCmd)
+    local cmdDown = ("+keybind_wrapper__%s"):format(keyDownCmd)
+    local keybind = pBindString(2, GetHashKey(cmdDown) | 0x80000000, true)
+    return keybind
+end
+
 
 CreateThread(function()
     -- Main
@@ -285,7 +291,7 @@ CreateThread(function()
     RegisterCommand('-useMain', function() 
         TriggerEvent('keybinds:Main', false)
     end, false)
-    AddKeyMapping("General", "+useMain", "-useMain", "Main", "keyboard", "E")
+    Components.Keybinds.Add("General", "+useMain", "-useMain", "Main", "keyboard", "E")
 
     -- Seconadry
     RegisterCommand('+use2nd', function() 
@@ -294,7 +300,7 @@ CreateThread(function()
     RegisterCommand('-use2nd', function() 
         TriggerEvent('keybinds:Secondary', false)
     end, false)
-    AddKeyMapping("General", "+use2nd", "-use2nd", "Secondary", "keyboard", "H")
+    Components.Keybinds.Add("General", "+use2nd", "-use2nd", "Secondary", "keyboard", "H")
 
     -- Other
     RegisterCommand('+use3rd', function() 
@@ -303,5 +309,5 @@ CreateThread(function()
     RegisterCommand('-use3rd', function() 
         TriggerEvent('keybinds:Other', false)
     end, false)
-    AddKeyMapping("General", "+use3rd", "-use3rd", "Other", "keyboard", "M")
+    Components.Keybinds.Add("General", "+use3rd", "-use3rd", "Other", "keyboard", "M")
 end)

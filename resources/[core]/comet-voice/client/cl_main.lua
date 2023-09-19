@@ -1,57 +1,73 @@
 CurrentTarget, CurrentInstance, CurrentProximity, CurrentVoiceChannel, MyServer = 0, 0, 0, 0, 0
-ProximityOverrides, PlayerModule = {[1] = {}, [2] = {}, [3] = {}}, nil
+ProximityOverrides, Player = {[1] = {}, [2] = {}, [3] = {}}, nil
 Transmissions, Targets, Channels = Context:New(), Context:New(), Context:New()
 
-KeybindsModule, OnesyncModule, FunctionsModule, InitialConnection = nil, nil, nil, true
+Infinity, Keybinds, Functions, InitialConnection = nil, nil, nil, true
 
-RegisterNetEvent('comet-base/client/on-login', function()
+RegisterNetEvent('comet-base:client:on-login', function()
     local A, B = GetInfo()
     MumbleSetServerAddress(A, B)
     Citizen.SetTimeout(1200, function()
-        TriggerEvent('comet-voice/client/voice-state', true)
+        TriggerEvent('comet-voice:client:voice-state', true)
         InitKeybinds()
     end)
 end)
 
-RegisterNetEvent('comet-base/client/on-logout', function()
-    TriggerEvent('comet-voice/client/voice-state', false)
+RegisterNetEvent('comet-base:client:on-logout', function()
+    TriggerEvent('comet-voice:client:voice-state', false)
 end)
 
-AddEventHandler('Modules/client/ready', function()
-    TriggerEvent('Modules/client/request-dependencies', {
-        'Player',
-        'Keybinds',
-        'Onesync',
-        'Preferences',
-        'Functions',
-    }, function(Succeeded)
-        if not Succeeded then return end
-        KeybindsModule = exports['comet-base']:FetchModule('Keybinds')
-        OnesyncModule = exports['comet-base']:FetchModule('Onesync')
-        PlayerModule = exports['comet-base']:FetchModule('Player')
-        PreferencesModule = exports['comet-base']:FetchModule('Preferences')
-        FunctionsModule = exports['comet-base']:FetchModule('Functions')
-        InitVoice()
+RegisterNetEvent("comet-base:refreshComponents", function()
+    exports['comet-base']:LoadComponents({
+        "Infinity",
+        "Keybinds",
+        "Functions",
+        "Player",
+    }, function(pass)
+        if not pass then return end
+        Infinity = exports['comet-base']:FetchComponent("Infinity")
+        Keybinds = exports['comet-base']:FetchComponent("Keybinds")
+        Functions = exports['comet-base']:FetchComponent("Functions")
+        Player = exports['comet-base']:FetchComponent("Player")
     end)
 end)
+
+
+-- AddEventHandler('Modules:client:ready', function()
+--     TriggerEvent('Modules:client:request-dependencies', {
+--         'Player',
+--         'Keybinds',
+--         'Onesync',
+--         'Preferences',
+--         'Functions',
+--     }, function(Succeeded)
+--         if not Succeeded then return end
+--         KeybindsModule = exports['comet-base']:FetchModule('Keybinds')
+--         OnesyncModule = exports['comet-base']:FetchModule('Onesync')
+--         PlayerModule = exports['comet-base']:FetchModule('Player')
+--         PreferencesModule = exports['comet-base']:FetchModule('Preferences')
+--         FunctionsModule = exports['comet-base']:FetchModule('Functions')
+--         InitVoice()
+--     end)
+-- end)
 
 -- [ Events ] --
 
 AddEventHandler("mumbleConnected", function()
     print("Mumble: Connected")
     Citizen.SetTimeout(1500, function()
-        TriggerEvent('comet-voice/client/voice-state', true)
+        TriggerEvent('comet-voice:client:voice-state', true)
     end)
 end)
 
 AddEventHandler("mumbleDisconnected", function()
     print("Mumble: Disconnected")
-    TriggerEvent('comet-voice/client/voice-state', false)
+    TriggerEvent('comet-voice:client:voice-state', false)
 end)
 
-RegisterNetEvent('comet-voice/client/voice-state', function(State)
+RegisterNetEvent('comet-voice:client:voice-state', function(State)
     Config.VoiceEnabled = State
-    TriggerServerEvent("comet-voice/server/connection-state", State)
+    TriggerServerEvent("comet-voice:server:connection-state", State)
     
     if Config.VoiceEnabled then
         local ServerId = GetPlayerServerId(PlayerId())
@@ -66,7 +82,7 @@ RegisterNetEvent('comet-voice/client/voice-state', function(State)
     end
 end)
 
-RegisterNetEvent("comet-voice/client/transmission-state", function(ServerId, Context, Transmitting, Effect)
+RegisterNetEvent("comet-voice:client:transmission-state", function(ServerId, Context, Transmitting, Effect)
     if Transmissions:ContextExists(Context) then
         if Transmitting then
             Transmissions:Add(ServerId, Context)
@@ -98,7 +114,7 @@ RegisterNetEvent("comet-voice/client/transmission-state", function(ServerId, Con
         end
         if Context == "Radio" and exports['comet-ui']:IsRadioOn() then
             if TooFar then
-                TriggerEvent('comet-ui/client/play-sound', 'radio-distortion', 0.2)
+                TriggerEvent('comet-ui:client:play-sound', 'radio-distortion', 0.2)
             else
                 local Preferences = PreferencesModule.GetPreferences()
                 if not Preferences.Voice.RadioClicksIn then return end
@@ -113,7 +129,7 @@ RegisterNetEvent("comet-voice/client/transmission-state", function(ServerId, Con
     end
 end)
 
-RegisterNetEvent('comet-voice/client/proximity-override', function(Id, Mode, Range, Priority)
+RegisterNetEvent('comet-voice:client:proximity-override', function(Id, Mode, Range, Priority)
     if type(Mode) == 'table' then
         for i = 1, #Mode do
             local ProximityOverride = Mode[i]
@@ -124,7 +140,7 @@ RegisterNetEvent('comet-voice/client/proximity-override', function(Id, Mode, Ran
     end
 end)
 
-RegisterNetEvent('comet-voice/client/set-muted', function(ServerId, Bool)
+RegisterNetEvent('comet-voice:client:set-muted', function(ServerId, Bool)
     MumbleSetPlayerMuted(ServerId, Bool)
     if Config.Debug then print(('[Main] Mute | Target %s'):format(Bool, ServerId)) end
 end)
@@ -132,7 +148,7 @@ end)
 RegisterNUICallback("ResetMumble", function(Data, Cb)
     exports['comet-ui']:Notify("reset-voice", "Resetted voice!", "success", 3000)
     RefreshConnection(true)
-    TriggerEvent('comet-voice/client/voice-state', true)
+    TriggerEvent('comet-voice:client:voice-state', true)
     Cb('Ok')
 end)
 
@@ -160,18 +176,35 @@ function InitVoice()
 
         MyServer = GetPlayerServerId(PlayerId())
         SetVoiceProximity(2)
-        TriggerEvent('comet-voice/client/voice-state', true)
+        TriggerEvent('comet-voice:client:voice-state', true)
     end)
 end
 
 function InitKeybinds()
     Citizen.CreateThread(function()
-        KeybindsModule.Add('SwitchProx', 'Voice', 'Switch Voice Proximity', 'GRAVE', function(IsPressed)
-            if IsPressed then CycleVoiceProximity() end
-        end)
-        KeybindsModule.Add('UseRadio', 'Voice', 'Use Radio', 'CAPITAL', function(IsPressed)
-            if IsPressed then StartRadioTransmission() else StopRadioTransmission() end
-        end)
+        RegisterCommand('+switchprox', function() 
+            CycleVoiceProximity()
+        end, false)
+        RegisterCommand('-switchprox', function() 
+
+        end, false)
+        Keybinds.Add("Voice", "+switchprox", "-switchprox", "Switch Voice Proximity", "keyboard", "GRAVE")
+
+        RegisterCommand('+radio', function() 
+            StartRadioTransmission()
+        end, false)
+        RegisterCommand('-radio', function() 
+            StopRadioTransmission()
+        end, false)
+        Keybinds.Add("Voice", "+radio", "-radio", "Use Radio", "keyboard", "CAPITAL")
+
+
+        -- Keybinds.Add('SwitchProx', 'Voice', 'Switch Voice Proximity', 'GRAVE', function(IsPressed)
+        --     if IsPressed then CycleVoiceProximity() end
+        -- end)
+        -- KeybindsModule.Add('UseRadio', 'Voice', 'Use Radio', 'CAPITAL', function(IsPressed)
+        --     if IsPressed then StartRadioTransmission() else StopRadioTransmission() end
+        -- end)
     end)
 end
 
@@ -262,14 +295,14 @@ function AddGroupToTargetList(Group, Context)
                 AddPlayerToTargetList(ServerId, Context, false)
             end
         end
-        TriggerServerEvent("comet-voice/server/transmission-state-radio", Group, Context, true, true)
+        TriggerServerEvent("comet-voice:server:transmission-state-radio", Group, Context, true, true)
     end
 end
 
 function AddPlayerToTargetList(ServerId, Context, Transmit)
     if not Targets:TargetContextExist(ServerId, Context) then
         if Transmit then
-            TriggerServerEvent("comet-voice/server/transmission-state-radio", ServerId, Context, true, false)
+            TriggerServerEvent("comet-voice:server:transmission-state-radio", ServerId, Context, true, false)
         end
         if not Targets:TargetHasAnyActiveContext(ServerId) and MyServer ~= ServerId then
             MumbleAddVoiceTargetPlayerByServerId(CurrentTarget, ServerId)
@@ -287,7 +320,7 @@ function RemoveGroupFromTargetList(Group, Context)
             end
         end
         RefreshTargets()
-        TriggerServerEvent("comet-voice/server/transmission-state-radio", Group, Context, false, true)
+        TriggerServerEvent("comet-voice:server:transmission-state-radio", Group, Context, false, true)
     end
 end
 
@@ -295,7 +328,7 @@ function RemovePlayerFromTargetList(ServerId, Context, Transmit, Refresh)
     if Targets:TargetContextExist(ServerId, Context) then
         Targets:Remove(ServerId, Context)
         if Transmit then
-            TriggerServerEvent("comet-voice/server/transmission-state-radio", ServerId, Context, false, false)
+            TriggerServerEvent("comet-voice:server:transmission-state-radio", ServerId, Context, false, false)
         end
         if Refresh then
             RefreshTargets()
@@ -384,11 +417,11 @@ function CycleVoiceProximity()
     local Proximity = _C(Config.VoiceRanges[NewProximity] ~= nil, NewProximity, 1)
     SetVoiceProximity(Proximity)
     if Proximity == 3 then
-        TriggerEvent('comet-ui/client/set-hud-values', 'Voice', 'Value',  100)
+        TriggerEvent('comet-ui:client:set-hud-values', 'Voice', 'Value',  100)
     elseif Proximity == 2 then
-        TriggerEvent('comet-ui/client/set-hud-values', 'Voice', 'Value',  66)
+        TriggerEvent('comet-ui:client:set-hud-values', 'Voice', 'Value',  66)
     else
-        TriggerEvent('comet-ui/client/set-hud-values', 'Voice', 'Value',  33)
+        TriggerEvent('comet-ui:client:set-hud-values', 'Voice', 'Value',  33)
     end
 end
 

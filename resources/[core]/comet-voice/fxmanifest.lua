@@ -9,13 +9,11 @@ shared_scripts {
 }
 
 client_script {
-    '@comet-assets/client/cl_errorlog.lua',
     'client/classes/cl_*.lua',
     'client/cl_*.lua',
 }
 
 server_script {
-    '@comet-assets/server/sv_errorlog.lua',
     'server/sv_*.lua',
 }
 

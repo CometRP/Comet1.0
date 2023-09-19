@@ -3,7 +3,7 @@ RadioChannels, IsTalkingOnRadio, RadioVolume, RadioClickVolume, CurrentChannel, 
 
 -- [ Events ] --
 
-RegisterNetEvent("comet-voice/client/radio-connect", function(RadioId, Subscribers)
+RegisterNetEvent("comet-voice:client:radio-connect", function(RadioId, Subscribers)
     if RadioChannels[RadioId] then return end
 
     local Channel = RadioChannel:New(RadioId)
@@ -19,7 +19,7 @@ RegisterNetEvent("comet-voice/client/radio-connect", function(RadioId, Subscribe
     if Config.Debug then print( ('[Radio] Connected | ID %s'):format(RadioId) ) end
 end)
 
-RegisterNetEvent("comet-voice/client/radio-disconnect", function(RadioId)
+RegisterNetEvent("comet-voice:client:radio-disconnect", function(RadioId)
     if not RadioChannels[RadioId] then return end
 
     CurrentRadioId = 0
@@ -28,7 +28,7 @@ RegisterNetEvent("comet-voice/client/radio-disconnect", function(RadioId)
     if Config.Debug then print( ('[Radio] Disconnected | ID %s'):format(RadioId) ) end
 end)
 
-RegisterNetEvent("comet-voice/client/radio-added", function(RadioId, ServerId)
+RegisterNetEvent("comet-voice:client:radio-added", function(RadioId, ServerId)
     if not RadioChannels[RadioId] then return end
 
     local Channel = RadioChannels[RadioId]
@@ -43,7 +43,7 @@ RegisterNetEvent("comet-voice/client/radio-added", function(RadioId, ServerId)
     end
 end)
 
-RegisterNetEvent("comet-voice/client/radio-removed", function(RadioId, ServerId)
+RegisterNetEvent("comet-voice:client:radio-removed", function(RadioId, ServerId)
     if not RadioChannels[RadioId] then return end
 
     local Channel = RadioChannels[RadioId]
@@ -59,11 +59,11 @@ RegisterNetEvent("comet-voice/client/radio-removed", function(RadioId, ServerId)
     end
 end)
 
-RegisterNetEvent('comet-hospital/client/on-player-death', function()
+RegisterNetEvent('comet-hospital:client:on-player-death', function()
     if IsTalkingOnRadio then StopRadioTransmission(true) end
 end)
 
-RegisterNetEvent('comet-preferences/client/update', function(PreferencesData)
+RegisterNetEvent('comet-preferences:client:update', function(PreferencesData)
     SetRadioVolume((PreferencesData.Voice.RadioVolume + 0.0) / 100)
     RadioClickVolume = (PreferencesData.Voice.RadioClickVolume + 0.0) / 100
 end)
@@ -139,9 +139,9 @@ function PlayRadioClick(Bool)
     local Preferences = PreferencesModule.GetPreferences()
     if not Preferences.Voice.RadioClicksOut then return end
     if Bool then
-        TriggerEvent('comet-ui/client/play-sound', 'radio-01-on', RadioClickVolume)
+        TriggerEvent('comet-ui:client:play-sound', 'radio-01-on', RadioClickVolume)
     else
-        TriggerEvent('comet-ui/client/play-sound', 'radio-01-off', RadioClickVolume)
+        TriggerEvent('comet-ui:client:play-sound', 'radio-01-off', RadioClickVolume)
     end
 end
 
