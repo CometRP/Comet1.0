@@ -2,7 +2,9 @@ Shared = Shared or {}
 Components = Components or {}
 Components.Base = Components.Base or {}
 
-local Dependencies = {}
+local Dependencies = {
+    [GetCurrentResourceName()] = true,
+}
 
 DoesComponentExist = function(i)
     if Components[i] ~= nil then 
@@ -52,7 +54,8 @@ end
 exports("RefreshComponents", RefreshComponents)
 -- CreateThread(RefreshComponents)
 AddEventHandler('onResourceStart', function(resourceName)
-    if Dependencies[resourceName] then 
+    if Dependencies[resourceName] then
+        print("[COMPONENTS] RELOADED MFFFF")
         RefreshComponents()
     end
 end)
