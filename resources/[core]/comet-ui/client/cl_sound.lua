@@ -16,7 +16,7 @@ end)
 
 -- [ Events ] --
 
-RegisterNetEvent('comet-ui/client/play-sound', function(AudioName, AudioVolume, Id)
+RegisterNetEvent('comet-ui:client:play-sound', function(AudioName, AudioVolume, Id)
     SendUIMessage('Sounds', 'PlaySound', {
         Name = AudioName,
         Volume = AudioVolume,
@@ -24,18 +24,18 @@ RegisterNetEvent('comet-ui/client/play-sound', function(AudioName, AudioVolume, 
     })
 end)
 
-RegisterNetEvent('comet-ui/client/stop-sound', function(Id)
+RegisterNetEvent('comet-ui:client:stop-sound', function(Id)
     SendUIMessage('Sounds', 'StopSound', {
         Id = Id,
     })
 end)
 
-RegisterNetEvent('comet-ui/client/play-audio-at-pos', function(Position, MaxDistance, AudioName, AudioVolume, FallOff)
+RegisterNetEvent('comet-ui:client:play-audio-at-pos', function(Position, MaxDistance, AudioName, AudioVolume, FallOff)
     local Position = vector3(Position[1], Position[2], Position[3])
     StartPositionalAudio(Position, MaxDistance, AudioName, AudioVolume, false, MaxDistance, true)
 end)
 
-RegisterNetEvent('comet-ui/client/playaudio-on-entity', function(SoundName, Entity, Timeout, Id, IsServerId, ServerId)
+RegisterNetEvent('comet-ui:client:playaudio-on-entity', function(SoundName, Entity, Timeout, Id, IsServerId, ServerId)
     local Entity = NetworkGetEntityFromNetworkId(Entity)
     if IsServerId ~= nil and IsServerId then 
         local ServerPlayer = GetPlayerFromServerId(ServerId) 
@@ -61,7 +61,7 @@ RegisterNetEvent('comet-ui/client/playaudio-on-entity', function(SoundName, Enti
     end
 end)
 
-RegisterNetEvent('comet-ui/client/stop-entity-sound', function(Id)
+RegisterNetEvent('comet-ui:client:stop-entity-sound', function(Id)
     if EntitySounds[Id] then
         StopSound(EntitySounds[Id])
         ReleaseSoundId(EntitySounds[Id])

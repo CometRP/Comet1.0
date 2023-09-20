@@ -6,13 +6,6 @@ lua54 'yes'
 ui_page 'nui/index.html'
 
 client_script {
-    '@comet-assets/client/cl_errorlog.lua',
-    '@comet-polyzone/client/cl_main.lua',
-    '@comet-polyzone/client/BoxZone.lua',
-    '@comet-polyzone/client/EntityZone.lua',
-    '@comet-polyzone/client/CircleZone.lua',
-    '@comet-polyzone/client/ComboZone.lua',
-    '@comet-base/shared/sh_shared.lua',
     'shared/sh_*.lua',
     'shared/cl_*.lua',
     'config/cl_*.lua',
@@ -20,8 +13,6 @@ client_script {
 }
 
 server_script {
-    '@comet-assets/server/sv_errorlog.lua',
-    '@comet-base/shared/sh_shared.lua',
     'shared/sh_*.lua',
     'server/*.lua',
 }

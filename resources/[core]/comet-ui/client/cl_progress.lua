@@ -15,7 +15,7 @@ function DoProgressBar(Title, Duration, Animation, Prop, Freeze, CanCancel, Fini
         end
 
         if Prop ~= nil and Prop ~= false then
-            exports['comet-assets']:AttachProp(Prop)
+            -- exports['comet-assets']:AttachProp(Prop)
         end
 
         Citizen.CreateThread(function()
@@ -41,7 +41,7 @@ function DoProgressBar(Title, Duration, Animation, Prop, Freeze, CanCancel, Fini
             end
             if Animation ~= nil and Animation ~= false then
                 if Prop ~= nil and Prop ~= false then
-                    exports['comet-assets']:RemoveProps(Prop)
+                    -- exports['comet-assets']:RemoveProps(Prop)
                 end
                 StopAnimTask(PlayerPedId(), Animation['AnimDict'], Animation['AnimName'], 1.0)
                 ClearPedTasks(PlayerPedId())
@@ -50,6 +50,7 @@ function DoProgressBar(Title, Duration, Animation, Prop, Freeze, CanCancel, Fini
     end
 end
 exports("ProgressBar", DoProgressBar)
+UiComponents.ProgressBar = DoProgressBar
 
 function StopProgress(Forced)
     if Forced then
@@ -68,10 +69,11 @@ RegisterNUICallback('Progress/Done', function(Data, Cb)
     end
 end)
 
-RegisterNetEvent('comet-ui/client/ui-reset', function()
+RegisterNetEvent('comet-ui:client:ui-reset', function()
     if ProgressBarActive then
         StopProgress(true)
     end
 end)
 
 exports("IsProgressBarActive", function() return IsProgressBarActive end)
+UiComponents.ProgressBar = function() return IsProgressBarActive end

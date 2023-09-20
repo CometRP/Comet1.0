@@ -8,6 +8,7 @@ function StartMemoryMinigame(Cb)
     SetNuiFocus(true, true)
 end
 exports("MemoryMinigame", StartMemoryMinigame)
+UiComponents.MemoryMinigame = StartMemoryMinigame
 
 function StartColorMinigame(Cb)
     Minigames.ColorCallback = Cb
@@ -15,6 +16,7 @@ function StartColorMinigame(Cb)
     SetNuiFocus(true, true)
 end
 exports("ColorMinigame", StartColorMinigame)
+UiComponents.ColorMinigame = StartColorMinigame
 
 function StartFigureMinigame(IconsAmount, ResponseTime, Cb)
     Minigames.FigureCallback = Cb
@@ -25,6 +27,7 @@ function StartFigureMinigame(IconsAmount, ResponseTime, Cb)
     SetNuiFocus(true, true)
 end
 exports("FigureMinigame", StartFigureMinigame)
+UiComponents.FigureMinigame = StartFigureMinigame
 
 function StartBoostingMinigame(Cb)
     Minigames.BoostingCallback = Cb
@@ -32,6 +35,7 @@ function StartBoostingMinigame(Cb)
     SetNuiFocus(true, true)
 end
 exports("BoostingMinigame", StartBoostingMinigame)
+UiComponents.BoostingMinigame = StartBoostingMinigame
 
 -- [ NUI Callbacks ] --
 
@@ -65,7 +69,7 @@ end)
 
 -- [ Events ] --
 
-RegisterNetEvent('comet-ui/client/ui-reset', function()
+RegisterNetEvent('comet-ui:client:ui-reset', function()
     if Minigames.MemoryCallback ~= nil then Minigames.MemoryCallback(false) end
     if Minigames.ColorCallback ~= nil then Minigames.ColorCallback(false) end
     if Minigames.FigureCallback ~= nil then Minigames.FigureCallback(false) end

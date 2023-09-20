@@ -1,73 +1,22 @@
-EntityModule, CallbackModule, FunctionsModule, BlipModule, PlayerModule, EventsModule, KeybindsModule, ThreadsModule, LoggerModule = nil, nil, nil, nil, nil, nil, nil, nil, nil
 UI = { Initializes = {}}
 
-RegisterNetEvent("comet-base/client/player-spawned", function()
-    Citizen.SetTimeout(700, function()
-        SendToCharacterScreen(true)
-        SetFollowPedCamViewMode(0)
-        DisplayRadar(false)
-	end)
+UiComponents = UiComponents or {}
+UiComponents.Refresh = function()
+    TriggerEvent("comet-ui:client:ui-reset")
+end
+
+AddEventHandler("comet-base:exportsReady", function()
+    exports['comet-base']:CreateComponent("UI", UiComponents)
 end)
-
-RegisterNetEvent('comet-base/client/on-login', function()
-    PreferencesModule.LoadPreference()
-    CallbackModule.CreateCallback("comet-preferences/client/get-preferences", function(Cb)
-        Cb(PreferencesModule.GetPreferences())
-    end)
-    Citizen.SetTimeout(3250, function()
-        SendUIMessage('Hud', 'SetAppVisiblity', {
-            Visible = true,
-        })
-        if KeybindsModule.GetCustomizedKey("eyePeek") ~= 'L Alt' then
-            exports['comet-ui']:Notify("eye-error", "You've re-binded the peeking functionality, this WILL result in broken or poor functionality! (Default: Left Alt)", "error", 10000)
-        end
-    end)
-end)
-
-RegisterNetEvent('comet-base/client/on-logout', function()
-    TriggerEvent('comet-ui/Client/remove-from-radio')
-    SendUIMessage('Hud', 'SetAppVisiblity', {
-        Visible = false,
-    })
-end)
-
-
-local _Ready = false
-AddEventHandler('Modules/client/ready', function()
-    TriggerEvent('Modules/client/request-dependencies', {
-        'Callback',
-        'Logger',
-        'Events',
-        'Functions',
-        'Entity',
-        'BlipManager',
-        'Player',
-        'Keybinds',
-        'Threads',
-    }, function(Succeeded)
-        if not Succeeded then return end
-        CallbackModule = exports['comet-base']:FetchModule('Callback')
-        LoggerModule = exports['comet-base']:FetchModule('Logger')
-        EventsModule = exports['comet-base']:FetchModule('Events')
-        FunctionsModule = exports['comet-base']:FetchModule('Functions')
-        EntityModule = exports['comet-base']:FetchModule('Entity')
-        BlipModule = exports['comet-base']:FetchModule('BlipManager')
-        PlayerModule = exports['comet-base']:FetchModule('Player')
-        KeybindsModule = exports['comet-base']:FetchModule('Keybinds')
-        ThreadsModule = exports['comet-base']:FetchModule('Threads')
-        _Ready = true
-    end)
-end)
-
 -- [ Code ] --
 
 RegisterCommand("ui-r", function()
-    TriggerEvent("comet-ui/client/ui-reset")
+    TriggerEvent("comet-ui:client:ui-reset")
 end)
 
 -- [ Events ] --
 
-RegisterNetEvent('comet-ui/client/ui-reset', function()
+RegisterNetEvent('comet-ui:client:ui-reset', function()
     SetNuiFocus(false, false)
     SendUIMessage('root', 'SetVisibility', { Bool = false })
     SendUIMessage('Prompts', 'CreatePrompt', {
@@ -78,10 +27,6 @@ RegisterNetEvent('comet-ui/client/ui-reset', function()
     })
     Citizen.Wait(2500)
     SendUIMessage('root', 'SetVisibility', { Bool = true })
-
-    if KeybindsModule.GetCustomizedKey("eyePeek") ~= 'L Alt' then
-        exports['comet-ui']:Notify("eye-error", "You've re-binded the peeking functionality, this WILL result in broken or poor functionality! (Default: Left Alt)", "error", 10000)
-    end
 end)
 
 RegisterNUICallback("DOMReady", function()
@@ -89,13 +34,10 @@ RegisterNUICallback("DOMReady", function()
     Citizen.SetTimeout(1500, function()
         for k, v in pairs(UI.Initializes) do v() end
         SendUIMessage('root', 'SetTax', Shared.Tax)
-        -- if KeybindsModule.GetCustomizedKey("eyePeek") ~= 'L Alt' then
-        --     exports['comet-ui']:Notify("eye-error", "You've re-binded the peeking functionality, this WILL result in broken or poor functionality! (Default: Left Alt)", "error", 10000)
-        -- end
     end)
 end)
 
-RegisterNetEvent('comet-ui/client/notify', function(id, message, type, duration)
+RegisterNetEvent('comet-ui:client:notify', function(id, message, type, duration)
     SendUIMessage("Prompts", "CreatePrompt", {
         text = message,
         color = type,
@@ -104,7 +46,7 @@ RegisterNetEvent('comet-ui/client/notify', function(id, message, type, duration)
     })
 end)
 
-RegisterNetEvent('comet-ui/client/CopyToClipboard', function(Text)
+RegisterNetEvent('comet-ui:client:CopyToClipboard', function(Text)
     SendUIMessage("Main", "CopyToClipboard", Text)
 end)
 
@@ -128,6 +70,7 @@ function SendUIMessage(app, action, data)
     })
 end
 exports("SendUIMessage", SendUIMessage)
+UiComponents.SendUIMessage = SendUIMessage
 
 function OpenContextMenu(MenuData)
     if #MenuData.MainMenuItems == 0 then return end
@@ -138,16 +81,19 @@ function OpenContextMenu(MenuData)
     end)
 end
 exports("OpenContext", OpenContextMenu)
+UiComponents.OpenContext = OpenContextMenu
 
 function SetInteraction(Text, Color, IgnoreSlide)
     SendUIMessage('Prompts', 'SetInteraction', {color = Color, text = Text, IgnoreSlide = IgnoreSlide})
 end
 exports("SetInteraction", SetInteraction)
+UiComponents.SetInteraction = SetInteraction
 
 function HideInteraction()
     SendUIMessage('Prompts', 'HideInteraction', {})
 end
 exports("HideInteraction", HideInteraction)
+UiComponents.HideInteraction = HideInteraction
 
 function Notify(Id, Text, Color, Duration)
     SendUIMessage("Prompts", "CreatePrompt", {
@@ -158,6 +104,7 @@ function Notify(Id, Text, Color, Duration)
     })
 end
 exports("Notify", Notify)
+UiComponents.Notify = Notify
 
 function RotationToDirection(Rotation)
 	local AdjustedRotation = {x = (math.pi / 180) * Rotation.x, y = (math.pi / 180) * Rotation.y, z = (math.pi / 180) * Rotation.z}

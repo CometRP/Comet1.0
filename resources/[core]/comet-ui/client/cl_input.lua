@@ -11,6 +11,7 @@ exports("CreateInput", function(Data, Cb)
 
     return Citizen.Await(InputPromise)
 end)
+UiComponents.CreateInput = exports['comet-ui']:CreateInput
 
 exports("HideInput", function(Data, Cb)
     if not HasActiveInput then return LoggerModule.Error("Ui/Input", "There is no active input to close.") end
@@ -20,6 +21,7 @@ exports("HideInput", function(Data, Cb)
     SendUIMessage("Input", "RemoveFocus", Data)
     SetNuiFocus(false, false)
 end)
+UiComponents.HideInput = exports['comet-ui']:HideInput
 
 RegisterNUICallback('Input/OnButtonClick', function(Data, Cb)
     if Data.Button == 'submit' then
@@ -44,6 +46,6 @@ RegisterNUICallback("Input/OnChoiceClick", function(Data, Cb)
     Cb('Ok')
 end)
 
-RegisterNetEvent('comet-ui/client/ui-reset', function()
+RegisterNetEvent('comet-ui:client:ui-reset', function()
     exports['comet-ui']:HideInput()
 end)
