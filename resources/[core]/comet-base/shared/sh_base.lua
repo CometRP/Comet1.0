@@ -1,4 +1,3 @@
-Shared = Shared or {}
 Components = Components or {}
 Components.Base = Components.Base or {}
 
@@ -56,7 +55,8 @@ exports("RefreshComponents", RefreshComponents)
 AddEventHandler('onResourceStart', function(resourceName)
     if Dependencies[resourceName] then
         print("[COMPONENTS] RELOADED MFFFF")
-        RefreshComponents()
+        CreateThread(RefreshComponents)
+        -- RefreshComponents()
     end
 end)
 

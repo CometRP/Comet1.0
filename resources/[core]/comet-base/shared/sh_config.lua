@@ -1,3 +1,4 @@
+Shared = Shared or {}
 Shared.Config = Shared.Config or {}
 
 Shared.Config.MaxPlayers = GetConvarInt('sv_maxclients', 48) -- Gets max players from config file, default 48

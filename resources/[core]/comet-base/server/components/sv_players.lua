@@ -32,7 +32,7 @@ Components.Player.GetByPhone = function(number)
 end
 
 
-Components.Player.GetPlayers()
+Components.Player.GetPlayers = function()
     local sources = {}
     for k in pairs(Components.Players) do
         sources[#sources+1] = k
@@ -42,7 +42,7 @@ end
 
 -- Will return an array of QB Player class instances
 -- unlike the GetPlayers() wrapper which only returns IDs
-Components.Player.GetCometPlayers()
+Components.Player.GetCometPlayers = function()
     return Components.Players
 end
 
@@ -111,12 +111,12 @@ Components.Player.CreateCid = function()
         --     print(id)
         -- end)
 
-
-        -- cid = QBCore.Shared.RandomInt(4)
-        -- local result = MySQL.prepare.await('SELECT COUNT(*) as count FROM players WHERE cid = ?', { cid })
-        -- if result == 0 then
-        --     UniqueFound = true
-        -- end
+        -- 100000
+        cid = tostring(math.random(1111,999999))
+        local result = MySQL.prepare.await('SELECT COUNT(*) as count FROM players WHERE cid = ?', { cid })
+        if result == 0 then
+            UniqueFound = true
+        end
     end
     return cid
 end

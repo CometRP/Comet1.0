@@ -9,7 +9,7 @@ version '1.0.0'
 dependency 'oxmysql'
 
 shared_scripts {
-    'shared/sh_config.lua'
+    'shared/sh_config.lua',
     'shared/sh_base.lua',
     'shared/components/sh_*.lua',
 }
