@@ -247,7 +247,7 @@ end, 'admin')
 --         if jobInfo then
 --             if jobInfo["grades"][sgrade] then
 --                 Player.SetJob(job, grade)
---                 exports['qb-phone']:hireUser(job, Player.PlayerData.citizenid, grade)
+--                 exports['qb-phone']:hireUser(job, Player.PlayerData.cid, grade)
 --             else
 --                 TriggerClientEvent('QBCore:Notify', source, "Not a valid grade", 'error')
 --             end
@@ -265,7 +265,7 @@ end, 'admin')
 --         if Player.PlayerData.job.name == tostring(args[2]) then
 --             Player.SetJob("unemployed", 0)
 --         end
---         exports['qb-phone']:fireUser(tostring(args[2]), Player.PlayerData.citizenid)
+--         exports['qb-phone']:fireUser(tostring(args[2]), Player.PlayerData.cid)
 --     else
 --         TriggerClientEvent('QBCore:Notify', source, 'Player not online', 'error')
 --     end
