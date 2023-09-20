@@ -107,3 +107,44 @@ end
 Components.Functions.GetPlayers = function()
     return GetActivePlayers()
 end
+
+Components.Functions.GetStreetNametAtCoords = function(coords)
+    local streetname1, streetname2 = GetStreetNameAtCoord(coords.x, coords.y, coords.z)
+    return { main = GetStreetNameFromHashKey(streetname1), cross = GetStreetNameFromHashKey(streetname2) }
+end
+
+Components.Functions.GetZoneAtCoords = function(coords)
+    return GetLabelText(GetNameOfZone(coords))
+end
+
+Components.Functions.GetCurrentTime = function()
+    local obj = {}
+    obj.min = GetClockMinutes()
+    obj.hour = GetClockHours()
+
+    if obj.hour <= 12 then
+        obj.ampm = "AM"
+    elseif obj.hour >= 13 then
+        obj.ampm = "PM"
+        obj.formattedHour = obj.hour - 12
+    end
+
+    if obj.min <= 9 then
+        obj.formattedMin = "0" .. obj.min
+    end
+
+    return obj
+end
+
+Components.Functions.GetGroundZCoord = function(coords)
+    if not coords then return end
+
+    local retval, groundZ = GetGroundZFor_3dCoord(coords.x, coords.y, coords.z, 0)
+    if retval then
+        return vector3(coords.x, coords.y, groundZ)
+    else
+        print('Couldn\'t find Ground Z Coordinates given 3D Coordinates')
+        print(coords)
+        return coords
+    end
+end
