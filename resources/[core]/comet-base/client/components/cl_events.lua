@@ -78,10 +78,10 @@ RegisterNetEvent('comet-base:deleteVehicle', function()
         SetEntityAsMissionEntity(veh, true, true)
         Components.Sync.DeleteVehicle(veh)
     else
-        local entity = GetEntityInFrontOfPlayer(3.0, ped)
+        local entity = Components.Player.GetEntityInFront(5.0, ped)
 
         if DoesEntityExist(entity) then
-            ComponentsSync.DeleteVehicle(entity)
+            Components.Sync.DeleteVehicle(entity)
     
             print(("[COMET-BASE] Delete Vehicle | Entity: %s"):format(entity))
         end

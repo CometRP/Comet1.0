@@ -1,9 +1,9 @@
 Components.Functions = Components.Functions or {}
 
-Components.Functions.GetPlayerData = function(cb)
-    if not cb then return Components.PlayerData end
-    cb(Components.PlayerData)
-end
+-- Components.Functions.GetPlayerData = function(cb)
+--     if not cb then return Components.PlayerData end
+--     cb(Components.PlayerData)
+-- end
 
 Components.Functions.GetCoords = function(entity)
     local coords = GetEntityCoords(entity)

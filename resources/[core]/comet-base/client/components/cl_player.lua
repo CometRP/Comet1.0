@@ -1,6 +1,11 @@
 Components.Player = Components.Player or {}
 Components.PlayerData = Components.PlayerData or {}
 
+Components.Player.GetPlayerData = function(cb)
+    if not cb then return Components.PlayerData end
+    cb(Components.PlayerData)
+end
+
 Components.Player.GetCardinalDirection = function(entity)
     entity = DoesEntityExist(entity) and entity or PlayerPedId()
     if DoesEntityExist(entity) then
@@ -19,7 +24,7 @@ Components.Player.GetCardinalDirection = function(entity)
     end
 end
 
-Components.Player.GetEntityInFront = function(ped, distance)
+Components.Player.GetEntityInFront = function(distance, ped)
 	local coords = GetEntityCoords(ped, 1)
 	local offset = GetOffsetFromEntityInWorldCoords(ped, 0.0, distance, 0.0)
 	local rayHandle = StartShapeTestRay(coords.x, coords.y, coords.z, offset.x, offset.y, offset.z, -1, ped, 0)

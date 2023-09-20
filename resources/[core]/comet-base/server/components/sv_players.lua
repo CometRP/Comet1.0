@@ -441,7 +441,7 @@ Components.Player.CreatePlayer = function(PlayerData, Offline)
             end
             -- TriggerClientEvent('qb-interface:addedMoney', self.PlayerData.source, amount,self.PlayerData.money[moneytype], amount)
             if moneytype == 'cash' or moneytype == 'bank' then
-                -- TriggerClientEvent('qb-base:addedMoney', self.PlayerData.source, amount, self.PlayerData.money[moneytype])
+                TriggerClientEvent('comet-base:addedMoney', self.PlayerData.source, amount, self.PlayerData.money[moneytype])
             end
 
             --QBCore:Client:OnMoneyChange QBCore:Server:OnMoneyChange
@@ -475,7 +475,7 @@ Components.Player.CreatePlayer = function(PlayerData, Offline)
                 -- TriggerEvent('qb-log:server:CreateLog', 'playermoney', 'RemoveMoney', 'red', '**' .. GetPlayerName(self.PlayerData.source) .. ' (cid: ' .. self.PlayerData.cid .. ' | id: ' .. self.PlayerData.source .. ')** $' .. amount .. ' (' .. moneytype .. ') removed, new ' .. moneytype .. ' balance: ' .. self.PlayerData.money[moneytype] .. ' reason: ' .. reason)
             end
             if moneytype == 'cash' or moneytype == 'bank' then
-                -- TriggerClientEvent('qb-base:removedMoney', self.PlayerData.source, amount, self.PlayerData.money[moneytype])
+                TriggerClientEvent('comet-base:removedMoney', self.PlayerData.source, amount, self.PlayerData.money[moneytype])
             end
             TriggerClientEvent('comet-base:onMoneyChange', self.PlayerData.source, moneytype, amount, "remove", reason)
             TriggerEvent('comet-base:onMoneyChange', self.PlayerData.source, moneytype, amount, "remove", reason)
