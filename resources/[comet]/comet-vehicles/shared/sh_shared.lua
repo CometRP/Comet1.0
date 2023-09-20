@@ -12,7 +12,7 @@ Shared.Classes = {
     X = 900,
 }
 
-Vehicle.GetTierClasses = function()
+Vehicles.GetTierClasses = function()
     return Shared.Classes
 end
 exports("GetTierClasses", function()

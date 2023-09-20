@@ -18,3 +18,11 @@ Components.Player.GetCardinalDirection = function(entity)
         return "Cardinal Direction Error"
     end
 end
+
+Components.Player.GetEntityInFront = function(ped, distance)
+	local coords = GetEntityCoords(ped, 1)
+	local offset = GetOffsetFromEntityInWorldCoords(ped, 0.0, distance, 0.0)
+	local rayHandle = StartShapeTestRay(coords.x, coords.y, coords.z, offset.x, offset.y, offset.z, -1, ped, 0)
+	local a, b, c, d, entity = GetRaycastResult(rayHandle)
+	return entity
+end

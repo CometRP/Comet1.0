@@ -5,6 +5,7 @@ AddEventHandler("comet-base:refreshComponents", function()
     }, function(pass)
         if not pass then return end
         Callback = exports['comet-base']:FetchComponent("Callback")
+        print("updated components")
     end)
 end)
 
