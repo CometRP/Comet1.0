@@ -25,8 +25,8 @@ const CraftingSpots = [
 ];
 
 on("comet-base:exportsReady", () => {
-    exports['comet-base'].FetchComponent("Callback").Register("comet-inventory:getCraftingSpots", (source, data, cb) => {
-        cb(CraftingSpots);
+    exports['comet-base'].FetchComponent("Callback").Register("comet-inventory:getCraftingSpots", (data) => {
+        return CraftingSpots;
     })
 })
 

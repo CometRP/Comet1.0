@@ -65,7 +65,7 @@ end
 
 local function openCharMenu(bool)
     -- QBCore.Functions.TriggerCallback("comet-multicharacter:server:GetNumberOfCharacters", function(result)
-    local result = Callback:CallAsync("comet-multicharacter:server:GetNumberOfCharacters")
+    local result = Callback.Execute("comet-multicharacter:server:GetNumberOfCharacters")
         SetNuiFocus(bool, bool)
         SendNUIMessage({
             action = "ui",
@@ -155,7 +155,7 @@ RegisterNUICallback('cDataPed', function(nData, cb)
     DeleteEntity(charPed)
     if cData ~= nil then
         -- QBCore.Functions.TriggerCallback('comet-multicharacter:server:getSkin', function(model, data)
-        local model, data = Callback:CallAsync('comet-multicharacter:server:getSkin', {cid = cData.cid} )
+        local model, data = Callback.Execute('comet-multicharacter:server:getSkin', {cid = cData.cid} )
             model = model ~= nil and tonumber(model) or false
             if model ~= nil then
                 CreateThread(function()
@@ -218,7 +218,7 @@ RegisterNUICallback('cDataPed', function(nData, cb)
 end)
 
 RegisterNUICallback('setupCharacters', function(_, cb)
-    local result = Callback:CallAsync("comet-multicharacter:server:setupCharacters")
+    local result = Callback.Execute("comet-multicharacter:server:setupCharacters")
     -- QBCore.Functions.TriggerCallback("comet-multicharacter:server:setupCharacters", function(result)
         SendNUIMessage({
             action = "setupCharacters",

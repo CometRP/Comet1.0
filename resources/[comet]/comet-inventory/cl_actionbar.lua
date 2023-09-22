@@ -329,8 +329,8 @@ AddEventHandler("comet-voice:focus:set", function(pState)
 end)
 
 AddEventHandler("comet-base:exportsReady", function()
-    exports['comet-base']:FetchComponent("Callback").Register('police:gsr', function(source, data, cb)
-        cb(shotRecentlyLoopActive)
+    exports['comet-base']:FetchComponent("Callback").Register('police:gsr', function(data)
+        return shotRecentlyLoopActive
     end)
 end)
 
