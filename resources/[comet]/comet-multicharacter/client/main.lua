@@ -1,7 +1,7 @@
 local cam = nil
 local charPed = nil
 --local ped1 = nil
-Callback = nil
+Callback = nil or exports['comet-base']:FetchComponent("Callback")
 AddEventHandler("comet-base:refreshComponents", function()
     exports['comet-base']:LoadComponents({
         "Callback"
@@ -45,7 +45,7 @@ local function pednpc(model)
 end
 
 local function skyCam(bool)
-    TriggerEvent('qb-weathersync:client:DisableSync')
+    TriggerEvent('comet-weathersync:client:DisableSync')
     if bool then
         DoScreenFadeIn(1000)
         SetTimecycleModifier('hud_def_blur')
@@ -65,7 +65,7 @@ end
 
 local function openCharMenu(bool)
     -- QBCore.Functions.TriggerCallback("comet-multicharacter:server:GetNumberOfCharacters", function(result)
-    local result = Callback.Execute("comet-multicharacter:server:GetNumberOfCharacters")
+    local result = Callback:CallAsync("comet-multicharacter:server:GetNumberOfCharacters")
         SetNuiFocus(bool, bool)
         SendNUIMessage({
             action = "ui",
@@ -87,6 +87,7 @@ RegisterNetEvent('comet-multicharacter:client:closeNUIdefault', function() -- Th
     DoScreenFadeOut(500)
     Wait(2000)
     SetEntityCoords(PlayerPedId(), Config.DefaultSpawn.x, Config.DefaultSpawn.y, Config.DefaultSpawn.z)
+    SetEntityHeading(PlayerPedId(), Config.DefaultSpawn.w)
     TriggerServerEvent('comet-base:playerLoaded')
     TriggerEvent('comet-base:playerLoaded')
     -- TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
@@ -96,8 +97,8 @@ RegisterNetEvent('comet-multicharacter:client:closeNUIdefault', function() -- Th
     SetEntityVisible(PlayerPedId(), true)
     Wait(500)
     DoScreenFadeIn(250)
-    TriggerEvent('qb-weathersync:client:EnableSync')
-    -- TriggerEvent('qb-clothes:client:CreateFirstCharacter')
+    TriggerEvent('comet-weathersync:client:EnableSync')
+    TriggerEvent('comet-clothingUI:client:CreateFirstCharacter')
 end)
 
 RegisterNetEvent('comet-multicharacter:client:closeNUI', function()
@@ -154,7 +155,7 @@ RegisterNUICallback('cDataPed', function(nData, cb)
     DeleteEntity(charPed)
     if cData ~= nil then
         -- QBCore.Functions.TriggerCallback('comet-multicharacter:server:getSkin', function(model, data)
-        local model, data = Callback.Execute('comet-multicharacter:server:getSkin', cData.cid)
+        local model, data = Callback:CallAsync('comet-multicharacter:server:getSkin', {cid = cData.cid} )
             model = model ~= nil and tonumber(model) or false
             if model ~= nil then
                 CreateThread(function()
@@ -217,13 +218,14 @@ RegisterNUICallback('cDataPed', function(nData, cb)
 end)
 
 RegisterNUICallback('setupCharacters', function(_, cb)
-    QBCore.Functions.TriggerCallback("comet-multicharacter:server:setupCharacters", function(result)
+    local result = Callback:CallAsync("comet-multicharacter:server:setupCharacters")
+    -- QBCore.Functions.TriggerCallback("comet-multicharacter:server:setupCharacters", function(result)
         SendNUIMessage({
             action = "setupCharacters",
             characters = result
         })
         cb("ok")
-    end)
+    -- end)
 end)
 
 RegisterNUICallback('removeBlur', function(_, cb)

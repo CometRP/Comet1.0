@@ -62,7 +62,7 @@ $(document).on('click', '#IconClassStyle', function(evt){
     $(".TextFoJSCode").html("Select a Location")
     if (type !== "lab") {
 
-        $.post('https://qb-spawn/setCam', JSON.stringify({
+        $.post('https://comet-spawn/setCam', JSON.stringify({
             posname: location,
             type: type,
         }));
@@ -116,17 +116,17 @@ $(document).on('click', '.GreenBTN', function(evt){
         SelectLocForSpawn = null
 
         if (MainspawnType == "appartment2") {
-            $.post('https://qb-spawn/spawnplayerappartment2', JSON.stringify({
+            $.post('https://comet-spawn/spawnplayerappartment2', JSON.stringify({
                 spawnloc: Mainlocation,
                 apartName: apartNames,
             }));
         } else if(MainspawnType !== "appartment"){
-            $.post('https://qb-spawn/spawnplayer', JSON.stringify({
+            $.post('https://comet-spawn/spawnplayer', JSON.stringify({
                 spawnloc: Mainlocation,
                 typeLoc: MainspawnType
             }));
         }else {
-            $.post('https://qb-spawn/chooseAppa', JSON.stringify({
+            $.post('https://comet-spawn/chooseAppa', JSON.stringify({
                 appType: Mainlocation,
             }));
         } 
@@ -211,7 +211,7 @@ function setupApps(apps) {
 }
 
 function CloseAddCoord() {
-    $.post('https://qb-spawn/CloseAddCoord', JSON.stringify({}));
+    $.post('https://comet-spawn/CloseAddCoord', JSON.stringify({}));
     $(".AddCoord").fadeOut(250);
 }
 

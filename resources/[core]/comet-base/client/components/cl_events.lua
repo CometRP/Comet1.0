@@ -6,7 +6,7 @@
 RegisterNetEvent('comet-base:playerLoaded', function()
     ShutdownLoadingScreenNui()
     LocalPlayer.state:set('isLoggedIn', true, false)
-    if not QBConfig.Server.PVP then return end
+    if not Config.Server.PVP then return end
     SetCanAttackFriendly(PlayerPedId(), true, false)
     NetworkSetFriendlyFireOption(true)
 end)
@@ -67,7 +67,7 @@ RegisterNetEvent('comet-base:spawnVehicle', function(model)
     local ped = PlayerPedId()
     local x,y,z = table.unpack(GetEntityCoords(ped))
     local w = GetEntityHeading(ped)
-    local netId = Components.Callback.Execute("comet-vehicles:SpawnVehicle", model, vector4(x, y, z, w), true)
+    local netId = Components.Callback:CallAsync("comet-vehicles:SpawnVehicle", model, vector4(x, y, z, w), true)
     local veh = NetToVeh(netId)
 end)
 

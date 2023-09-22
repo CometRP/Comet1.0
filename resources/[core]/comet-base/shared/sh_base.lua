@@ -52,6 +52,10 @@ RefreshComponents = function()
 end
 exports("RefreshComponents", RefreshComponents)
 -- CreateThread(RefreshComponents)
+AddEventHandler('comet-base:refreshComponent', function()
+    print("[COMPONENTS] Refreshed Components")
+end)
+
 AddEventHandler('onResourceStart', function(resourceName)
     if Dependencies[resourceName] then
         print("[COMPONENTS] RELOADED MFFFF")

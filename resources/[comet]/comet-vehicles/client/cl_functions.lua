@@ -1,5 +1,5 @@
 Vehicles.SpawnVehicle = function(model, coords, warp, cb)
-    local netId = Callback.Execute("comet-vehicles:SpawnVehicle", model, coords, warp)
+    local netId = Callback:CallAsync("comet-vehicles:SpawnVehicle", model, coords, warp)
     local veh = NetToVeh(netId)
     if cb then cb(veh) end
 end

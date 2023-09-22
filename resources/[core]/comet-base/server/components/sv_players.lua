@@ -557,7 +557,7 @@ Components.Player.CreatePlayer = function(PlayerData, Offline)
 
         -- At this point we are safe to emit new instance to third party resource for load handling
         -- TriggerEvent('QBCore:Server:PlayerLoaded', self)
-        TriggerEvent('comet-rp:loadedPlayer', self)
+        TriggerEvent('comet-base:loadedPlayer', self)
         self.UpdatePlayerData()
     end
 end

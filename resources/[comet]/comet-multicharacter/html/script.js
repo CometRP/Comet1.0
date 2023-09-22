@@ -382,7 +382,7 @@ chatplay = function(){
     var charData = $(selectedChar).data('cid');
     if (selectedChar !== null) {
         if (charData !== "") {
-            $.post('https://qb-multicharacter/selectCharacter', JSON.stringify({
+            $.post('https://comet-multicharacter/selectCharacter', JSON.stringify({
                 cData: $(selectedChar).data('cData')
             }));
             setTimeout(function(){

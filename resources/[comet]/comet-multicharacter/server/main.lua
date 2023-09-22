@@ -1,13 +1,28 @@
-local QBCore = exports['qb-core']:GetCoreObject()
 local hasDonePreloading = {}
+
+Callback = nil or exports['comet-base']:FetchComponent("Callback")
+Functions = nil or exports['comet-base']:FetchComponent("Functions")
+Player = nil or exports['comet-base']:FetchComponent("Player")
+AddEventHandler("comet-base:refreshComponents", function()
+    exports['comet-base']:LoadComponents({
+        "Callback"
+    }, function(pass)
+        if not pass then return end
+        Callback = exports['comet-base']:FetchComponent("Callback")
+        Functions = exports['comet-base']:FetchComponent("Functions")
+        Player = exports['comet-base']:FetchComponent("Player")
+        print("[COMET-MULTICHARACTER] Loaded Components")
+    end)
+end)
+-- Mai
 
 -- Functions
 
 local function GiveStarterItems(source)
     local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = exports['comet-base']:FetchComponent("Player").GetBySource(src)
 
-    for _, v in pairs(QBCore.Shared.StarterItems) do
+    for _, v in pairs(exports['comet-base']:FetchComponent("Shared").StarterItems) do
         local info = {}
         if v.item == "id_card" then
             info.cid = Player.PlayerData.cid
@@ -53,50 +68,60 @@ local function loadHouseData()
             }
         end
     end
-    TriggerClientEvent("qb-garages:client:houseGarageConfig", -1, HouseGarages)
-    TriggerClientEvent("qb-houses:client:setHouseConfig", -1, Houses)
+    -- TriggerClientEvent("qb-garages:client:houseGarageConfig", -1, HouseGarages)
+    -- TriggerClientEvent("qb-houses:client:setHouseConfig", -1, Houses)
 end
 
 -- Commands
 
-QBCore.Commands.Add("logout", "Logout of Character (Admin Only)", {}, false, function(source)
-    local src = source
-    QBCore.Player.Logout(src)
-    TriggerClientEvent('comet-multicharacter:client:chooseChar', src)
-end, "admin")
+CreateThread(function()
 
--- QBCore.Commands.Add("closeNUI", "Close Multi NUI", {}, false, function(source)
+    local Command = exports['comet-base']:FetchComponent("Commands")
+
+    while not Command do
+        Wait(15)
+    end
+
+    Command.Add("logout", "Logout of Character (Admin Only)", {}, false, function(source)
+        local src = source
+        exports['comet-base']:FetchComponent("Player").Logout(src)
+        TriggerClientEvent('comet-multicharacter:client:chooseChar', src)
+    end, "admin")
+
+end)
+
+-- exports['comet-base']:FetchComponent("Commands").Add("closeNUI", "Close Multi NUI", {}, false, function(source)
 --     local src = source
 --     TriggerClientEvent('comet-multicharacter:client:closeNUI', src)
 -- end)
 
 -- Events
 
-AddEventHandler('QBCore:Server:PlayerLoaded', function(Player)
+AddEventHandler('comet-base:loadedPlayer', function(Player)
     Wait(1000) -- 1 second should be enough to do the preloading in other resources
     hasDonePreloading[Player.PlayerData.source] = true
 end)
 
-AddEventHandler('QBCore:Server:OnPlayerUnload', function(src)
+AddEventHandler('comet-base:playerUnload', function(src)
     hasDonePreloading[src] = false
 end)
 
 RegisterNetEvent('comet-multicharacter:server:disconnect', function()
     local src = source
-    DropPlayer(src, "You have disconnected from QBCore")
+    DropPlayer(src, "You have disconnected from CometRP")
 end)
 
 RegisterNetEvent('comet-multicharacter:server:loadUserData', function(cData)
     local src = source
-    if QBCore.Player.Login(src, cData.cid) then
+    if exports['comet-base']:FetchComponent("Player").Login(src, cData.cid) then
         repeat
             Wait(10)
         until hasDonePreloading[src]
-        print('^2[qb-core]^7 '..GetPlayerName(src)..' (Citizen ID: '..cData.cid..') has succesfully loaded!')
-        QBCore.Commands.Refresh(src)
+        print('^2[comet-base]^7 '..GetPlayerName(src)..' (Citizen ID: '..cData.cid..') has succesfully loaded!')
+        exports['comet-base']:FetchComponent("Commands").Refresh(src)
         TriggerClientEvent('apartments:client:setupSpawnUI', src, cData)
         -- TriggerClientEvent('ps-housing:client:setupSpawnUI', src, cData)
-        TriggerEvent("qb-log:server:CreateLog", "joinleave", "Loaded", "green", "**".. GetPlayerName(src) .. "** (<@"..(QBCore.Functions.GetIdentifier(src, 'discord'):gsub("discord:", "") or "unknown").."> |  ||"  ..(QBCore.Functions.GetIdentifier(src, 'ip') or 'undefined') ..  "|| | " ..(QBCore.Functions.GetIdentifier(src, 'license') or 'undefined') .." | " ..cData.cid.." | "..src..") loaded..")
+        -- TriggerEvent("qb-log:server:CreateLog", "joinleave", "Loaded", "green", "**".. GetPlayerName(src) .. "** (<@"..(Functions.GetIdentifier(src, 'discord'):gsub("discord:", "") or "unknown").."> |  ||"  ..(Functions.GetIdentifier(src, 'ip') or 'undefined') ..  "|| | " ..(Functions.GetIdentifier(src, 'license') or 'undefined') .." | " ..cData.cid.." | "..src..") loaded..")
     end
 end)
 
@@ -105,7 +130,7 @@ RegisterNetEvent('comet-multicharacter:server:createCharacter', function(data)
     local newData = {}
     newData.cid = data.cid
     newData.charinfo = data
-    if QBCore.Player.Login(src, false, newData) then
+    if exports['comet-base']:FetchComponent("Player").Login(src, false, newData) then
         repeat
             Wait(10)
         until hasDonePreloading[src]
@@ -113,17 +138,17 @@ RegisterNetEvent('comet-multicharacter:server:createCharacter', function(data)
         --     local randbucket = (GetPlayerPed(src) .. math.random(1,999))
         --     SetPlayerRoutingBucket(src, randbucket)
         --     print('^2[qb-core]^7 '..GetPlayerName(src)..' has successfully loaded!')
-        --     QBCore.Commands.Refresh(src)
+        --     exports['comet-base']:FetchComponent("Commands").Refresh(src)
         --     loadHouseData(src)
-        --     TriggerClientEvent("qb-multicharacter:client:closeNUI", src)
+        --     TriggerClientEvent("comet-multicharacter:client:closeNUI", src)
         --     TriggerClientEvent('apartments:client:setupSpawnUI', src, newData)
         --     GiveStarterItems(src)
         -- else
             print('^2[qb-core]^7 '..GetPlayerName(src)..' has successfully loaded!')
-            QBCore.Commands.Refresh(src)
+            exports['comet-base']:FetchComponent("Commands").Refresh(src)
             loadHouseData(src)
-            TriggerClientEvent("qb-multicharacter:client:closeNUIdefault", src)
-            GiveStarterItems(src)
+            TriggerClientEvent("comet-multicharacter:client:closeNUIdefault", src)
+            -- GiveStarterItems(src)
         -- end
     end
 end)
@@ -134,12 +159,12 @@ end)
 --     local newData = {}
 --     newData.cid = data.cid
 --     newData.charinfo = data
---     if QBCore.Player.Login(src, false, newData) then
+--     if exports['comet-base']:FetchComponent("Player").Login(src, false, newData) then
 --         repeat
 --             Wait(10)
 --         until hasDonePreloading[src]
 --         print('^2[qb-core]^7 '..GetPlayerName(src)..' has succesfully loaded!')
---         QBCore.Commands.Refresh(src)
+--         exports['comet-base']:FetchComponent("Commands").Refresh(src)
 --         TriggerClientEvent("comet-multicharacter:client:closeNUI", src)
 --         newData.cid = QBCore.Functions.GetPlayer(src).PlayerData.cid
 --         TriggerClientEvent('apartments:client:setupSpawnUI', src, newData, true)
@@ -150,65 +175,120 @@ end)
 
 RegisterNetEvent('comet-multicharacter:server:deleteCharacter', function(cid)
     local src = source
-    QBCore.Player.DeleteCharacter(src, cid)
+    exports['comet-base']:FetchComponent("Player").DeleteCharacter(src, cid)
 end)
 
 -- Callbacks
 
-QBCore.Functions.CreateCallback("comet-multicharacter:server:GetUserCharacters", function(source, cb)
-    local src = source
-    local license = QBCore.Functions.GetIdentifier(src, 'license')
+CreateThread(function()
 
-    MySQL.Async.execute('SELECT * FROM players WHERE license = ?', {license}, function(result)
-        cb(result)
+    local Callback = exports['comet-base']:FetchComponent("Callback")
+    local Functions = exports['comet-base']:FetchComponent("Functions")
+
+    while not Callback do
+        Wait(15)
+    end
+    while not Functions do
+        Wait(15)
+    end
+
+    Callback.Register("comet-multicharacter:server:GetUserCharacters", function(source, data, cb)
+        local src = source
+        local license = Functions.GetIdentifier(src, 'license')
+        local p = promise.new()
+        MySQL.Async.execute('SELECT * FROM players WHERE license = ?', {license}, function(result)
+            p:resolve(result)
+        end)
+        cb(Citizen.Await(p))
     end)
-end)
-
-QBCore.Functions.CreateCallback("comet-multicharacter:server:GetServerLogs", function(source, cb)
-    MySQL.Async.execute('SELECT * FROM server_logs', {}, function(result)
-        cb(result)
+    
+    Callback.Register("comet-multicharacter:server:GetServerLogs", function(source, data, cb)
+        local p = promise.new()
+        MySQL.Async.execute('SELECT * FROM server_logs', {}, function(result)
+            p:resolve(result)
+        end)
+        cb(Citizen.Await(p))
     end)
-end)
-
-QBCore.Functions.CreateCallback("comet-multicharacter:server:GetNumberOfCharacters", function(source, cb)
-    local src = source
-    local license = QBCore.Functions.GetIdentifier(src, 'license')
-    local numOfChars = 0
-
-    if next(Config.PlayersNumberOfCharacters) then
-        for i, v in pairs(Config.PlayersNumberOfCharacters) do
-            if v.license == license then
-                numOfChars = v.numberOfChars
-                break
-            else 
-                numOfChars = Config.DefaultNumberOfCharacters
+    
+    Callback.Register("comet-multicharacter:server:GetNumberOfCharacters", function(source, data, cb)
+        print("test")
+        local src = source
+        print(src, source)
+        local license = Functions.GetIdentifier(src, 'license')
+        local numOfChars = 0
+    
+        if next(Config.PlayersNumberOfCharacters) then
+            for i, v in pairs(Config.PlayersNumberOfCharacters) do
+                if v.license == license then
+                    numOfChars = v.numberOfChars
+                    break
+                else 
+                    numOfChars = Config.DefaultNumberOfCharacters
+                end
             end
+        else
+            numOfChars = Config.DefaultNumberOfCharacters
         end
-    else
-        numOfChars = Config.DefaultNumberOfCharacters
-    end
-    cb(numOfChars)
-end)
-
-QBCore.Functions.CreateCallback("comet-multicharacter:server:setupCharacters", function(source, cb)
-    local license = QBCore.Functions.GetIdentifier(source, 'license')
-    local plyChars = {}
-    MySQL.Async.fetchAll('SELECT * FROM players WHERE license = ?', {license}, function(result)
-        for i = 1, (#result), 1 do
-            result[i].charinfo = json.decode(result[i].charinfo)
-            result[i].money = json.decode(result[i].money)
-            result[i].job = json.decode(result[i].job)
-            plyChars[#plyChars+1] = result[i]
-        end
-        cb(plyChars)
+        cb(numOfChars)
     end)
-end)
+    
+    Callback.Register("comet-multicharacter:server:setupCharacters", function(source, data, cb)
+        local source = source
+        local license = Functions.GetIdentifier(source, 'license')
+        local plyChars = {}
+        local p = promise.new()
+        MySQL.Async.fetchAll('SELECT * FROM players WHERE license = ?', {license}, function(result)
+            for k, v in pairs(result) do
+                local cc = MySQL.Sync.fetchAll('SELECT * FROM character_current WHERE cid = ?', {v.cid})
+                plyChars[k] = {}
+                plyChars[k].model = '1885233650'
+                plyChars[k].drawables = json.decode('{"1":["masks",0],"2":["hair",0],"3":["torsos",0],"4":["legs",0],"5":["bags",0],"6":["shoes",1],"7":["neck",0],"8":["undershirts",0],"9":["vest",0],"10":["decals",0],"11":["jackets",0],"0":["face",0]}')
+                plyChars[k].props = json.decode('{"1":["glasses",-1],"2":["earrings",-1],"3":["mouth",-1],"4":["lhand",-1],"5":["rhand",-1],"6":["watches",-1],"7":["braclets",-1],"0":["hats",-1]}')
+                plyChars[k].drawtextures = json.decode('[["face",0],["masks",0],["hair",0],["torsos",0],["legs",0],["bags",0],["shoes",2],["neck",0],["undershirts",1],["vest",0],["decals",0],["jackets",11]]')
+                plyChars[k].proptextures = json.decode('[["hats",-1],["glasses",-1],["earrings",-1],["mouth",-1],["lhand",-1],["rhand",-1],["watches",-1],["braclets",-1]]')
+                plyChars[k].cid = v.cid
+                plyChars[k].something = v
+                plyChars[k].charinfo = json.decode(v.charinfo)
+    
+                if cc[1] and cc[1].model then
+                    plyChars[k].model = cc[1].model
+                    plyChars[k].drawables = json.decode(cc[1].drawables)
+                    plyChars[k].props = json.decode(cc[1].props)
+                    plyChars[k].drawtextures = json.decode(cc[1].drawtextures)
+                    plyChars[k].proptextures = json.decode(cc[1].proptextures)
+                end
+            end
+            local cf = MySQL.Sync.fetchAll('SELECT * FROM character_face WHERE citizenid = ?', {v.citizenid})
+            if cf[1] and cf[1].headBlend then
+                plyChars[k].headBlend = json.decode(cf[1].headBlend)
+                plyChars[k].hairColor = json.decode(cf[1].hairColor)
+                plyChars[k].headOverlay= json.decode(cf[1].headOverlay)
+                plyChars[k].headStructure = json.decode(cf[1].headStructure)
+            end
+            local ct = MySQL.Sync.fetchAll('SELECT * FROM character_tattoos WHERE citizenid = ?', {v.citizenid})
+            if ct[1] and ct[1].tattoos then
+                plyChars[k].tattoos = json.decode(ct[1].tattoos)
+            end
 
-QBCore.Functions.CreateCallback("comet-multicharacter:server:getSkin", function(source, cb, cid)
-    local result = MySQL.Sync.fetchAll('SELECT * FROM playerskins WHERE cid = ? AND active = ?', {cid, 1})
-    if result[1] ~= nil then
-        cb(result[1].model, result[1].skin)
-    else
-        cb(nil)
-    end
+            -- for i = 1, (#result), 1 do
+            --     result[i].charinfo = json.decode(result[i].charinfo)
+            --     result[i].money = json.decode(result[i].money)
+            --     result[i].job = json.decode(result[i].job)
+            --     plyChars[#plyChars+1] = result[i]
+            -- end
+
+            p:resolve(plyChars)
+        end)
+        cb(Citizen.Await(p))
+    end)
+    
+    Callback.Register("comet-multicharacter:server:getSkin", function(source, data, cb)
+        local result = MySQL.Sync.fetchAll('SELECT * FROM playerskins WHERE cid = ? AND active = ?', {data.cid, 1})
+        if result[1] ~= nil then
+            cb(result[1].model, result[1].skin)
+        else
+            cb(nil)
+        end
+    end)
+    
 end)

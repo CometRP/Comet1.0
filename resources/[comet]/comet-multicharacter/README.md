@@ -20,7 +20,7 @@ ensure comet-multicharacter
 ensure qb-spawn
 ensure qb-apartments
 ensure qb-clothing
-ensure qb-weathersync
+ensure comet-weathersync
 ```
 # rights 
 - discord : https://discord.gg/p8HRkBZjh2

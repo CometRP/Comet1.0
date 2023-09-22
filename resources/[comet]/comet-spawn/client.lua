@@ -23,12 +23,12 @@ end
 
 -- Events
 
-RegisterNetEvent('qb-spawn:client:openUI', function(value)
+RegisterNetEvent('comet-spawn:client:openUI', function(value)
     SetEntityVisible(PlayerPedId(), false)
     DoScreenFadeOut(250)
     Wait(1000)
     DoScreenFadeIn(250)
-    QBCore.Functions.GetPlayerData(function(PlayerData)
+    exports['comet-base']:FetchComponent("Player").GetPlayerData(function(PlayerData)
         cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", PlayerData.position.x, PlayerData.position.y, PlayerData.position.z + camZPlus1, -85.00, 0.00, 0.00, 100.00, false, 0)
         SetCamActive(cam, true)
         RenderScriptCams(true, false, 1, true, true)
@@ -43,40 +43,40 @@ end)
 
 RegisterNetEvent('apartments:client:setupSpawnUI', function(cData, isNew)
 
-
+        TriggerEvent("comet-clothing:inSpawn", true)
     -- if not isNew then 
         TriggerEvent('comet-spawn:client:setupSpawns', cData, false, nil)
-        TriggerEvent('qb-spawn:client:openUI', true)
+        TriggerEvent('comet-spawn:client:openUI', true)
     -- elseif isNew then
     --     TriggerEvent('comet-spawn:client:setupSpawns', cData, true, nil)
-    --     TriggerEvent('qb-spawn:client:openUI', false)
+    --     TriggerEvent('comet-spawn:client:openUI', false)
     -- else
     --     print("ERROR")
     -- end
 
 
 
-    -- QBCore.Functions.TriggerCallback('apartments:GetOwnedApartment', function(result)
+    -- Callbacks.TriggerCallback('apartments:GetOwnedApartment', function(result)
     --     if result then
-    --         TriggerEvent('qb-spawn:client:setupSpawns', cData, false, nil)
-    --         TriggerEvent('qb-spawn:client:openUI', true)
+    --         TriggerEvent('comet-spawn:client:setupSpawns', cData, false, nil)
+    --         TriggerEvent('comet-spawn:client:openUI', true)
     --         TriggerEvent("apartments:client:SetHomeBlip", result.type)
     --     else
     --         if Apartments.Starting then
-    --             TriggerEvent('qb-spawn:client:setupSpawns', cData, true, Apartments.Locations)
-    --             TriggerEvent('qb-spawn:client:openUI', true)
+    --             TriggerEvent('comet-spawn:client:setupSpawns', cData, true, Apartments.Locations)
+    --             TriggerEvent('comet-spawn:client:openUI', true)
     --         else
-    --             TriggerEvent('qb-spawn:client:setupSpawns', cData, false, nil)
-    --             TriggerEvent('qb-spawn:client:openUI', true)
+    --             TriggerEvent('comet-spawn:client:setupSpawns', cData, false, nil)
+    --             TriggerEvent('comet-spawn:client:openUI', true)
     --         end
     --     end
-    -- end, cData.citizenid)
+    -- end, cData.cid)
 end)
 
 RegisterNetEvent('comet-spawn:client:setupSpawns', function(cData, new, apps)
     if not new then
-        -- QBCore.Functions.TriggerCallback('qb-spawn:server:getOwnedHouses', function(houses)
-        local houses = exports["comet-base"]:FetchComponent("Callback").Execute("comet-spawn:server:getOwnedHouse", cData.cid)
+        -- Callbacks.TriggerCallback('comet-spawn:server:getOwnedHouses', function(houses)
+        local houses = exports["comet-base"]:FetchComponent("Callback"):CallAsync("comet-spawn:server:getOwnedHouse", {cid = cData.cid})
             local myHouses = {}
             if houses ~= nil then
                 for i = 1, (#houses), 1 do
@@ -89,7 +89,7 @@ RegisterNetEvent('comet-spawn:client:setupSpawns', function(cData, new, apps)
             Wait(400)
             -- local Apartment = nil
             -- local ApartmentName = nil
-            -- QBCore.Functions.TriggerCallback('apartments:GetOwnedApartment', function(result)
+            -- eCallBacks.TriggerCallback('apartments:GetOwnedApartment', function(result)
             --     Apartment = Apartments.Locations[result.type]  
             --     ApartmentName = result.name
             -- end)
@@ -106,7 +106,7 @@ RegisterNetEvent('comet-spawn:client:setupSpawns', function(cData, new, apps)
     elseif new then
         -- local coords = vector4(328.22, -203.86, 54.09, 158.98)
 
-
+        -- TriggerEvent("comet-clothingUI:client:CreateFirstCharacter")
 
         -- SendNUIMessage({
         --     action = "setupAppartements",
@@ -148,7 +148,7 @@ RegisterNUICallback('setCam', function(data, cb)
     if DoesCamExist(cam2) then DestroyCam(cam2, true) end
 
     if type == "current" then
-        QBCore.Functions.GetPlayerData(function(PlayerData)
+        exports['comet-base']:FetchComponent("Player").GetPlayerData(function(PlayerData)
             SetCam(PlayerData.position)
         end)
     elseif type == "house" then
@@ -202,11 +202,11 @@ RegisterNUICallback('spawnplayerappartment2', function(data, cb)
     PreSpawnPlayer()
     local Data = data.spawnloc
     local Data2 = data.apartName
-    TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
-    TriggerEvent('QBCore:Client:OnPlayerLoaded')
-    TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
-    TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
-    TriggerEvent('qb-apartments:client:LastLocationHouse', Data, Data2)
+    TriggerServerEvent('comet-base:playerLoaded')
+    TriggerEvent('comet-base:playerLoaded')
+    -- TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
+    -- TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
+    -- TriggerEvent('qb-apartments:client:LastLocationHouse', Data, Data2)
     PostSpawnPlayer()
     cb('ok')
 end)
@@ -215,12 +215,12 @@ RegisterNUICallback('spawnplayer', function(data, cb)
     local location = tostring(data.spawnloc)
     local type = tostring(data.typeLoc)
     local ped = PlayerPedId()
-    local PlayerData = QBCore.Functions.GetPlayerData()
+    local PlayerData = exports['comet-base']:FetchComponent("Player").GetPlayerData()
     local insideMeta = PlayerData.metadata["inside"]
 
     if type == "current" then
         PreSpawnPlayer()
-        QBCore.Functions.GetPlayerData(function(pd)
+        exports['comet-base']:FetchComponent("Player").GetPlayerData(function(pd)
             ped = PlayerPedId()
             SetEntityCoords(ped, pd.position.x, pd.position.y, pd.position.z)
             SetEntityHeading(ped, pd.position.a)
@@ -235,14 +235,14 @@ RegisterNUICallback('spawnplayer', function(data, cb)
             local apartmentId = insideMeta.apartment.apartmentId
             TriggerEvent('qb-apartments:client:LastLocationHouse', apartmentType, apartmentId)
         end
-        TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
-        TriggerEvent('QBCore:Client:OnPlayerLoaded')
+        TriggerServerEvent('comet-base:playerLoaded')
+        TriggerEvent('comet-base:playerLoaded')
         PostSpawnPlayer()
     elseif type == "house" then
         PreSpawnPlayer()
         TriggerEvent('qb-houses:client:enterOwnedHouse', location)
-        TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
-        TriggerEvent('QBCore:Client:OnPlayerLoaded')
+        TriggerServerEvent('comet-base:playerLoaded')
+        TriggerEvent('comet-base:playerLoaded')
         TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
         TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
         PostSpawnPlayer()
@@ -250,8 +250,8 @@ RegisterNUICallback('spawnplayer', function(data, cb)
         local pos = Config.Spawns[location].coords
         PreSpawnPlayer()
         SetEntityCoords(ped, pos.x, pos.y, pos.z)
-        TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
-        TriggerEvent('QBCore:Client:OnPlayerLoaded')
+        TriggerServerEvent('comet-base:playerLoaded')
+        TriggerEvent('comet-base:playerLoaded')
         TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
         TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
         Wait(500)
@@ -262,7 +262,7 @@ RegisterNUICallback('spawnplayer', function(data, cb)
     cb('ok')
 end)
 
-RegisterNetEvent('qb-spawn:client:OpenUIForSelectCoord', function()
+RegisterNetEvent('comet-spawn:client:OpenUIForSelectCoord', function()
     local PlayerCoord = GetEntityCoords(PlayerPedId(), 1)
     local PlayerHeading = GetEntityHeading(PlayerPedId())
     SendNUIMessage({

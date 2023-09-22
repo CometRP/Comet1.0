@@ -30,7 +30,7 @@ CreateThread(function()
     while not Callback do
         Citizen.Wait(25)
     end
-    Callback.Register("comet-vehicles:SpawnVehicle", function(model, coords, warp)
+    Callback.Register("comet-vehicles:SpawnVehicle", function(source, data, cb)
         local veh = Vehicles.SpawnVehicle(source, model, coords, warp)
         return NetworkGetNetworkIdFromEntity(veh)
     end)
