@@ -1,5 +1,5 @@
 RegisterNetEvent("comet-clothingUI:client:CreateFirstCharacter", function()
-    OpenShops('barber',true)
+    OpenShops('clothing',true)
 end)
 
 RegisterNetEvent("comet-clothingUI:openClothing", function()

@@ -18,12 +18,12 @@ end exports('UseItem', _INV.UseItem)
 AddEventHandler("comet-base:exportsReady", function()
     exports['comet-base']:CreateComponent("Inventory", _INV)
 
-    exports['comet-base']:FetchComponent("Callback").Register('GetCurrentCash', function(data)
+    exports['comet-base']:FetchComponent("Callback").Register('GetCurrentCash', function(source, data)
         local Player = exports['comet-base']:FetchComponent("Player").GetBySource(source)
         return Player.PlayerData.money.cash
     end)
     
-    exports['comet-base']:FetchComponent("Callback").Register('CheckLicenseForCharacter', function(data)
+    exports['comet-base']:FetchComponent("Callback").Register('CheckLicenseForCharacter', function(source, data)
         -- print(pCid, pType)
         -- local typyes = {
         --     [2] = true,

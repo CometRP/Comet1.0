@@ -1,18 +1,7 @@
-Callback, Commands, Player = nil, nil, nil
-AddEventHandler("comet-base:refreshComponents", function()
-    exports['comet-base']:LoadComponents({
-        "Callback",
-        "Commands",
-        "Player",
-    }, function(pass)
-        if not pass then return end
-        Callback = exports['comet-base']:FetchComponent("Callback")
-        Commands = exports['comet-base']:FetchComponent("Commands")
-        Player = exports['comet-base']:FetchComponent("Player")
-    end)
-end)
-
 CreateThread(function()
+    local Callback = exports['comet-base']:FetchComponent("Callback")
+    local Commands = exports['comet-base']:FetchComponent("Commands")
+    local Player = exports['comet-base']:FetchComponent("Player")
     while not Callback do
         Citizen.Wait(25)
     end
@@ -37,20 +26,23 @@ CreateThread(function()
     --         return nil
     --     end
     -- end)
-    Callback.Register('comet-spawn:server:getOwnedHouses', function(source, data, cb)
-        local p = promise.new()
+    Callback.Register('comet-spawn:server:getOwnedHouses', function(source, data)
+        print("aids")
+        -- local p = promise.new()
         if cid ~= nil then
             local houses = exports.oxmysql:executeSync('SELECT * FROM player_houses WHERE cid = ?', {data.cid}) -- OLD
             -- local houses = MySQL.query.await('SELECT * FROM player_houses WHERE cid = ?', {cid}) -- NEW
             if houses[1] ~= nil then
-                p:resolve(houses)
+                return houses
             else
-                p:resolve(nil)
+                return {}
+                -- p:resolve(nil)
             end
         else
-            p:resolve(nil)
+            return {}
+            -- p:resolve(nil)
         end
-        cb(Citizen.Await(p)) -- Sending back whatever was resolved.
+        -- cb(Citizen.Await(p)) -- Sending back whatever was resolved.
     end)
 
     

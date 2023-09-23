@@ -841,7 +841,7 @@ AddEventHandler("comet-clothing:setclothes", function(data,alreadyExist)
     TriggerServerEvent("comet-clothing:retrieve_tats")
     TriggerServerEvent("police:SetMeta")
     TriggerEvent("Animation:Set:Reset")
-    TriggerEvent("e-blips:updateAfterPedChange",exports["isPed"]:isPed("myjob"))
+    TriggerEvent("e-blips:updateAfterPedChange", exports["comet-base"]:isPed("myjob"))
 end)
 
 RegisterNetEvent("comet-clothing:AdminSetModel")
@@ -1132,7 +1132,7 @@ AddEventHandler("comet-clothing:setclothessss", function(data,alreadyExist)
     TriggerServerEvent("comet-clothing:get_character_face")
     TriggerServerEvent("comet-clothing:retrieve_tats")
     TriggerEvent("Animation:Set:Reset")
-    TriggerEvent("e-blips:updateAfterPedChange",exports["isPed"]:isPed("myjob"))
+    TriggerEvent("e-blips:updateAfterPedChange",exports["comet-base"]:isPed("myjob"))
 end)
 
 RegisterCommand('clearprops', function()
@@ -1221,7 +1221,7 @@ local facialWear = {
 
 RegisterNetEvent("facewear:adjust")
 AddEventHandler("facewear:adjust",function(faceType,remove)
-	local handcuffed = exports["isPed"]:isPed("handcuffed")
+	local handcuffed = exports["comet-base"]:isPed("handcuffed")
 	if handcuffed then return end
 	local AnimSet = "none"
 	local AnimationOn = "none"

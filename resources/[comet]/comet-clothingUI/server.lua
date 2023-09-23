@@ -25,36 +25,39 @@ CreateThread(function()
     while not Callback do
         Wait(25)
     end
+    while not Player do
+        Wait(25)
+    end
 
-    Callback.Register("comet-clothingUI:saveSkin", function(data)
+    Callback.Register("comet-clothingUI:saveSkin", function(source, data)
         local save = TriggerClientEvent("comet-clothingUI:save", source)
         return save, true
     end)
 
-    Callback.Register("clothing:purchasecash",function(data)
+    Callback.Register("clothing:purchasecash",function(source, data)
         local Player = Player.GetBySource(source)
         if Player.PlayerData.money.cash >= data.pPrice then
-            Player.Functions.RemoveMoney('cash', data.pPrice)
+            Player.RemoveMoney('cash', data.pPrice)
             return true
         else 
             return false
         end
     end)
     
-    Callback.Register("clothing:bankpurchase",function(data)
+    Callback.Register("clothing:bankpurchase",function(source, data)
         local src = source
         local Player = Player.GetBySource(source)
-        local p = promise.new()
         if Player.PlayerData.money.bank >= data.pPrice then
-            Player.Functions.RemoveMoney('bank', data.pPrice)
+            Player.RemoveMoney('bank', data.pPrice)
             return true
         else 
-            return false
             TriggerClientEvent('DoLongHudText', src, 'You do not have enough money ! Required Ammount : $200', 2)
+            return false
+
         end
     end)
-    
-    Callback.Register("comet-clothingUI:getTextureNames",function(name,)
+    -- this one errors
+    Callback.Register("comet-clothingUI:getTextureNames",function(source,name)
         local data = LoadResourceFile(GetCurrentResourceName(), "./client/names.json")
         data = json.decode(data)
         if data then

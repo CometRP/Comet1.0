@@ -74,9 +74,15 @@ RegisterNetEvent('apartments:client:setupSpawnUI', function(cData, isNew)
 end)
 
 RegisterNetEvent('comet-spawn:client:setupSpawns', function(cData, new, apps)
+
     if not new then
         -- Callbacks.TriggerCallback('comet-spawn:server:getOwnedHouses', function(houses)
-        local houses = exports["comet-base"]:FetchComponent("Callback"):CallAsync("comet-spawn:server:getOwnedHouse", {cid = cData.cid})
+        TriggerServerEvent("comet-clothing:retrieve_tats")
+        TriggerServerEvent('comet-clothing:get_character_current')
+        TriggerServerEvent('comet-clothing:get_character_face')
+        local houses = exports["comet-base"]:FetchComponent("Callback").Execute("comet-spawn:server:getOwnedHouses", {cid = cData.cid})
+        print(json.encode(houses))
+
             local myHouses = {}
             if houses ~= nil then
                 for i = 1, (#houses), 1 do

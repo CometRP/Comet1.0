@@ -321,7 +321,7 @@ function isInSkins(skin)
 end
 
 function canUseCustomSkins()
-    -- local steamId = Callback:CallAsync("skins:getSteamId")
+    -- local steamId = Callback.Execute("skins:getSteamId")
     -- for k, v in pairs(whitelisted_to_use_custom_skins) do
     --     if steamId == k then
     --         return true

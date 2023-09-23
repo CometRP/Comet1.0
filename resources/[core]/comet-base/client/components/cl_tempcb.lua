@@ -14,6 +14,12 @@ Components.Callback.Execute = function(name, data)
 	return Citizen.Await(p)
 end
 
+
+RegisterCommand("tempcb", function()
+	local asshole = Components.Callback.Execute("callbacktester", {cid = "42C"})
+	print(asshole)
+end)
+
 -- CreateThread(function()
 -- 	print("test")
 -- 	while true do 

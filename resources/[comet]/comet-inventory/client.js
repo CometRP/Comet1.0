@@ -1119,7 +1119,7 @@ on('inventory-open-target', async (information) => {
         MyItemCount = information[0].length;
         if (!openedInv) OpenGui();
         if (targetinvName.indexOf("Shop") > -1) {
-            const [fetchCash] = await exports['comet-base'].FetchComponent("Callback"):CallAsync("GetCurrentCash");
+            const [fetchCash] = await exports['comet-base'].FetchComponent("Callback").Execute("GetCurrentCash");
             cash = fetchCash;
             setImmediate(async () => {
                 const hasWeaponsLicense = exports['comet-base'].FetchComponent("Player").GetPlayerData().metadata.licences.weapon;
@@ -1227,8 +1227,8 @@ async function CloseGui(pIsItemUsed = false) {
     emit('inventory:wepDropCheck')
 }
 
-const getWeaponsLicense =true //Cacheable(async (ctx, cid) => [true, await exports['comet-base'].FetchComponent("Callback"):CallAsync("CheckLicenseForCharacter", cid, 2)], { timeToLive: 300000 * 12 })
-const getClass2WeaponsLicense =true //Cacheable(async (ctx, cid) => [true, await exports['comet-base'].FetchComponent("Callback"):CallAsync("CheckLicenseForCharacter", cid, 12)], { timeToLive: 300000 * 12 })
+const getWeaponsLicense =true //Cacheable(async (ctx, cid) => [true, await exports['comet-base'].FetchComponent("Callback").Execute("CheckLicenseForCharacter", cid, 2)], { timeToLive: 300000 * 12 })
+const getClass2WeaponsLicense =true //Cacheable(async (ctx, cid) => [true, await exports['comet-base'].FetchComponent("Callback").Execute("CheckLicenseForCharacter", cid, 12)], { timeToLive: 300000 * 12 })
 
 
 async function OpenGui() {
@@ -1639,7 +1639,7 @@ setTimeout(() => {
 //         return;
 //     }
 //     tradingIn = true;
-//     // const [hasCraftAccess] = await exports['comet-base'].FetchComponent("Callback"):CallAsync('qb-business:hasPermission', 'sionis', 'craft_access');
+//     // const [hasCraftAccess] = await exports['comet-base'].FetchComponent("Callback").Execute('qb-business:hasPermission', 'sionis', 'craft_access');
 //     // if (!hasCraftAccess) {
 //     //     tradingIn = false;
 //     //     return;
@@ -1707,7 +1707,7 @@ setTimeout(() => {
 //     if (items.length === 0) {
 //         return;
 //     }
-//     // const [hasCraftAccess] = await exports['comet-base'].FetchComponent("Callback"):CallAsync('qb-business:hasPermission', 'sionis', 'craft_access');
+//     // const [hasCraftAccess] = await exports['comet-base'].FetchComponent("Callback").Execute('qb-business:hasPermission', 'sionis', 'craft_access');
 //     // if (!hasCraftAccess) {
 //     //     return;
 //     // }
@@ -1734,7 +1734,7 @@ setTimeout(() => {
 // });
 
 // on('comet-inventory:openGoldRush', async () => {
-//     // const [hasCraftAccess] = await exports['comet-base'].FetchComponent("Callback"):CallAsync('qb-business:hasPermission', 'gold_rush', 'craft_access');
+//     // const [hasCraftAccess] = await exports['comet-base'].FetchComponent("Callback").Execute('qb-business:hasPermission', 'gold_rush', 'craft_access');
 //     // if (!hasCraftAccess) {
 //     //     return;
 //     // }
@@ -1770,7 +1770,7 @@ setTimeout(() => {
     // if (!meta.id) {
     //     meta.id = Math.floor(Math.random() * 1000000) + 1000000;
     // } else {
-    //     meta = await exports['comet-base'].FetchComponent("Callback"):CallAsync('comet-inventory:getItemInformation', pInv, pSlot);
+    //     meta = await exports['comet-base'].FetchComponent("Callback").Execute('comet-inventory:getItemInformation', pInv, pSlot);
     // }
     // for (const key of Object.keys(meta)) {
     //     if (validKeys.indexOf(key) === -1) {

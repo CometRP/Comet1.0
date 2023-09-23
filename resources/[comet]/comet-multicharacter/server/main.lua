@@ -144,7 +144,7 @@ RegisterNetEvent('comet-multicharacter:server:createCharacter', function(data)
         --     TriggerClientEvent('apartments:client:setupSpawnUI', src, newData)
         --     GiveStarterItems(src)
         -- else
-            print('^2[qb-core]^7 '..GetPlayerName(src)..' has successfully loaded!')
+            print('^2[comet-base]^7 '..GetPlayerName(src)..' has successfully loaded!')
             exports['comet-base']:FetchComponent("Commands").Refresh(src)
             loadHouseData(src)
             TriggerClientEvent("comet-multicharacter:client:closeNUIdefault", src)
@@ -192,7 +192,7 @@ CreateThread(function()
         Wait(15)
     end
 
-    Callback.Register("comet-multicharacter:server:GetUserCharacters", function(data)
+    Callback.Register("comet-multicharacter:server:GetUserCharacters", function(source, data)
         local src = source
         local license = Functions.GetIdentifier(src, 'license')
         MySQL.Async.execute('SELECT * FROM players WHERE license = ?', {license}, function(result)
@@ -200,13 +200,13 @@ CreateThread(function()
         end)
     end)
     
-    Callback.Register("comet-multicharacter:server:GetServerLogs", function(data)
+    Callback.Register("comet-multicharacter:server:GetServerLogs", function(source, data)
         MySQL.Async.execute('SELECT * FROM server_logs', {}, function(result)
             return result
         end)
     end)
     
-    Callback.Register("comet-multicharacter:server:GetNumberOfCharacters", function(data)
+    Callback.Register("comet-multicharacter:server:GetNumberOfCharacters", function(source, data)
         print("test")
         local src = source
         print(src, source)
@@ -227,30 +227,88 @@ CreateThread(function()
         end
         return numOfChars
     end)
-    
-    Callback.Register("comet-multicharacter:server:setupCharacters", function(data)
+    -- local a = 0 
+    Callback.Register("comet-multicharacter:server:setupCharacters", function(source, data)
         local source = source
         local license = Functions.GetIdentifier(source, 'license')
+        print(license)
+        -- a = a + 1
+        -- print(a)
         local plyChars = {}
-        MySQL.Async.fetchAll('SELECT * FROM players WHERE license = ?', {license}, function(result)
-            for i = 1, (#result), 1 do
-                result[i].charinfo = json.decode(result[i].charinfo)
-                result[i].money = json.decode(result[i].money)
-                result[i].job = json.decode(result[i].job)
-                plyChars[#plyChars+1] = result[i]
-            end
-            return plyChars
-        end)
+        -- local p = promise.new()
+        local result = MySQL.Sync.fetchAll('SELECT * FROM players WHERE license = ?', {license})
+        -- MySQL.Async.fetchAll('SELECT * FROM players WHERE license = ?', {license}, function(result)
+            -- print(json.encode(result))
+        for i = 1, (#result), 1 do
+            result[i].charinfo = json.decode(result[i].charinfo)
+            result[i].money = json.decode(result[i].money)
+            result[i].job = json.decode(result[i].job)
+            plyChars[#plyChars+1] = result[i]
+            
+        end
+        print(json.encode(plyChars))
         return plyChars
+            -- p:resolve(plyChars)
+        -- end)
+        -- print(json.encode(plyChars))
+        -- return plyChars
     end)
     
-    Callback.Register("comet-multicharacter:server:getSkin", function(data)
-        local result = MySQL.Sync.fetchAll('SELECT * FROM playerskins WHERE cid = ? AND active = ?', {data.cid, 1})
-        if result[1] ~= nil then
-            return result[1].model, result[1].skin
-        else
-            return nil
+    Callback.Register("comet-multicharacter:server:getSkin", function(source, data)
+        local plyChars = {}
+        local result = MySQL.Sync.fetchAll('SELECT * FROM players WHERE cid = ?', {data.cid})
+
+        local PlayerData = MySQL.Sync.prepare('SELECT * FROM players where cid = ?', {data.cid})
+        if PlayerData then
+            PlayerData.money = json.decode(PlayerData.money)
+            PlayerData.job = json.decode(PlayerData.job)
+            PlayerData.position = json.decode(PlayerData.position)
+            PlayerData.metadata = json.decode(PlayerData.metadata)
+            PlayerData.charinfo = json.decode(PlayerData.charinfo)
+            if PlayerData.gang then
+                PlayerData.gang = json.decode(PlayerData.gang)
+            else
+                PlayerData.gang = {}
+            end
+
+            -- return Components.Player.CheckPlayerData(nil, PlayerData)
         end
+        print(PlayerData)
+        if result[1] ~= nil then
+            local cc = MySQL.Sync.fetchAll('SELECT * FROM character_current WHERE cid = ?', {data.cid})
+            plyChars = {}
+            plyChars.model = '1885233650'
+            plyChars.drawables = json.decode('{"1":["masks",0],"2":["hair",0],"3":["torsos",0],"4":["legs",0],"5":["bags",0],"6":["shoes",1],"7":["neck",0],"8":["undershirts",0],"9":["vest",0],"10":["decals",0],"11":["jackets",0],"0":["face",0]}')
+            plyChars.props = json.decode('{"1":["glasses",-1],"2":["earrings",-1],"3":["mouth",-1],"4":["lhand",-1],"5":["rhand",-1],"6":["watches",-1],"7":["braclets",-1],"0":["hats",-1]}')
+            plyChars.drawtextures = json.decode('[["face",0],["masks",0],["hair",0],["torsos",0],["legs",0],["bags",0],["shoes",2],["neck",0],["undershirts",1],["vest",0],["decals",0],["jackets",11]]')
+            plyChars.proptextures = json.decode('[["hats",-1],["glasses",-1],["earrings",-1],["mouth",-1],["lhand",-1],["rhand",-1],["watches",-1],["braclets",-1]]')
+            plyChars.cid = data.cid
+            plyChars.something = PlayerData
+            plyChars.charinfo = PlayerData.charinfo
+
+            if cc[1] and cc[1].model then
+                plyChars.model = cc[1].model
+                plyChars.drawables = json.decode(cc[1].drawables)
+                plyChars.props = json.decode(cc[1].props)
+                plyChars.drawtextures = json.decode(cc[1].drawtextures)
+                plyChars.proptextures = json.decode(cc[1].proptextures)
+            end          
+            local cf = MySQL.Sync.fetchAll('SELECT * FROM character_face WHERE cid = ?', {data.cid})
+            if cf[1] and cf[1].headBlend then
+                plyChars.headBlend = json.decode(cf[1].headBlend)
+                plyChars.hairColor = json.decode(cf[1].hairColor)
+                plyChars.headOverlay= json.decode(cf[1].headOverlay)
+                plyChars.headStructure = json.decode(cf[1].headStructure)
+            end
+            local ct = MySQL.Sync.fetchAll('SELECT * FROM character_tattoos WHERE cid = ?', {data.cid})
+            if ct[1] and ct[1].tattoos then
+                plyChars.tattoos = json.decode(ct[1].tattoos)
+            end
+            -- return result[1].model, result[1].skin
+        else
+            -- return nil
+        end
+        return plyChars
     end)
     
 end)

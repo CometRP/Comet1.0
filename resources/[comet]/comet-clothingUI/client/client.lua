@@ -138,6 +138,7 @@ hairDecor = {
 -- end)
 
 CreateThread(function()
+    while not Callback do Wait(25) end
     local TextureNames = Callback.Execute("comet-clothingUI:getTextureNames")
     Config.SetShops()
     Citizen.Wait(500)
@@ -333,7 +334,7 @@ RegisterNUICallback("closeNui", function(buy)
     if firstspawn then
         firstspawn = false
         finishedClothing = true
-        OpenShops('clothing')
+        OpenShops('barber')
     elseif finishedClothing then
         finishedClothing = false
     end
@@ -348,7 +349,7 @@ RegisterNUICallback("closeCancel", function(buy)
     if firstspawn then
         firstspawn = false
         finishedClothing = true
-        OpenShops('clothing')
+        OpenShops('barber')
     elseif finishedClothing then
         finishedClothing = false
     end
@@ -363,7 +364,7 @@ RegisterNUICallback("resetNui", function(buy)
     if firstspawn then
         firstspawn = false
         finishedClothing = true
-        OpenShops('clothing')
+       OpenShops('barber')
     elseif finishedClothing then
         finishedClothing = false
     end
@@ -372,6 +373,7 @@ end)
 RegisterNUICallback("PayBank", function(buy)
     local currentPrices = 58
     local buy = Callback.Execute("clothing:bankpurchase", {pPrice = currentPrices})
+    print(buy)
     local data = GetCurrentPed()
     if not buy and playerApperance then
         TriggerServerEvent("comet-clothing:get_character_current")
@@ -384,7 +386,7 @@ RegisterNUICallback("PayBank", function(buy)
     if firstspawn then
         firstspawn = false
         finishedClothing = true
-        OpenShops('clothing')
+        OpenShops('barber')
     elseif finishedClothing then
         finishedClothing = false
     end

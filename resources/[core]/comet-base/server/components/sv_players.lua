@@ -18,9 +18,9 @@ Components.Player.GetByCid = function(cid)
     return nil
 end
 
--- Components.Player.GetOfflinePlayerByCid = function(cid)
---     return Components.Player.GetOfflinePlayer(cid)
--- end
+Components.Player.GetOfflinePlayerByCid = function(cid)
+    return Components.Player.GetOfflinePlayer(cid)
+end
 
 Components.Player.GetByPhone = function(number)
     for src in pairs(Components.Players) do
@@ -50,7 +50,7 @@ Components.Player.Login = function(source, cid, newData)
     local src = source
     if src then
         if cid then
-            -- local license = QBCore.Functions.GetIdentifier(src, 'license')
+            local license = Components.Functions.GetIdentifier(src, 'license')
             local PlayerData = MySQL.Sync.prepare('SELECT * FROM players where cid = ?', { cid })
             if PlayerData and license == PlayerData.license then
                 TriggerClientEvent('updatecid', source, cid)
@@ -112,7 +112,8 @@ Components.Player.CreateCid = function()
         -- end)
 
         -- 100000
-        cid = tostring(math.random(1111,999999))
+        cid = ("%s%s"):format(math.random(1,999999))
+        print(cid)
         local result = MySQL.prepare.await('SELECT COUNT(*) as count FROM players WHERE cid = ?', { cid })
         if result == 0 then
             UniqueFound = true
@@ -198,7 +199,7 @@ Components.Player.CheckPlayerData = function(source, PlayerData)
     local Offline = true
     if source then
         PlayerData.source = source
-        -- PlayerData.license = PlayerData.license or QBCore.Functions.GetIdentifier(source, 'license')
+        PlayerData.license = PlayerData.license or Components.Functions.GetIdentifier(source, 'license')
         PlayerData.name = GetPlayerName(source)
         Offline = false
     end
@@ -276,37 +277,37 @@ Components.Player.CheckPlayerData = function(source, PlayerData)
         InstalledApps = {},
     }
 
-    -- PlayerData.metadata['jobrep'] = PlayerData.metadata['jobrep'] or {}
-    -- PlayerData.metadata['jobrep']['tow'] = PlayerData.metadata['jobrep']['tow'] or 0
-    -- PlayerData.metadata['jobrep']['trucker'] = PlayerData.metadata['jobrep']['trucker'] or 0
-    -- PlayerData.metadata['jobrep']['taxi'] = PlayerData.metadata['jobrep']['taxi'] or 0
-    -- PlayerData.metadata['jobrep']['hotdog'] = PlayerData.metadata['jobrep']['hotdog'] or 0
+    PlayerData.metadata['jobrep'] = PlayerData.metadata['jobrep'] or {}
+    PlayerData.metadata['jobrep']['tow'] = PlayerData.metadata['jobrep']['tow'] or 0
+    PlayerData.metadata['jobrep']['trucker'] = PlayerData.metadata['jobrep']['trucker'] or 0
+    PlayerData.metadata['jobrep']['taxi'] = PlayerData.metadata['jobrep']['taxi'] or 0
+    PlayerData.metadata['jobrep']['hotdog'] = PlayerData.metadata['jobrep']['hotdog'] or 0
 
-    -- -- Job
-    -- if PlayerData.job and PlayerData.job.name and not QBCore.Shared.Jobs[PlayerData.job.name] then PlayerData.job = nil end
-    -- PlayerData.job = PlayerData.job or {}
-    -- PlayerData.job.name = PlayerData.job.name or 'unemployed'
-    -- PlayerData.job.label = PlayerData.job.label or 'Civilian'
-    -- PlayerData.job.payment = PlayerData.job.payment or 10
-    -- PlayerData.job.type = PlayerData.job.type or 'none'
-    -- if QBCore.Shared.ForceJobDefaultDutyAtLogin or PlayerData.job.onduty == nil then
-    --     PlayerData.job.onduty = QBCore.Shared.Jobs[PlayerData.job.name].defaultDuty
-    -- end
-    -- PlayerData.job.isboss = PlayerData.job.isboss or false
-    -- PlayerData.job.grade = PlayerData.job.grade or {}
-    -- PlayerData.job.grade.name = PlayerData.job.grade.name or 'Freelancer'
-    -- PlayerData.job.grade.level = PlayerData.job.grade.level or 0
-    -- -- Gang
-    -- if PlayerData.gang and PlayerData.gang.name and not QBCore.Shared.Gangs[PlayerData.gang.name] then PlayerData.gang = nil end
-    -- PlayerData.gang = PlayerData.gang or {}
-    -- PlayerData.gang.name = PlayerData.gang.name or 'none'
-    -- PlayerData.gang.label = PlayerData.gang.label or 'No Gang Affiliaton'
-    -- PlayerData.gang.isboss = PlayerData.gang.isboss or false
-    -- PlayerData.gang.grade = PlayerData.gang.grade or {}
-    -- PlayerData.gang.grade.name = PlayerData.gang.grade.name or 'none'
-    -- PlayerData.gang.grade.level = PlayerData.gang.grade.level or 0
+    -- Job
+    if PlayerData.job and PlayerData.job.name and not Components.Shared.Jobs[PlayerData.job.name] then PlayerData.job = nil end
+    PlayerData.job = PlayerData.job or {}
+    PlayerData.job.name = PlayerData.job.name or 'unemployed'
+    PlayerData.job.label = PlayerData.job.label or 'Civilian'
+    PlayerData.job.payment = PlayerData.job.payment or 10
+    PlayerData.job.type = PlayerData.job.type or 'none'
+    if PlayerData.job.onduty == nil then
+        PlayerData.job.onduty = Components.Shared.Jobs[PlayerData.job.name].defaultDuty
+    end
+    PlayerData.job.isboss = PlayerData.job.isboss or false
+    PlayerData.job.grade = PlayerData.job.grade or {}
+    PlayerData.job.grade.name = PlayerData.job.grade.name or 'Freelancer'
+    PlayerData.job.grade.level = PlayerData.job.grade.level or 0
+    -- Gang
+    if PlayerData.gang and PlayerData.gang.name and not Components.Shared.Gangs[PlayerData.gang.name] then PlayerData.gang = nil end
+    PlayerData.gang = PlayerData.gang or {}
+    PlayerData.gang.name = PlayerData.gang.name or 'none'
+    PlayerData.gang.label = PlayerData.gang.label or 'No Gang Affiliaton'
+    PlayerData.gang.isboss = PlayerData.gang.isboss or false
+    PlayerData.gang.grade = PlayerData.gang.grade or {}
+    PlayerData.gang.grade.name = PlayerData.gang.grade.name or 'none'
+    PlayerData.gang.grade.level = PlayerData.gang.grade.level or 0
     -- Other
-    PlayerData.position = PlayerData.position or QBConfig.DefaultSpawn
+    PlayerData.position = PlayerData.position or Shared.Config.DefaultSpawn
     -- PlayerData.items = {}
     return Components.Player.CreatePlayer(PlayerData, Offline)
 end
@@ -332,70 +333,70 @@ Components.Player.CreatePlayer = function(PlayerData, Offline)
         TriggerClientEvent('comet-base:setPlayerData', self.PlayerData.source, self.PlayerData)
     end
 
-    -- function self.SetJob(job, grade)
-    --     job = job:lower()
-    --     grade = tostring(grade) or '0'
-    --     if not QBCore.Shared.Jobs[job] then return false end
-    --     self.PlayerData.job.name = job
-    --     self.PlayerData.job.label = QBCore.Shared.Jobs[job].label
-    --     self.PlayerData.job.onduty = QBCore.Shared.Jobs[job].defaultDuty
-    --     self.PlayerData.job.type = QBCore.Shared.Jobs[job].type or 'none'
-    --     if QBCore.Shared.Jobs[job].grades[grade] then
-    --         local jobgrade = QBCore.Shared.Jobs[job].grades[grade]
-    --         self.PlayerData.job.grade = {}
-    --         self.PlayerData.job.grade.name = jobgrade.name
-    --         self.PlayerData.job.grade.level = tonumber(grade)
-    --         self.PlayerData.job.payment = jobgrade.payment or 30
-    --         self.PlayerData.job.isboss = jobgrade.isboss or false
-    --     else
-    --         self.PlayerData.job.grade = {}
-    --         self.PlayerData.job.grade.name = 'No Grades'
-    --         self.PlayerData.job.grade.level = 0
-    --         self.PlayerData.job.payment = 30
-    --         self.PlayerData.job.isboss = false
-    --     end
+    function self.SetJob(job, grade)
+        job = job:lower()
+        grade = tostring(grade) or '0'
+        if not Components.Shared.Jobs[job] then return false end
+        self.PlayerData.job.name = job
+        self.PlayerData.job.label = Components.Shared.Jobs[job].label
+        self.PlayerData.job.onduty = Components.Shared.Jobs[job].defaultDuty
+        self.PlayerData.job.type = Components.Shared.Jobs[job].type or 'none'
+        if Components.Shared.Jobs[job].grades[grade] then
+            local jobgrade = Components.Shared.Jobs[job].grades[grade]
+            self.PlayerData.job.grade = {}
+            self.PlayerData.job.grade.name = jobgrade.name
+            self.PlayerData.job.grade.level = tonumber(grade)
+            self.PlayerData.job.payment = jobgrade.payment or 30
+            self.PlayerData.job.isboss = jobgrade.isboss or false
+        else
+            self.PlayerData.job.grade = {}
+            self.PlayerData.job.grade.name = 'No Grades'
+            self.PlayerData.job.grade.level = 0
+            self.PlayerData.job.payment = 30
+            self.PlayerData.job.isboss = false
+        end
 
-    --     if not self.Offline then
-    --         self.UpdatePlayerData()
-    --         TriggerEvent('QBCore:Server:OnJobUpdate', self.PlayerData.source, self.PlayerData.job)
-    --         TriggerClientEvent('QBCore:Client:OnJobUpdate', self.PlayerData.source, self.PlayerData.job)
-    --     end
+        if not self.Offline then
+            self.UpdatePlayerData()
+            TriggerEvent('comet-base:jobUpdate', self.PlayerData.source, self.PlayerData.job)
+            TriggerClientEvent('comet-base:jobUpdate', self.PlayerData.source, self.PlayerData.job)
+        end
 
-    --     return true
-    -- end
+        return true
+    end
 
-    -- function self.SetGang(gang, grade)
-    --     gang = gang:lower()
-    --     grade = tostring(grade) or '0'
-    --     if not QBCore.Shared.Gangs[gang] then return false end
-    --     self.PlayerData.gang.name = gang
-    --     self.PlayerData.gang.label = QBCore.Shared.Gangs[gang].label
-    --     if QBCore.Shared.Gangs[gang].grades[grade] then
-    --         local ganggrade = QBCore.Shared.Gangs[gang].grades[grade]
-    --         self.PlayerData.gang.grade = {}
-    --         self.PlayerData.gang.grade.name = ganggrade.name
-    --         self.PlayerData.gang.grade.level = tonumber(grade)
-    --         self.PlayerData.gang.isboss = ganggrade.isboss or false
-    --     else
-    --         self.PlayerData.gang.grade = {}
-    --         self.PlayerData.gang.grade.name = 'No Grades'
-    --         self.PlayerData.gang.grade.level = 0
-    --         self.PlayerData.gang.isboss = false
-    --     end
+    function self.SetGang(gang, grade)
+        gang = gang:lower()
+        grade = tostring(grade) or '0'
+        if not Components.Shared.Gangs[gang] then return false end
+        self.PlayerData.gang.name = gang
+        self.PlayerData.gang.label = Components.Shared.Gangs[gang].label
+        if Components.Shared.Gangs[gang].grades[grade] then
+            local ganggrade = Components.Shared.Gangs[gang].grades[grade]
+            self.PlayerData.gang.grade = {}
+            self.PlayerData.gang.grade.name = ganggrade.name
+            self.PlayerData.gang.grade.level = tonumber(grade)
+            self.PlayerData.gang.isboss = ganggrade.isboss or false
+        else
+            self.PlayerData.gang.grade = {}
+            self.PlayerData.gang.grade.name = 'No Grades'
+            self.PlayerData.gang.grade.level = 0
+            self.PlayerData.gang.isboss = false
+        end
 
-    --     if not self.Offline then
-    --         self.UpdatePlayerData()
-    --         TriggerEvent('QBCore:Server:OnGangUpdate', self.PlayerData.source, self.PlayerData.gang)
-    --         TriggerClientEvent('QBCore:Client:OnGangUpdate', self.PlayerData.source, self.PlayerData.gang)
-    --     end
+        if not self.Offline then
+            self.UpdatePlayerData()
+            TriggerEvent('comet-base:gangUpdate', self.PlayerData.source, self.PlayerData.gang)
+            TriggerClientEvent('comet-base:gangUpdat', self.PlayerData.source, self.PlayerData.gang)
+        end
 
-    --     return true
-    -- end
+        return true
+    end
 
-    -- function self.SetJobDuty(onDuty)
-    --     self.PlayerData.job.onduty = not not onDuty -- Make sure the value is a boolean if nil is sent
-    --     self.UpdatePlayerData()
-    -- end
+    function self.SetJobDuty(onDuty)
+        self.PlayerData.job.onduty = not not onDuty -- Make sure the value is a boolean if nil is sent
+        self.UpdatePlayerData()
+    end
 
     function self.SetPlayerData(key, val)
         if not key or type(key) ~= 'string' then return end
@@ -458,7 +459,7 @@ Components.Player.CreatePlayer = function(PlayerData, Offline)
         amount = tonumber(amount)
         if amount < 0 then return end
         if not self.PlayerData.money[moneytype] then return false end
-        for _, mtype in pairs(QBCore.Config.Money.DontAllowMinus) do
+        for _, mtype in pairs(Shared.Config.Money.DontAllowMinus) do
             if mtype == moneytype then
                 if (self.PlayerData.money[moneytype] - amount) < 0 then
                     return false

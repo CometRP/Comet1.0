@@ -117,7 +117,7 @@
 -- 	return Components.Callback.Execute(event, data)
 -- end)
 
--- -- exports['erp_remotecalls']:CallAsync()
+-- -- exports['erp_remotecalls'].Execute()
 
 -- -- SERVER -> CLIENT
 

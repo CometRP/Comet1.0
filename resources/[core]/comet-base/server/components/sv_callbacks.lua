@@ -121,7 +121,7 @@
 -- 	return Components.Callback.Execute(source, event, data)
 -- end)
 
--- -- exports['erp_remotecalls']:CallAsync()
+-- -- exports['erp_remotecalls'].Execute()
 
 -- RegisterNetEvent('erp_remotecalls:getData', function(callId, ...)
 -- 	Components.Callback:GetData(callId, ...)

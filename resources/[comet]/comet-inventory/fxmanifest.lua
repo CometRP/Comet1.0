@@ -26,6 +26,7 @@ files {
 }
 
 shared_script 'shared_list.js'
+shared_script 'sh_cache.js'
 
 client_scripts {
 

@@ -544,13 +544,13 @@ AddEventHandler("disableHUD", function(passedinfo)
   HudStage = passedinfo
 end)
 
--- local countpolice = exports["isPed"]:isPed("femaleclothes")
+-- local countpolice = exports["comet-base"]:isPed("femaleclothes")
 RegisterNetEvent('pd:deathcheck')
 AddEventHandler('pd:deathcheck', function()
 	dead = not dead
 end)
 
--- local handcuffed = exports["isPed"]:isPed("handcuffed")
+-- local handcuffed = exports["comet-base"]:isPed("handcuffed")
 RegisterNetEvent('comet-police:cuffs:state')
 AddEventHandler('comet-police:cuffs:state', function(handCuffed,handCuffedWalking)
 	handcuffed = handCuffed
@@ -562,7 +562,7 @@ AddEventHandler('pagerStatus', function(PassedPagerStatus)
     PagerStatus = PassedPagerStatus
 end)
 
---local myJob = exports["isPed"]:isPed("myJob")
+--local myJob = exports["comet-base"]:isPed("myJob")
 -- RegisterNetEvent("qb-jobmanager:playerBecameJob")
 -- AddEventHandler("qb-jobmanager:playerBecameJob", function(jobpassed, name, notify)
 -- 	job = jobpassed
@@ -1247,3 +1247,10 @@ maleclothes = {
 'u_m_y_hippie_01',
 'a_m_y_hippy_01'
 }
+
+exports("GetClosestNPC", GetClosestNPC)
+exports("IsPedNearCoords", IsPedNearCoords)
+exports("isPed", isPed)
+exports("GroupRank" ,GroupRank )
+exports("GlobalObject", GlobalObject)
+exports("retreiveBusinesses", retreiveBusinesses)

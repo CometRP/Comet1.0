@@ -827,7 +827,7 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon, pa
 
 
     if (itemid == "pdbadge") then
-        exports['comet-base']:FetchComponent("Callback"):CallAsync("qb-gov:police:showBadge", json.decode(ItemInfo.information))
+        exports['comet-base']:FetchComponent("Callback").Execute("qb-gov:police:showBadge", json.decode(ItemInfo.information))
     end
 
     if (itemid == "joint" or itemid == "weed5oz" or itemid == "weedq" or itemid == "beer" or itemid == "vodka" or itemid == "whiskey" or itemid == "lsdtab" or itemid == 'winemilkshake' or itemid == 'honestwineglass' or itemid == "customjointitem") then
@@ -2586,7 +2586,7 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon, pa
         end)
         finished = exports["comet-taskbar"]:taskBar(20000,"Harness")
         if (finished == 100 and not cancelHarness) then
-            exports['comet-base']:FetchComponent("Callback"):CallAsync('qb-vehicles:addHarness', GetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId())))
+            exports['comet-base']:FetchComponent("Callback").Execute('qb-vehicles:addHarness', GetVehicleNumberPlateText(GetVehiclePedIsIn(PlayerPedId())))
             TriggerEvent("harness", false, 100)
             remove = true
         else
@@ -2636,7 +2636,7 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon, pa
                 local targetCoords = GetEntityCoords(target)
                 if #(plyCoords - targetCoords) < 5.0 then
                     local plyId = GetPlayerServerId( NetworkGetPlayerIndexFromPed(target))
-                    local success = exports['comet-base']:FetchComponent("Callback"):CallAsync("clothing:removeTattoosForPlayer", plyId)
+                    local success = exports['comet-base']:FetchComponent("Callback").Execute("clothing:removeTattoosForPlayer", plyId)
                     if success then
                         TriggerEvent("DoLongHudText", "Removed tattoos.")
                     else
@@ -3843,7 +3843,7 @@ end)
 -- RegisterInterfaceCallback("qb-interface:inv:moneycaseAction", function(data, cb)
 -- 	cb({ data = {}, meta = { ok = true, message = "done" } })
 --   exports['qb-interface']:closeApplication('textbox')
---   exports['comet-base']:FetchComponent("Callback"):CallAsync("comet-inventory:doMoneycaseAction", data)
+--   exports['comet-base']:FetchComponent("Callback").Execute("comet-inventory:doMoneycaseAction", data)
 -- end)
 
 AddEventHandler("comet-inventory:openGolfStore", function(name, info)

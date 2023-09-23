@@ -108,7 +108,7 @@ end)
 
 CreateThread(function()
 	while not Callback do Wait(15) end
-	Callback.Register('comet-stores:GetCurrentPlayers', function(data)
+	Callback.Register('comet-stores:GetCurrentPlayers', function(source, data)
 		local TotalPlayers = 0
 		local players = Player.GetPlayers()
 		for _ in pairs(players) do

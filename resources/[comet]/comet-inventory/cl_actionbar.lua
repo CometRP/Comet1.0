@@ -152,7 +152,7 @@ Citizen.CreateThread(function()
 	-- exports["comet-keybinds"]:registerKeyMapping("", _L("keybinds-player", "Player"), _L("keybinds-wink", "Wink"), "+playerWink", "-playerWink")
 	RegisterCommand('+playerWink', playerWink, false)
 	RegisterCommand('-playerWink', function() end, false)
-    exports["comet-base"]:FetchComponent("Keybinds").Add("Player",  "+playerWink", "-playerWink", "Wink",)
+    exports["comet-base"]:FetchComponent("Keybinds").Add("Player",  "+playerWink", "-playerWink", "Wink")
 
 	-- exports["comet-keybinds"]:registerKeyMapping("", _L("keybinds-player", "Player"), _L("keybinds-passive", "Passive Mode"), "+passiveMode", "-passiveMode")
 	RegisterCommand('+passiveMode', passiveMode, false)
@@ -199,7 +199,7 @@ local function shotRecently()
 end
 
 AddEventHandler('comet-actionbar:hotreload', function()
-    ammoTable = exports['comet-base']:FetchComponent("Callback"):CallAsync("weapons:getAmmo")
+    ammoTable = exports['comet-base']:FetchComponent("Callback").Execute("weapons:getAmmo")
 end)
 
 Citizen.CreateThread( function()
@@ -329,7 +329,7 @@ AddEventHandler("comet-voice:focus:set", function(pState)
 end)
 
 AddEventHandler("comet-base:exportsReady", function()
-    exports['comet-base']:FetchComponent("Callback").Register('police:gsr', function(data)
+    exports['comet-base']:FetchComponent("Callback").Register('police:gsr', function(source, data)
         return shotRecentlyLoopActive
     end)
 end)
@@ -431,7 +431,7 @@ function ammoTypeCheck(atype)
 	end
 end
 -- AddEventHandler('comet-actionbar:hotreload', function()
---     ammoTable = exports['comet-base']:FetchComponent("Callback"):CallAsync("weapons:getAmmo")
+--     ammoTable = exports['comet-base']:FetchComponent("Callback").Execute("weapons:getAmmo")
 -- end)
 
 
@@ -443,12 +443,12 @@ AddEventHandler('actionbar:ammo', function(hash,amount,addition)
 	ammoTypeCheck(ammoType)
 
 	if ammoTable == nil then
-		ammoTable = exports['comet-base']:FetchComponent("Callback"):CallAsync("weapons:getAmmo")
+		ammoTable = exports['comet-base']:FetchComponent("Callback").Execute("weapons:getAmmo")
 		
 	end
 
 	if ammoTable["" .. ammoType .. ""] == nil then
-		ammoTable = exports['comet-base']:FetchComponent("Callback"):CallAsync("weapons:getAmmo")
+		ammoTable = exports['comet-base']:FetchComponent("Callback").Execute("weapons:getAmmo")
 	end
 
 

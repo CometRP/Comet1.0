@@ -2,7 +2,7 @@ Shared = Shared or {}
 Shared.Config = Shared.Config or {}
 
 Shared.Config.MaxPlayers = GetConvarInt('sv_maxclients', 48) -- Gets max players from config file, default 48
-Shared.Config.DefaultSpawn = vector4(-1035.71, -2731.87, 12.86, 0.0)
+Shared.Config.DefaultSpawn = vector4(328.22, -203.86, 54.09, 158.98)--vector4(-1035.71, -2731.87, 12.86, 0.0)
 Shared.Config.UpdateInterval = 5 -- how often to update player data in minutes
 Shared.Config.StatusInterval = 5000 -- how often to check hunger/thirst status in milliseconds
 
