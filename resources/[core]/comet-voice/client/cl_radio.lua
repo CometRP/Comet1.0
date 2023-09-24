@@ -84,7 +84,7 @@ function SetRadioChannel(RadioId)
 end
 
 function StartRadioTransmission()
-    local PlayerData = PlayerModule.GetPlayerData()
+    local PlayerData = Player.GetPlayerData()
     if exports['comet-ui']:IsRadioOn() and CurrentChannel ~= nil and CurrentRadioId > 0 and not PlayerData.MetaData['Dead'] and not PlayerData.MetaData['Handcuffed'] then
         if not IsTalkingOnRadio then
             IsTalkingOnRadio = true
@@ -101,7 +101,7 @@ function StartRadioTransmission()
 end
 
 function StopRadioTransmission(Forced)
-    local PlayerData = PlayerModule.GetPlayerData()
+    local PlayerData = Player.GetPlayerData()
     if not exports['comet-ui']:IsRadioOn() or CurrentRadioId <= 0 then return end
     if not (PlayerData.MetaData['Dead'] and not PlayerData.MetaData['Handcuffed']) or Forced then
         if IsTalkingOnRadio or not RadioTimeout then 
@@ -121,7 +121,7 @@ end
 
 function StartRadioTask()
     Citizen.CreateThread(function()
-        FunctionsModule.RequestAnimDict("random@arrests")
+        Functions.RequestAnimDict("random@arrests")
         while IsTalkingOnRadio do
             Citizen.Wait(4)
             if not IsEntityPlayingAnim(PlayerPedId(), "random@arrests", "generic_radio_chatter", 3) then
@@ -136,8 +136,8 @@ function StartRadioTask()
 end
 
 function PlayRadioClick(Bool)
-    local Preferences = PreferencesModule.GetPreferences()
-    if not Preferences.Voice.RadioClicksOut then return end
+    -- local Preferences = PreferencesModule.GetPreferences()
+    -- if not Preferences.Voice.RadioClicksOut then return end
     if Bool then
         TriggerEvent('comet-ui:client:play-sound', 'radio-01-on', RadioClickVolume)
     else

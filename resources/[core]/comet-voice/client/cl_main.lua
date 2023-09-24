@@ -29,6 +29,7 @@ AddEventHandler("comet-base:refreshComponents", function()
         Keybinds = exports['comet-base']:FetchComponent("Keybinds")
         Functions = exports['comet-base']:FetchComponent("Functions")
         Player = exports['comet-base']:FetchComponent("Player")
+        InitVoice()
     end)
 end)
 
@@ -116,8 +117,8 @@ RegisterNetEvent("comet-voice:client:transmission-state", function(ServerId, Con
             if TooFar then
                 TriggerEvent('comet-ui:client:play-sound', 'radio-distortion', 0.2)
             else
-                local Preferences = PreferencesModule.GetPreferences()
-                if not Preferences.Voice.RadioClicksIn then return end
+                -- local Preferences = PreferencesModule.GetPreferences()
+                -- if not Preferences.Voice.RadioClicksIn then return end
                 PlayRadioClick(Transmitting)
             end
         end
@@ -456,7 +457,7 @@ function GetPlayerCoords(ServerId)
     if PlayerId ~= -1 then
         return GetEntityCoords(GetPlayerPed(PlayerId))
     else
-        return OnesyncModule.GetPlayerCoords(ServerId) or vector3(0.0, 0.0, 0.0)
+        return Infinity.GetPlayerCoords(ServerId) or vector3(0.0, 0.0, 0.0)
     end
 end
 
