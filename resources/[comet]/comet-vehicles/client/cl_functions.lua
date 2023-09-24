@@ -9,21 +9,21 @@ AddEventHandler("comet-base:refreshComponents", function()
     end)
 end)
 
-RegisterCommand("sv", function(s,a)
-    local ped = PlayerPedId()
-    local x,y,z = table.unpack(GetEntityCoords(ped))
-    local w = GetEntityHeading(ped)
+-- RegisterCommand("sv", function(s,a)
+--     local ped = PlayerPedId()
+--     local x,y,z = table.unpack(GetEntityCoords(ped))
+--     local w = GetEntityHeading(ped)
 
-    Vehicles.SpawnVehicle(model, vector4(x, y, z, w), true, function(veh)
-        SetEntityCoords(veh, x,y,z)
-        SetEntityHeadinG(veh,w)
-        print("test")
-    end)
+--     Vehicles.SpawnVehicle(model, vector4(x, y, z, w), true, function(veh)
+--         SetEntityCoords(veh, x,y,z)
+--         SetEntityHeadinG(veh,w)
+--         print("test")
+--     end)
     
-end)
+-- end)
 
 Vehicles.SpawnVehicle = function(model, coords, warp, cb)
-    local netId = Callback.Execute("comet-vehicles:SpawnVehicle", {model = model, coords = coords, warp = warp})
+    local netId = exports['comet-base']:FetchComponent("Callback").Execute("comet-vehicles:SpawnVehicle", {model = model, coords = coords, warp = warp})
     local veh = NetToVeh(netId)
     if cb then cb(veh) end
 end

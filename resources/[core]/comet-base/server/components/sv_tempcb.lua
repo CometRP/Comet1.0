@@ -15,14 +15,14 @@ RegisterNetEvent("comet-base:executeCB", function(key, name, data)
     local source = source
     local event = ("comet-base:%s:%s"):format(name, key)
 
-    print(name, source, data, key, Callbacks, Callbacks[name])
+    -- print(name, source, data, key, Callbacks, Callbacks[name])
     local cb = Callbacks[name]
     local result = cb(source, data)
     TriggerClientEvent(event, source, result)
 end)
 
 Components.Callback.Register = function(name, cb)
-    print(name, cb)
+    -- print(name, cb)
     -- print(json.encode(cb))
     -- print(type(cb))
     -- if type(cb) ~= "table" then print("[CALLBACKS] `"..name.."` is not a function!") return end
@@ -37,7 +37,7 @@ Components.Callback.Register("callbacktester", function(source, data)
     if not data.cid then 
         return "no cid"
     end
-    print(source)
+    -- print(source)
 
     return data.cid == "42C"
 end)
