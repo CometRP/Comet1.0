@@ -100,7 +100,7 @@ function setPedHeadBlend(ped, headBlend) {
   const { shapeFirst, shapeSecond, shapeMix, skinFirst, skinSecond, skinMix } =
     headBlend;
 
-    if (exports.isPed.isPedFreemodeModel(ped)) {
+    if (exports['comet-base'].isPedFreemodeModel(ped)) {
     SetPedHeadBlendData(
       ped,
       shapeFirst,
@@ -286,7 +286,16 @@ let cameraHandle;
 let currentCamera;
 let reverseCamera;
 
+exports("reverseCamera", function(af) {
+  reverseCamera = af;
+})
+
 let isCameraInterpolating;
+
+exports("isCameraInterpolating", function(af) {
+  isCameraInterpolating = af;
+})
+
 let crcamera = 0
 
 exports("updateCamera", function(data) {

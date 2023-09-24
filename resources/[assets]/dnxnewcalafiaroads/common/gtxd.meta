@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CMapParentTxds>
+  <txdRelationships>
+    <Item>
+      <parent>dnx_newcalafiaroads_1</parent>
+      <child>dnx_newcalafiaroads</child>
+    </Item>
+  </txdRelationships>
+</CMapParentTxds>

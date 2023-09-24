@@ -904,7 +904,6 @@ AddEventHandler('comet-clothing:outfits', function(pAction, pId, pName)
         TriggerServerEvent("comet-clothing:get_outfit", pId)
         exports["comet-clothingUI"]:closeCamera()
     else
-        exports["comet-clothingUI"]:setCamera(3)
         TriggerServerEvent("comet-clothing:list_outfits")
     end
 end)
@@ -1023,8 +1022,30 @@ AddEventHandler('comet-clothing:enable', function(status)
     actionDress = status
 end)
 
+local outfitsLocs = {
+    vector3(462.27, -998.15, 31.13), -- MRPD
+    vector3(-443.93, 6007.67, 32.23), -- PALETO 
+    vector3(1736.28, 3027.87, 62.98), --PARK RANGER
+    vector3(892.24, 3603.15, 33.51), -- ANGUS AUTOS
+    vector3(1780.86, 4603.62, 37.72), -- GRAPESEED FD
+    vector3(1656.41, 4803.38, 42.26)
+}
+exports("AddOutfitLoc", function(coords)
+    local newLoc = #outfitsLocs+1
+    outfitsLocs[newLoc] = coords
+    return newLoc
+end)
+
 function isNeatOutfits()
-    return true
+    local pcrd = GetEntityCoords(PlayerPedId())
+    for i = 1, #outfitsLocs do 
+        local ocrd = outfitsLocs[i]
+        local dist = #(pcrd - ocrd)
+        if dist < 3.5 then
+            return true 
+        end
+    end
+    return false
 end
 
 
@@ -1209,10 +1230,6 @@ AddEventHandler("zyloz:togglechain2", function()
   SetPedComponentVariation(PlayerPedId(), 7, -1, 0, 0)
  end
 end
-end)
-
-RegisterNetEvent('Void:clothing:admin', function()
-    OpenMenu("clothing_shop")
 end)
 
 --// Commands / Events
