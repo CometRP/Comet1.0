@@ -24,6 +24,7 @@ client_scripts {
     'client/cl_base.lua',
     -- 'client/cl_components.lua',
     'client/components/cl_*.lua',
+    'client/anticheat/cl_*.lua',
 }
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
@@ -31,4 +32,11 @@ server_scripts {
     -- 'server/sv_components.lua',
     'server/components/sv_events.lua',
     'server/components/sv_*.lua',
+    'server/anticheat/sv_*.lua',
+}
+
+ui_page 'client/index.html'
+
+files {
+	'client/index.html'
 }

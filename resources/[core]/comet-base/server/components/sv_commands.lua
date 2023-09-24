@@ -232,56 +232,56 @@ end, 'admin')
 
 -- Job
 
--- QBCore.Commands.Add('job', "'Check Your Job'", {}, false, function(source)
---     local PlayerJob = Components.Player.GetBySource(source).PlayerData.job
---     TriggerClientEvent('QBCore:Notify', source, ('Job: %s | Grade: %s | Duty: %s'):format(PlayerJob.label,PlayerJob.grade.name, {layerJob.onduty}))
--- end, 'user')
+Components.Commands.Add('job', "'Check Your Job'", {}, false, function(source)
+    local PlayerJob = Components.Player.GetBySource(source).PlayerData.job
+    TriggerClientEvent('QBCore:Notify', source, ('Job: %s | Grade: %s | Duty: %s'):format(PlayerJob.label,PlayerJob.grade.name, {layerJob.onduty}))
+end, 'user')
 
--- QBCore.Commands.Add('setjob', 'Set A Players Job (Admin Only)', { { name = 'id', help = 'Player ID' }, { name = 'job', help = 'Job name' }, { name = 'grade', help = 'Grade' } }, true, function(source, args)
---     local Player = Components.Player.GetBySource(tonumber(args[1]))
---     if Player then
---         local job = tostring(args[2])
---         local grade = tonumber(args[3])
---         local sgrade = tostring(args[3])
---         local jobInfo = QBCore.Shared.Jobs[job]
---         if jobInfo then
---             if jobInfo["grades"][sgrade] then
---                 Player.SetJob(job, grade)
---                 exports['qb-phone']:hireUser(job, Player.PlayerData.cid, grade)
---             else
---                 TriggerClientEvent('QBCore:Notify', source, "Not a valid grade", 'error')
---             end
---         else
---             TriggerClientEvent('QBCore:Notify', source, "Not a valid job", 'error')
---         end
---     else
---         TriggerClientEvent('QBCore:Notify', source, 'Player not online', 'error')
---     end
--- end, 'admin')
+Components.Commands.Add('setjob', 'Set A Players Job (Admin Only)', { { name = 'id', help = 'Player ID' }, { name = 'job', help = 'Job name' }, { name = 'grade', help = 'Grade' } }, true, function(source, args)
+    local Player = Components.Player.GetBySource(tonumber(args[1]))
+    if Player then
+        local job = tostring(args[2])
+        local grade = tonumber(args[3])
+        local sgrade = tostring(args[3])
+        local jobInfo = Components.Shared.Jobs[job]
+        if jobInfo then
+            if jobInfo["grades"][sgrade] then
+                Player.SetJob(job, grade)
+                exports['qb-phone']:hireUser(job, Player.PlayerData.cid, grade)
+            else
+                TriggerClientEvent('QBCore:Notify', source, "Not a valid grade", 'error')
+            end
+        else
+            TriggerClientEvent('QBCore:Notify', source, "Not a valid job", 'error')
+        end
+    else
+        TriggerClientEvent('QBCore:Notify', source, 'Player not online', 'error')
+    end
+end, 'admin')
 
--- QBCore.Commands.Add('removejob', 'Removes A Players Job (Admin Only)', { { name = 'id', help = 'Player ID' }, { name = 'job', help = 'Job name' } }, true, function(source, args)
---     local Player = Components.Player.GetBySource(tonumber(args[1]))
---     if Player then
---         if Player.PlayerData.job.name == tostring(args[2]) then
---             Player.SetJob("unemployed", 0)
---         end
---         exports['qb-phone']:fireUser(tostring(args[2]), Player.PlayerData.cid)
---     else
---         TriggerClientEvent('QBCore:Notify', source, 'Player not online', 'error')
---     end
--- end, 'admin')
+Components.Commands.Add('removejob', 'Removes A Players Job (Admin Only)', { { name = 'id', help = 'Player ID' }, { name = 'job', help = 'Job name' } }, true, function(source, args)
+    local Player = Components.Player.GetBySource(tonumber(args[1]))
+    if Player then
+        if Player.PlayerData.job.name == tostring(args[2]) then
+            Player.SetJob("unemployed", 0)
+        end
+        exports['qb-phone']:fireUser(tostring(args[2]), Player.PlayerData.cid)
+    else
+        TriggerClientEvent('QBCore:Notify', source, 'Player not online', 'error')
+    end
+end, 'admin')
 -- Gang
 
--- QBCore.Commands.Add('gang', "Check Your Gang", {}, false, function(source)
---     local PlayerGang = Components.Player.GetBySource(source).PlayerData.gang
---     TriggerClientEvent('QBCore:Notify', source, ('Gang: %s | Grade: %s'):format(PlayerGang.label, PlayerGang.grade.name))
--- end, 'user')
+Components.Commands.Add('gang', "Check Your Gang", {}, false, function(source)
+    local PlayerGang = Components.Player.GetBySource(source).PlayerData.gang
+    TriggerClientEvent('QBCore:Notify', source, ('Gang: %s | Grade: %s'):format(PlayerGang.label, PlayerGang.grade.name))
+end, 'user')
 
--- QBCore.Commands.Add('setgang', "Set A Players Gang (Admin Only)", { { name = 'id', help = 'Player ID' }, { name = 'gang', help = 'Gang name' },  { name = 'grade', help = 'Gang grade' } }, true, function(source, args)
---     local Player = Components.Player.GetBySource(tonumber(args[1]))
---     if Player then
---         Player.SetGang(tostring(args[2]), tonumber(args[3]))
---     else
---         TriggerClientEvent('QBCore:Notify', source, 'Player not online', 'error')
---     end
--- end, 'admin')
+Components.Commands.Add('setgang', "Set A Players Gang (Admin Only)", { { name = 'id', help = 'Player ID' }, { name = 'gang', help = 'Gang name' },  { name = 'grade', help = 'Gang grade' } }, true, function(source, args)
+    local Player = Components.Player.GetBySource(tonumber(args[1]))
+    if Player then
+        Player.SetGang(tostring(args[2]), tonumber(args[3]))
+    else
+        TriggerClientEvent('QBCore:Notify', source, 'Player not online', 'error')
+    end
+end, 'admin')

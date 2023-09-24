@@ -74,7 +74,7 @@ Components.Player.Login = function(source, cid, newData)
         end
         return true
     else
-        -- QBCore.ShowError(GetCurrentResourceName(), 'ERROR QBCORE.PLAYER.LOGIN - NO SOURCE GIVEN!')
+        -- Components.ShowError(GetCurrentResourceName(), 'ERROR COMPONENTS.PLAYER.LOGIN - NO SOURCE GIVEN!')
         return false
     end
 end

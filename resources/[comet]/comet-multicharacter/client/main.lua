@@ -64,19 +64,16 @@ local function skyCam(bool)
 end
 
 local function openCharMenu(bool)
-    -- QBCore.Functions.TriggerCallback("comet-multicharacter:server:GetNumberOfCharacters", function(result)
     local result = Callback.Execute("comet-multicharacter:server:GetNumberOfCharacters")
-        SetNuiFocus(bool, bool)
-        SendNUIMessage({
-            action = "ui",
-            toggle = bool,
-            nChar = result,
-            enableDeleteButton = Config.EnableDeleteButton,
-        })
-        skyCam(bool)
-		pednpc(model)
-		
-    -- end)
+	SetNuiFocus(bool, bool)
+	SendNUIMessage({
+		action = "ui",
+		toggle = bool,
+		nChar = result,
+		enableDeleteButton = Config.EnableDeleteButton,
+	})
+	skyCam(bool)
+	pednpc(model)
 end
 
 -- Events
@@ -161,53 +158,49 @@ RegisterNUICallback('cDataPed', function(nData, cb)
     SetEntityAsMissionEntity(charPed, true, true)
     DeleteEntity(charPed)
     if cData ~= nil then
-        -- QBCore.Functions.TriggerCallback('comet-multicharacter:server:getSkin', function(model, data)
         local result = Callback.Execute('comet-multicharacter:server:getSkin', {cid = cData.cid} )
         local model = result.model
         local data = result.data
-        print(json.encode(data))
-            model = model ~= nil and tonumber(model) or false
-            print(model)
-            if model ~= nil then
-                CreateThread(function()
-                    -- jay fix the fuck model time
-                    RequestModel(model)
-                    while not HasModelLoaded(model) do
-                        Wait(0)
-                    end
-                    SetPlayerModel(PlayerId(), model)
-                    charPed = ClonePed(PlayerPedId(), false, true, false)
-                    -- jay fix the fuck model time
+        -- print(json.encode(data))
+		model = model ~= nil and tonumber(model) or false
+		-- print(model)
+		if model ~= nil then
+			CreateThread(function()
+				-- jay fix the fuck model time
+				RequestModel(model)
+				while not HasModelLoaded(model) do
+					Wait(0)
+				end
+				SetPlayerModel(PlayerId(), model)
+				charPed = ClonePed(PlayerPedId(), false, true, false)
+				-- jay fix the fuck model time
 
-                    TaskStartScenarioAtPosition(charPed, 'PROP_HUMAN_SEAT_BENCH', Config.PedCoords.x, Config.PedCoords.y, Config.PedCoords.z - 0.98, Config.PedCoords.w, 0, false, true)
-                    SetPedComponentVariation(charPed, 0, 0, 0, 2)
-                    FreezeEntityPosition(charPed, false)
-                    SetEntityInvincible(charPed, true)
-                    PlaceObjectOnGroundProperly(charPed)
-                    SetBlockingOfNonTemporaryEvents(charPed, true)
-                    -- data = json.decode(data)
-                    LoadPed(charPed, result, model)
-                    -- TriggerEvent('qb-clothing:client:loadPlayerClothing', data, charPed)
-                end)
-            else
-                CreateThread(function()
-                    local randommodels = Config.PlayerModels
-                    model = GetHashKey(randommodels[math.random(1, #randommodels)])
-                    RequestModel(model)
-                    while not HasModelLoaded(model) do
-                        Wait(0)
-                    end
-                    charPed = CreatePed(2, model, Config.PedCoords.x, Config.PedCoords.y, Config.PedCoords.z - 0.98, Config.PedCoords.w, false, true)
-					TaskStartScenarioAtPosition(charPed, 'PROP_HUMAN_SEAT_BENCH', Config.PedCoords.x, Config.PedCoords.y, Config.PedCoords.z - 0.98, Config.PedCoords.w, 0, false, true)
-                    SetPedComponentVariation(charPed, 0, 0, 0, 2)
-                    FreezeEntityPosition(charPed, false)
-                    SetEntityInvincible(charPed, true)
-                    PlaceObjectOnGroundProperly(charPed)
-                    SetBlockingOfNonTemporaryEvents(charPed, true)
-                end)
-            end
-            cb("ok")
-        -- end, cData.cid)
+				TaskStartScenarioAtPosition(charPed, 'PROP_HUMAN_SEAT_BENCH', Config.PedCoords.x, Config.PedCoords.y, Config.PedCoords.z - 0.98, Config.PedCoords.w, 0, false, true)
+				SetPedComponentVariation(charPed, 0, 0, 0, 2)
+				FreezeEntityPosition(charPed, false)
+				SetEntityInvincible(charPed, true)
+				PlaceObjectOnGroundProperly(charPed)
+				SetBlockingOfNonTemporaryEvents(charPed, true)
+				-- data = json.decode(data)
+			end)
+		else
+			CreateThread(function()
+				local randommodels = Config.PlayerModels
+				model = GetHashKey(randommodels[math.random(1, #randommodels)])
+				RequestModel(model)
+				while not HasModelLoaded(model) do
+					Wait(0)
+				end
+				charPed = CreatePed(2, model, Config.PedCoords.x, Config.PedCoords.y, Config.PedCoords.z - 0.98, Config.PedCoords.w, false, true)
+				TaskStartScenarioAtPosition(charPed, 'PROP_HUMAN_SEAT_BENCH', Config.PedCoords.x, Config.PedCoords.y, Config.PedCoords.z - 0.98, Config.PedCoords.w, 0, false, true)
+				SetPedComponentVariation(charPed, 0, 0, 0, 2)
+				FreezeEntityPosition(charPed, false)
+				SetEntityInvincible(charPed, true)
+				PlaceObjectOnGroundProperly(charPed)
+				SetBlockingOfNonTemporaryEvents(charPed, true)
+			end)
+		end
+		cb("ok")
     else
         CreateThread(function()--
             local randommodels = Config.PlayerModels
@@ -231,14 +224,11 @@ end)
 
 RegisterNUICallback('setupCharacters', function(_, cb)
     local result = Callback.Execute("comet-multicharacter:server:setupCharacters")
-    print(result, json.encode(result))
-    -- QBCore.Functions.TriggerCallback("comet-multicharacter:server:setupCharacters", function(result)
-        SendNUIMessage({
-            action = "setupCharacters",
-            characters = result
-        })
-        cb("ok")
-    -- end)
+	SendNUIMessage({
+		action = "setupCharacters",
+		characters = result
+	})
+	cb("ok")
 end)
 
 RegisterNUICallback('removeBlur', function(_, cb)
@@ -748,7 +738,7 @@ end
 function SetTats(ped,data)
     currentTats = {}
     for k, v in pairs(data) do
-        print(k,v)
+        -- print(k,v)
         for categ in pairs(tattooHashList) do
             if k == categ then
                 local something = tattooHashList[categ][tonumber(v)]

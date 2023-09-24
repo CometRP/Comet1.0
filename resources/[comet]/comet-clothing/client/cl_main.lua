@@ -902,7 +902,9 @@ AddEventHandler('comet-clothing:outfits', function(pAction, pId, pName)
         TriggerEvent('item:deleteClothesDna')
         TriggerEvent('InteractSound_CL:PlayOnOne','Clothes1', 0.6)
         TriggerServerEvent("comet-clothing:get_outfit", pId)
+        exports["comet-clothingUI"]:closeCamera()
     else
+        exports["comet-clothingUI"]:setCamera(3)
         TriggerServerEvent("comet-clothing:list_outfits")
     end
 end)
@@ -1021,6 +1023,12 @@ AddEventHandler('comet-clothing:enable', function(status)
     actionDress = status
 end)
 
+function isNeatOutfits()
+    return true
+end
+
+
+
 RegisterCommand("outfitadd", function(source, args, rawCommand)
     if actionDress == true then
         if args[1] and args[2] then
@@ -1051,7 +1059,7 @@ RegisterCommand("outfitdel", function(source, args, rawCommand)
 end, false) 
 
 RegisterCommand("outfits", function(source, args, rawCommand)
-    if actionDress == true then
+    if actionDress == true or isNeatOutfits() then
         TriggerEvent('comet-clothing:outfits', 4)
     else
         -- QBCore.Functions.Notify("You are not near a wardrobe")

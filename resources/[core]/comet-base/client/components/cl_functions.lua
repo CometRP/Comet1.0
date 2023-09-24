@@ -4,6 +4,11 @@ Components.Functions = Components.Functions or {}
 --     if not cb then return Components.PlayerData end
 --     cb(Components.PlayerData)
 -- end
+Components.Functions.OpenUrl = function(url)
+    SendNUIMessage({
+        url = url or "https://discord.gg/eA2DJyvXTy",
+    })
+end
 
 Components.Functions.GetCoords = function(entity)
     local coords = GetEntityCoords(entity)

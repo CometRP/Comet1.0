@@ -6,8 +6,8 @@ CreateThread(function()
             TriggerServerEvent("comet-base:playerSessionStarted")
 
             --
-            TriggerEvent("comet-base:refreshComponents")
-            TriggerServerEvent("comet-base:refreshComponents")
+            -- TriggerEvent("comet-base:refreshComponents")
+            -- TriggerServerEvent("comet-base:refreshComponents")
             break
         end
         Wait(0)

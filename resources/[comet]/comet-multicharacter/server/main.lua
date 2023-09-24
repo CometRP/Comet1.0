@@ -37,7 +37,7 @@ local function GiveStarterItems(source)
             info.birthdate = Player.PlayerData.charinfo.birthdate
             info.type = "Class C Driver License"
         end
-        Player.Functions.AddItem(v.item, v.amount, false, info)
+        Player.AddItem(v.item, v.amount, false, info)
     end
 end
 
@@ -154,25 +154,6 @@ RegisterNetEvent('comet-multicharacter:server:createCharacter', function(data)
 end)
 
 
--- RegisterNetEvent('comet-multicharacter:server:createCharacter', function(data)
---     local src = source
---     local newData = {}
---     newData.cid = data.cid
---     newData.charinfo = data
---     if exports['comet-base']:FetchComponent("Player").Login(src, false, newData) then
---         repeat
---             Wait(10)
---         until hasDonePreloading[src]
---         print('^2[qb-core]^7 '..GetPlayerName(src)..' has succesfully loaded!')
---         exports['comet-base']:FetchComponent("Commands").Refresh(src)
---         TriggerClientEvent("comet-multicharacter:client:closeNUI", src)
---         newData.cid = QBCore.Functions.GetPlayer(src).PlayerData.cid
---         TriggerClientEvent('apartments:client:setupSpawnUI', src, newData, true)
---         -- TriggerClientEvent('ps-housing:client:setupSpawnUI', src, newData)
---         GiveStarterItems(src)
---     end
--- end)
-
 RegisterNetEvent('comet-multicharacter:server:deleteCharacter', function(cid)
     local src = source
     exports['comet-base']:FetchComponent("Player").DeleteCharacter(src, cid)
@@ -207,9 +188,9 @@ CreateThread(function()
     end)
     
     Callback.Register("comet-multicharacter:server:GetNumberOfCharacters", function(source, data)
-        print("test")
+        -- print("test")
         local src = source
-        print(src, source)
+        -- print(src, source)
         local license = Functions.GetIdentifier(src, 'license')
         local numOfChars = 0
     
@@ -231,7 +212,7 @@ CreateThread(function()
     Callback.Register("comet-multicharacter:server:setupCharacters", function(source, data)
         local source = source
         local license = Functions.GetIdentifier(source, 'license')
-        print(license)
+        -- print(license)
         -- a = a + 1
         -- print(a)
         local plyChars = {}
@@ -246,7 +227,7 @@ CreateThread(function()
             plyChars[#plyChars+1] = result[i]
             
         end
-        print(json.encode(plyChars))
+        -- print(json.encode(plyChars))
         return plyChars
             -- p:resolve(plyChars)
         -- end)
@@ -273,7 +254,7 @@ CreateThread(function()
 
             -- return Components.Player.CheckPlayerData(nil, PlayerData)
         end
-        print(PlayerData)
+        -- print(PlayerData)
         if result[1] ~= nil then
             local cc = MySQL.Sync.fetchAll('SELECT * FROM character_current WHERE cid = ?', {data.cid})
             plyChars = {}

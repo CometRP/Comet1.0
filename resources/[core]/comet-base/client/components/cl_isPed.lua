@@ -1,5 +1,4 @@
 dead = false
--- QBCore = exports['qb-core']:GetCoreObject()
 handcuffed = false
 job = "None"
 bank = 10
