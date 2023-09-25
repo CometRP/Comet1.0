@@ -22,28 +22,32 @@ RegisterCommand("sv", function(source,args)
     TriggerEvent("wv-keys:addNew", vehicle, GetVehicleNumberPlateText(vehicle))
 end)
 
+
 RegisterCommand("ui-test", function()
     local completed = 0
+    local failed = 0
 
     -- function restart()
     --     goto test
     -- end
 
-    ::test::
+    ::continue::
     local finished = false
     exports['comet-ui']:MemoryMinigame(function(result)
         if result then 
-            finished = true
             completed = completed + 1
+        else 
+            failed = failed + 1
         end
+        finished = true
     end)
     while not finished do Wait(0) end 
     finished = false
     print(completed)
-    if completed < 5 then 
-        goto test
-    end
-   
+    print(failed)
+    if failed > 2 then return false end
+    if completed > 5 then return true end
+    goto continue
 end)
 
 RegisterCommand("extras", function()
