@@ -1,0 +1,26 @@
+<CodeWalkerProject>
+  <Name>New CodeWalker Project</Name>
+  <Version value="1" />
+  <YmapFilenames>
+    <Item>hospital_milo.ymap</Item>
+    <Item>mourge_milo.ymap</Item>
+    <Item>id1_33_strm_0.ymap</Item>
+    <Item>bkr_id1_33_strm_0.ymap</Item>
+  </YmapFilenames>
+  <YtypFilenames>
+    <Item>hospital.ytyp</Item>
+    <Item>hospital_props.ytyp</Item>
+    <Item>mourge.ytyp</Item>
+  </YtypFilenames>
+  <YbnFilenames>
+    <Item>hi@id1_33_0.ybn</Item>
+    <Item>id1_33_0.ybn</Item>
+    <Item>mourge_shell_col.ybn</Item>
+    <Item>shell_col.ybn</Item>
+  </YbnFilenames>
+  <YndFilenames />
+  <YnvFilenames />
+  <TrainsFilenames />
+  <ScenarioFilenames />
+  <AudioRelFilenames />
+</CodeWalkerProject>
