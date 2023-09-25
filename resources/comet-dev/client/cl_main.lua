@@ -22,6 +22,30 @@ RegisterCommand("sv", function(source,args)
     TriggerEvent("wv-keys:addNew", vehicle, GetVehicleNumberPlateText(vehicle))
 end)
 
+RegisterCommand("ui-test", function()
+    local completed = 0
+
+    -- function restart()
+    --     goto test
+    -- end
+
+    ::test::
+    local finished = false
+    exports['comet-ui']:MemoryMinigame(function(result)
+        if result then 
+            finished = true
+            completed = completed + 1
+        end
+    end)
+    while not finished do Wait(0) end 
+    finished = false
+    print(completed)
+    if completed < 5 then 
+        goto test
+    end
+   
+end)
+
 RegisterCommand("extras", function()
     for i = 1,14 do 
         SetVehicleExtra(GetVehiclePedIsIn(PlayerPedId(), false), i, 0)
