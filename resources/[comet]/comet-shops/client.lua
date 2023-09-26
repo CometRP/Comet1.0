@@ -99,7 +99,7 @@ end
 
 RegisterNetEvent('shop:general')
 AddEventHandler('shop:general', function()
-	TriggerEvent("server-inventory-open", "normal", "Shop")
+	TriggerEvent("server-inventory-open", "2", "Shop")
 	Wait(1000)
 end)
 RegisterNetEvent('produceshop:general')

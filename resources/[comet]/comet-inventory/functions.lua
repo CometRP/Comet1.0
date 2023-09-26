@@ -388,7 +388,7 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon, pa
     SetTimeout(1500, function()
         exports['comet-inventory']:DisableInventory(false)
     end)
-    --[[
+    -- [[
     if itemid == "-1518444656" then
         if tonumber(ItemInfo.quality) > 0 then
               local katanaInfo = json.decode(ItemInfo.information)

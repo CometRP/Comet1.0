@@ -23,6 +23,7 @@ RegisterCommand("sv", function(source,args)
 end)
 
 
+
 RegisterCommand("ui-test", function()
     local completed = 0
     local failed = 0
@@ -54,4 +55,36 @@ RegisterCommand("extras", function()
     for i = 1,14 do 
         SetVehicleExtra(GetVehiclePedIsIn(PlayerPedId(), false), i, 0)
     end
+end)
+
+CreateThread(function()
+    exports['comet-target']:AddBoxZone("MissionRowDutyClipboard", vector3(441.7989, -982.0529, 30.67834), 0.45, 0.35, {
+        name = "MissionRowDutyClipboard",
+        heading = 11.0,
+        debugPoly = false,
+        minZ = 30.77834,
+        maxZ = 30.87834,
+    }, {
+        options = {
+            {
+                type = "client",
+                event = "comet-police:clockIn",
+                icon = "fas fa-sign-in-alt",
+                label = "Sign In",
+            },
+            {
+                type = "client",
+                event = "comet-police:clockOut",
+                icon = "fas fa-sign-in-alt",
+                label = "Sign Out",
+            },
+            {
+                type = "client",
+                event = "comet-police:pager",
+                icon = "fas fa-sign-in-alt",
+                label = "Pager",
+            },
+        },
+        distance = 2.5
+    })
 end)

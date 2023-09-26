@@ -1119,8 +1119,12 @@ on('inventory-open-target', async (information) => {
         MyItemCount = information[0].length;
         if (!openedInv) OpenGui();
         if (targetinvName.indexOf("Shop") > -1) {
-            const [fetchCash] = await exports['comet-base'].FetchComponent("Callback").Execute("GetCurrentCash");
-            cash = fetchCash;
+            console.log("test");
+            // const [fetchCash] = await Callback.Execute("GetCurrentCash");
+            // const [fetchCash] = exports['comet-base'].FetchComponent("Player").GetPlayerData().money.cash;
+            
+            // console.log(fetchCash);
+            cash = exports['comet-base'].FetchComponent("Player").GetPlayerData().money.cash;
             setImmediate(async () => {
                 const hasWeaponsLicense = exports['comet-base'].FetchComponent("Player").GetPlayerData().metadata.licences.weapon;
                 const hasClass2WeaponsLicense = false;

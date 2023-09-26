@@ -387,7 +387,7 @@ Components.Player.CreatePlayer = function(PlayerData, Offline)
         if not self.Offline then
             self.UpdatePlayerData()
             TriggerEvent('comet-base:gangUpdate', self.PlayerData.source, self.PlayerData.gang)
-            TriggerClientEvent('comet-base:gangUpdat', self.PlayerData.source, self.PlayerData.gang)
+            TriggerClientEvent('comet-base:gangUpdate', self.PlayerData.source, self.PlayerData.gang)
         end
 
         return true

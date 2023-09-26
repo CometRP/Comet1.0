@@ -2,7 +2,7 @@ local traysQ = {
     {
         id = "liquidlibrary1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Top",
         coords = vector3(1151.81, -409.84, 72.25),
         length = 2.65,
@@ -17,7 +17,7 @@ local traysQ = {
     {
         id = "liquidlibrary2",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Top",
         coords = vector3(1153.45, -404.14, 72.25),
         length = 3.4,
@@ -32,7 +32,7 @@ local traysQ = {
     {
         id = "liquidlibrary3",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Top",
         coords = vector3(1153.67, -407.48, 72.25),
         length = 5,
@@ -47,7 +47,7 @@ local traysQ = {
     {
         id = "liquidlibrary4",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Meeting Table",
         coords = vector3(1155.48, -421.02, 72.25),
         length = 1.2,
@@ -62,7 +62,7 @@ local traysQ = {
     {
         id = "liquidlibrary5",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Office Desk",
         coords = vector3(1152.3, -418.87, 67.49),
         length = 1.4,
@@ -77,7 +77,7 @@ local traysQ = {
     {
         id = "liquidlibrary6",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Gun Desk",
         coords = vector3(1151.88, -408.95, 67.48),
         length = 1.0,
@@ -92,7 +92,7 @@ local traysQ = {
     {
         id = "liquidlibrary7",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Counter Top",
         coords = vector3(1172.5, -409.41, 67.48),
         length = 3.8,
@@ -107,7 +107,7 @@ local traysQ = {
     {
         id = "liquidlibrarylounge1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Lounge Table",
         coords = vector3(1162.43, -402.24, 72.23),
         length = 1.0,
@@ -122,7 +122,7 @@ local traysQ = {
     {
         id = "liquidlibrarylounge2",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Lounge Table",
         coords = vector3(1165.8, -403.19, 72.23),
         length = 1.0,
@@ -137,7 +137,7 @@ local traysQ = {
     {
         id = "liquidlibrarylounge3",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Lounge Table",
         coords = vector3(1171.17, -410.05, 72.23),
         length = 1.0,
@@ -152,7 +152,7 @@ local traysQ = {
     {
         id = "liquidlibrarylounge4",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Lounge Table",
         coords = vector3(1170.05, -414.32, 72.23),
         length = 1.0,
@@ -167,7 +167,7 @@ local traysQ = {
     {
         id = "liquidlibrarylounge5",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Lounge Table",
         coords = vector3(1166.14, -416.68, 72.23),
         length = 1.0,
@@ -182,7 +182,7 @@ local traysQ = {
     {
         id = "liquidlibrarylounge6",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Lounge Table",
         coords = vector3(1163.15, -419.75, 72.24),
         length = 1.0,
@@ -197,7 +197,7 @@ local traysQ = {
     {
         id = "liquidlibrarylounge7",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Lounge Table",
         coords = vector3(1169.52, -421.6, 72.24),
         length = 1.0,
@@ -212,7 +212,7 @@ local traysQ = {
     {
         id = "liquidlibrarylounge8",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Lounge Table",
         coords = vector3(1165.83, -423.23, 72.24),
         length = 1.0,
@@ -227,7 +227,7 @@ local traysQ = {
     {
         id = "liquidlibrarylounge9",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Lounge Table",
         coords = vector3(1167.54, -425.98, 72.25),
         length = 1.6,
@@ -242,7 +242,7 @@ local traysQ = {
     {
         id = "liquidlibrarylounge10",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Lounge Table",
         coords = vector3(1162.48, -425.05, 72.25),
         length = 1.2,
@@ -257,7 +257,7 @@ local traysQ = {
     {
         id = "splitside1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-447.67, 269.19, 83.02),
         length = 0.8,
@@ -272,7 +272,7 @@ local traysQ = {
     {
         id = "splitside2",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-447.25, 273.36, 83.02),
         length = 0.8,
@@ -287,7 +287,7 @@ local traysQ = {
     {
         id = "splitside3",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-448.89, 279.4, 83.02),
         length = 0.8,
@@ -302,7 +302,7 @@ local traysQ = {
     {
         id = "splitside4",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-443.97, 274.7, 83.02),
         length = 0.8,
@@ -317,7 +317,7 @@ local traysQ = {
     {
         id = "splitside5",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-444.29, 270.96, 83.02),
         length = 0.8,
@@ -332,7 +332,7 @@ local traysQ = {
     {
         id = "splitside6",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-444.67, 266.96, 83.02),
         length = 0.8,
@@ -347,7 +347,7 @@ local traysQ = {
     {
         id = "splitside7",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-433.48, 269.53, 86.76),
         length = 0.8,
@@ -362,7 +362,7 @@ local traysQ = {
     {
         id = "splitside8",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-433.15, 273.52, 86.76),
         length = 0.8,
@@ -377,7 +377,7 @@ local traysQ = {
     {
         id = "splitside9",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-432.77, 277.35, 86.76),
         length = 0.8,
@@ -392,7 +392,7 @@ local traysQ = {
     {
         id = "splitside10",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-434.74, 279.79, 86.76),
         length = 0.8,
@@ -407,7 +407,7 @@ local traysQ = {
     {
         id = "splitside11",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-437.71, 279.98, 86.76),
         length = 0.8,
@@ -422,7 +422,7 @@ local traysQ = {
     {
         id = "splitside12",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-442.22, 281.27, 86.36),
         length = 0.8,
@@ -437,7 +437,7 @@ local traysQ = {
     {
         id = "splitside13",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-445.58, 281.56, 86.36),
         length = 0.8,
@@ -452,7 +452,7 @@ local traysQ = {
     {
         id = "splitside14",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(-448.96, 281.8, 86.36),
         length = 0.8,
@@ -468,7 +468,7 @@ local traysQ = {
     {
         id = "galleria1",
         enabled = true,
-        icon = "box-open",
+        icon = "fas fa-box-open",
         displayName = "Gem Table",
         coords = vector3(-468.54, 32.63, 46.23),
         length = 1.0,
@@ -483,7 +483,7 @@ local traysQ = {
     {
         id = "galleriapcatable",
         enabled = true,
-        icon = "box-open",
+        icon = "fas fa-box-open",
         displayName = "PCA Table",
         coords = vector3(-468.25, 39.76, 46.23),
         length = 1.0,
@@ -498,7 +498,7 @@ local traysQ = {
     {
         id = "galleria2",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Tray",
         coords = vector3(-488.57, 40.56, 52.41),
         length = 0.6,
@@ -513,7 +513,7 @@ local traysQ = {
     {
         id = "galleria3",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Tray",
         coords = vector3(-488.87, 38.3, 52.41),
         length = 0.6,
@@ -528,7 +528,7 @@ local traysQ = {
     {
         id = "galleria4",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table #1",
         coords = vector3(-486.09, 32.7, 52.41),
         length = 0.6,
@@ -543,7 +543,7 @@ local traysQ = {
     {
         id = "galleria5",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table #2",
         coords = vector3(-484.59, 29.26, 52.41),
         length = 0.6,
@@ -558,7 +558,7 @@ local traysQ = {
     {
         id = "galleria6",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table #3",
         coords = vector3(-481.74, 31.89, 52.41),
         length = 0.6,
@@ -573,7 +573,7 @@ local traysQ = {
     {
         id = "galleria7",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table #4",
         coords = vector3(-484.08, 35.21, 52.41),
         length = 0.6,
@@ -588,7 +588,7 @@ local traysQ = {
     {
         id = "burgershot1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1190.11, -896.15, 13.98),
         length = 1.0,
@@ -603,7 +603,7 @@ local traysQ = {
     {
         id = "burgershot2",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1186.79, -894.54, 13.98),
         length = 2.15,
@@ -618,7 +618,7 @@ local traysQ = {
     {
         id = "burgershot3",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1184.48, -892.98, 13.98),
         length = 2.1,
@@ -633,7 +633,7 @@ local traysQ = {
     {
         id = "burgershot4",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1182.01, -890.66, 13.98),
         length = 1.0,
@@ -648,7 +648,7 @@ local traysQ = {
     {
         id = "burgershot5",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1183.12, -888.12, 13.98),
         length = 1.05,
@@ -663,7 +663,7 @@ local traysQ = {
     {
         id = "burgershot6",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1188.46, -891.48, 14.00),
         length = 1.1,
@@ -678,7 +678,7 @@ local traysQ = {
     {
         id = "burgershot7",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1187.01, -882.39, 13.98),
         length = 2.25,
@@ -693,7 +693,7 @@ local traysQ = {
     {
         id = "burgershot8",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1188.94, -880.49, 13.98),
         length = 1.05,
@@ -708,7 +708,7 @@ local traysQ = {
     {
         id = "burgershot9",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1191.96, -881.76, 13.98),
         length = 2.15,
@@ -723,7 +723,7 @@ local traysQ = {
     {
         id = "burgershot10",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1194.29, -883.42, 13.98),
         length = 2.05,
@@ -738,7 +738,7 @@ local traysQ = {
     {
         id = "burgershot11",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1192.03, -886.14, 14.00),
         length = 1.1,
@@ -753,7 +753,7 @@ local traysQ = {
     {
         id = "burgershot12",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1193.43, -888.16, 13.98),
         length = 1.1,
@@ -768,7 +768,7 @@ local traysQ = {
     {
         id = "burgershot13",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table Tray",
         coords = vector3(-1190.85, -892.03, 13.98),
         length = 1.1,
@@ -784,7 +784,7 @@ local traysQ = {
     {
         id = "burgershot14",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Pickup Order",
         coords = vector3(-1193.81, -894.38, 13.98),
         length = 0.85,
@@ -799,7 +799,7 @@ local traysQ = {
     {
         id = "burgershot15",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Pickup Order",
         coords = vector3(-1194.95, -892.87, 13.98),
         length = 0.85,
@@ -814,7 +814,7 @@ local traysQ = {
     {
         id = "burgershot16",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Pickup Order",
         coords = vector3(-1195.94, -891.44, 13.98),
         length = 1.0,
@@ -829,7 +829,7 @@ local traysQ = {
     {
         id = "burgershot17",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Pickup Order",
         coords = vector3(-1687.42, -1091.29, 13.15),
         length = 1.6,
@@ -844,7 +844,7 @@ local traysQ = {
     {
         id = "burgershot18",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Drive Thru Window",
         coords = vector3(-1193.81, -907.8, 13.98),
         length = 4.0,
@@ -859,7 +859,7 @@ local traysQ = {
     {
         id = "roosterest1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Pickup Order",
         coords = vector3(-170.95, 302.43, 98.52),
         length = 1.6,
@@ -874,7 +874,7 @@ local traysQ = {
     {
         id = "roosterest2",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Pickup Order",
         coords = vector3(-171.36, 291.72, 99.2),
         length = 3.4,
@@ -889,7 +889,7 @@ local traysQ = {
     {
         id = "wuchang1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table #1",
         coords = vector3(-827.63, -717.81, 28.06),
         length = 1.8,
@@ -904,7 +904,7 @@ local traysQ = {
     {
         id = "wuchang2",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table #2",
         coords = vector3(-830.02, -722.11, 28.06),
         length = 1.8,
@@ -919,7 +919,7 @@ local traysQ = {
     {
         id = "wuchang3",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table #3",
         coords = vector3(-832.87, -719.43, 28.06),
         length = 1.8,
@@ -934,7 +934,7 @@ local traysQ = {
     {
         id = "wuchang4",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table #4",
         coords = vector3(-835.71, -722.89, 28.06),
         length = 1.8,
@@ -949,7 +949,7 @@ local traysQ = {
     {
         id = "wuchang5",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table #5",
         coords = vector3(-841.29, -730.49, 28.31),
         length = 1.0,
@@ -964,7 +964,7 @@ local traysQ = {
     {
         id = "wuchang6",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Table #6",
         coords = vector3(-837.47, -730.61, 28.31),
         length = 1.0,
@@ -979,7 +979,7 @@ local traysQ = {
     {
         id = "wuchang7",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Tray",
         coords = vector3(-830.99, -727.67, 28.06),
         length = 1.0,
@@ -994,7 +994,7 @@ local traysQ = {
     {
         id = "wuchang8",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Tray",
         coords = vector3(-827.37, -727.74, 28.06),
         length = 1.0,
@@ -1009,7 +1009,7 @@ local traysQ = {
     {
         id = "npa1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Tray",
         coords = vector3(5511.05, 5969.71, 634.41),
         length = 1.0,
@@ -1024,7 +1024,7 @@ local traysQ = {
     {
         id = "uwu1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-583.95, -1059.53, 22.34),
         length = 1.0,
@@ -1039,7 +1039,7 @@ local traysQ = {
     {
         id = "uwu2",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-584.01, -1062.38, 22.34),
         length = 1.0,
@@ -1054,7 +1054,7 @@ local traysQ = {
     {
         id = "uwu3",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-573.49, -1067.04, 22.49),
         length = 1.0,
@@ -1069,7 +1069,7 @@ local traysQ = {
     {
         id = "uwu4",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-573.54, -1063.33, 22.49),
         length = 1.0,
@@ -1084,7 +1084,7 @@ local traysQ = {
     {
         id = "uwu5",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-573.5, -1059.71, 22.49),
         length = 1.0,
@@ -1100,7 +1100,7 @@ local traysQ = {
     {
         id = "mald1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-580.28, -887.37, 25.72),
         length = 1.0,
@@ -1115,7 +1115,7 @@ local traysQ = {
     {
         id = "mald2",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-580.14, -888.39, 25.72),
         length = 1.0,
@@ -1130,7 +1130,7 @@ local traysQ = {
     {
         id = "mald3",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-580.05, -889.41, 25.72),
         length = 1.0,
@@ -1145,7 +1145,7 @@ local traysQ = {
     {
         id = "mald4",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-583.42, -891.07, 25.72),
         length = 1.0,
@@ -1160,7 +1160,7 @@ local traysQ = {
     {
         id = "mald5",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-585.51, -891.09, 25.72),
         length = 1.0,
@@ -1175,7 +1175,7 @@ local traysQ = {
     {
         id = "mald6",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-587.6, -891.12, 25.72),
         length = 1.0,
@@ -1190,7 +1190,7 @@ local traysQ = {
     {
         id = "mald7",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-589.7, -891.1, 25.72),
         length = 1.0,
@@ -1205,7 +1205,7 @@ local traysQ = {
     {
         id = "mald8",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-592.07, -894.36, 25.72),
         length = 1.0,
@@ -1220,7 +1220,7 @@ local traysQ = {
     {
         id = "mald9",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-592.08, -896.47, 25.72),
         length = 1.0,
@@ -1235,7 +1235,7 @@ local traysQ = {
     {
         id = "mald10",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-584.09, -888.35, 25.72),
         length = 1.0,
@@ -1250,7 +1250,7 @@ local traysQ = {
     {
         id = "mald11",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-588.01, -888.33, 25.72),
         length = 1.0,
@@ -1265,7 +1265,7 @@ local traysQ = {
     {
         id = "mald12",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-592.01, -888.33, 25.72),
         length = 1.0,
@@ -1280,7 +1280,7 @@ local traysQ = {
     {
         id = "mald13",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-593.14, -885.62, 25.72),
         length = 2.0,
@@ -1295,7 +1295,7 @@ local traysQ = {
     {
         id = "yellowjack1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Tray",
         coords = vector3(1984.18, 3052.77, 47.22),
         length = 2.8,
@@ -1311,7 +1311,7 @@ local traysQ = {
     {
         id = "tequilala1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Tray",
         coords = vector3(-561.15, 284.8, 82.18),
         length = 0.6,
@@ -1326,7 +1326,7 @@ local traysQ = {
     {
         id = "tequilala2",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Tray",
         coords = vector3(-561.02, 286.09, 82.18),
         length = 0.6,
@@ -1341,7 +1341,7 @@ local traysQ = {
     {
         id = "tequilala3",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Tray",
         coords = vector3(-560.9, 287.39, 82.18),
         length = 0.6,
@@ -1356,7 +1356,7 @@ local traysQ = {
     {
         id = "tequilala4",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Tray",
         coords = vector3(-564.08, 286.89, 85.38),
         length = 0.6,
@@ -1371,7 +1371,7 @@ local traysQ = {
     {
         id = "kiki_oc",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Tray",
         coords = vector3(87.61, -1418.48, 29.28),
         length = 1.0,
@@ -1386,7 +1386,7 @@ local traysQ = {
     {
         id = "pawnhub_counter_1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Counter",
         coords = vector3(-732.25, -1127.71, 10.83),
         length = 0.6,
@@ -1401,7 +1401,7 @@ local traysQ = {
     {
         id = "pawnhub_counter_2",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Counter",
         coords = vector3(-729.53, -1137.02, 10.83),
         length = 2.2,
@@ -1416,7 +1416,7 @@ local traysQ = {
     {
         id = "jewel_dragon1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Counter",
         coords = vector3(-708.91, -899.65, 23.81),
         length = 0.8,
@@ -1431,7 +1431,7 @@ local traysQ = {
     {
         id = "jewel_dragon2",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Counter",
         coords = vector3(-700.82, -903.05, 19.52),
         length = 1.0,
@@ -1446,7 +1446,7 @@ local traysQ = {
     {
         id = "cinema1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Bar Top",
         coords = vector3(-623.52, -946.51, -1.18),
         length = 1.0,
@@ -1461,7 +1461,7 @@ local traysQ = {
     {
         id = "wuchangcounter",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Countertop",
         coords = vector3(-819.63, -698.38, 28.04),
         length = 3.05,
@@ -1476,7 +1476,7 @@ local traysQ = {
     {
         id = "mald14",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-580.24, -883.77, 25.72),
         length = 1.0,
@@ -1491,7 +1491,7 @@ local traysQ = {
     {
         id = "mald15",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-577.62, -881.07, 25.72),
         length = 1.0,
@@ -1506,7 +1506,7 @@ local traysQ = {
     {
         id = "mald16",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-580.22, -878.34, 25.72),
         length = 1.0,
@@ -1521,7 +1521,7 @@ local traysQ = {
     {
         id = "mald17",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-593.28, -883.77, 25.72),
         length = 1.0,
@@ -1536,7 +1536,7 @@ local traysQ = {
     {
         id = "mald18",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-595.66, -881.14, 25.72),
         length = 1.0,
@@ -1551,7 +1551,7 @@ local traysQ = {
     {
         id = "mald19",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Food Tray",
         coords = vector3(-593.31, -878.31, 25.72),
         length = 1.0,
@@ -1566,7 +1566,7 @@ local traysQ = {
     {
         id = "pittattoo1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Tray",
         coords = vector3(-1152.82, -1424.12, 4.95),
         length = 0.8,
@@ -1581,7 +1581,7 @@ local traysQ = {
     {
         id = "rameesanct1",
         enabled = true,
-        icon = "hand-holding",
+        icon = "fas fa-hand-holding",
         displayName = "Open",
         coords = vector3(2106.57, 443.2, 164.47),
         length = 2.6,
@@ -1596,7 +1596,7 @@ local traysQ = {
     {
         id = "rameesanct2",
         enabled = true,
-        icon = "box",
+        icon = "fas fa-box",
         label = "Claim Prize",
         displayName = "Prize",
         coords = vector3(2133.59, 444.77, 164.32),
@@ -1612,7 +1612,7 @@ local traysQ = {
     {
         id = "rameesanct3",
         enabled = true,
-        icon = "box",
+        icon = "fas fa-box",
         label = "Claim Prize",
         displayName = "Prize",
         coords = vector3(2133.33, 442.73, 164.17),
@@ -1628,7 +1628,7 @@ local traysQ = {
     {
         id = "rameesanct4",
         enabled = true,
-        icon = "box",
+        icon = "fas fa-box",
         label = "Claim Prize",
         displayName = "Prize",
         coords = vector3(2134.57, 441.36, 164.32),
@@ -1650,6 +1650,30 @@ Citizen.CreateThread(function()
         if (not v.enabled) then 
             goto continue 
         end
+
+
+        exports['comet-target']:AddBoxZone(v.id .. "_tray", v.coords, v.length, v.width, {
+            name = v.id .. "_tray",
+            debugPoly = false,
+            heading = v.data.heading,
+            minZ = v.data.minZ,
+            maxZ = v.data.maxZ,
+            data = {
+                id = v.id,
+            }
+        }, {
+            options = {
+                {
+                    type = "client",
+                    event = "comet-trays:openTray",
+                    icon = v.icon,
+                    label = v.label ~= nil and v.label or "Open",
+                    id = v.id,
+                    displayName = v.displayName,
+                },
+            },
+            distance = 2.5
+        })
 
         -- exports["qb-polytarget"]:AddBoxZone(v.id .. "_tray", v.coords, v.length, v.width, {
         --     heading = v.data.heading,

@@ -1,19 +1,23 @@
 -- local QBCore = exports['qb-core']:GetCoreObject()
 local _INV = {}
-_INV.UseableItems = {}
+_INV.UsableItems = {}
 _INV.CreateUsableItem = function(item, cb)
-    _INV.UseableItems[item] = cb
+    _INV.UsableItems[item] = cb
 end
 _INV.CanUseItem = function(item)
 	return _INV.UsableItems[item]
 end
 _INV.UseItem = function(itemName, ...)
-    local itemData = GetUsableItem(itemName)
+    local itemData = _INV.CanUseItem(itemName)
     local callback = type(itemData) == 'table' and (rawget(itemData, '__cfx_functionReference') and itemData or itemData.cb or itemData.callback) or type(itemData) == 'function' and itemData
     if not callback then return end
     -- print('am here dude fuck you')
     callback(...)
 end exports('UseItem', _INV.UseItem)
+
+CreateThread(function()
+    TriggerEvent("comet-base:exportsReady")
+end)
 
 AddEventHandler("comet-base:exportsReady", function()
     exports['comet-base']:CreateComponent("Inventory", _INV)
@@ -48,14 +52,14 @@ end)
 
 RegisterServerEvent("cash:remove")
 AddEventHandler("cash:remove", function(pSource, pAmount)
-    local Player = QBCore.Functions.GetPlayer(pSource)
-    Player.Functions.RemoveMoney('cash', pAmount)
+    local Player = exports['comet-base']:FetchComponent("Player").GetBySource(pSource)
+    Player.RemoveMoney('cash', pAmount)
 end)
 
 RegisterServerEvent('comet-inventory:itemUsed')
 AddEventHandler('comet-inventory:itemUsed', function(itemid, passedItemInfo, inventoryName, slot)
 	local src = source
-	UseItem(itemid, src, json.decode(passedItemInfo))
+	_INV.UseItem(itemid, src, json.decode(passedItemInfo))
 end)
 
 

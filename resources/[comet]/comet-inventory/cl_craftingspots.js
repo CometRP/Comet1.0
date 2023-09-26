@@ -4,7 +4,7 @@ let openedBait = false;
 
 setImmediate(async () => {
     // const spawnPublicZones = true;
-    // const craftingSpots = await exports['comet-base']:FetchComponent("Callback").Execute("comet-inventory:getCraftingSpots");
+    // const craftingSpots = await Callback.Execute("comet-inventory:getCraftingSpots");
     // craftingSpots.forEach(spot => {
     //     if (spot.zoneData.options.data.public && !spawnPublicZones) return;
     //     const name = `comet-inventory:crafting:${spot.id}`;

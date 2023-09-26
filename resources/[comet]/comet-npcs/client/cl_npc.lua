@@ -98,7 +98,7 @@ end
 function _npcNPC:setTarget(ped, target)
     if ped then self.entity = ped end
     if target then self.target = target end
-    -- exports['qb-target']:AddTargetEntity(self.entity, self.target)
+    exports['comet-target']:AddTargetEntity(self.entity, self.target)
 end
 
 function _npcNPC:setSetting(mode, active, settings)

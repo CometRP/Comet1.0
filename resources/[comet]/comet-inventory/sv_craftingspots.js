@@ -25,15 +25,15 @@ const CraftingSpots = [
 ];
 
 on("comet-base:exportsReady", () => {
-    exports['comet-base'].FetchComponent("Callback").Register("comet-inventory:getCraftingSpots", (data) => {
+    exports['comet-base'].FetchComponent("Callback").Register("comet-inventory:getCraftingSpots", (source, data) => {
         return CraftingSpots;
     })
 })
 
 on("comet-inventory:crafting:progression", (pSource, pData) => {
     if (pData.inventory.indexOf("Crafting:") === -1) return;
-    const user = exports['comet-base'].FetchComponent("Player").GetUser(pSource);
-    const cid = user.getCurrentCharacter().id;
+    const user = exports['comet-base'].FetchComponent("Player").GetByPlayer(pSource);
+    const cid = Player.PlayerData.cid
 
     const invId = pData.inventory.split(":")[1];
     if (!invId) return;

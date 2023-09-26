@@ -29,7 +29,6 @@ shared_script 'shared_list.js'
 shared_script 'sh_cache.js'
 
 client_scripts {
-
   'client.js',
   'functions.lua',
   'cl_vehicleweights.js',
@@ -40,7 +39,6 @@ client_scripts {
 }
 
 server_scripts {
-
   "sv_config.js",
   "sv_clean.js",
   'server_degradation.js',

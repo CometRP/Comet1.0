@@ -128,10 +128,10 @@ local passiveModeEnabled = false
 function passiveMode()
   if passiveModeEnabled then
     passiveModeEnabled = false
-    TriggerEvent("DoLongHudText", _L("actionbar-passivemode-off", "Passive mode off"))
+    TriggerEvent("DoLongHudText", "Passive mode off")
     return
   end
-  TriggerEvent("DoLongHudText", _L("actionbar-passivemode-on", "Passive mode on"))
+  TriggerEvent("DoLongHudText", "Passive mode on")
   passiveModeEnabled = true
   Citizen.CreateThread(function()
     while passiveModeEnabled do
@@ -144,17 +144,17 @@ function passiveMode()
 end
 
 Citizen.CreateThread(function()
-	-- exports["comet-keybinds"]:registerKeyMapping("", _L("keybinds-player", "Player"), _L("keybinds-actionbar", "Action Bar"), "+actionBar", "-actionBar", "Z")
+	
 	RegisterCommand('+actionBar', actionBarDown, false)
 	RegisterCommand('-actionBar', actionBarUp, false)
     exports["comet-base"]:FetchComponent("Keybinds").Add("Player",  "+actionBar", "-actionBar", "Action Bar", "keyboard", "Y")
 
-	-- exports["comet-keybinds"]:registerKeyMapping("", _L("keybinds-player", "Player"), _L("keybinds-wink", "Wink"), "+playerWink", "-playerWink")
+	
 	RegisterCommand('+playerWink', playerWink, false)
 	RegisterCommand('-playerWink', function() end, false)
     exports["comet-base"]:FetchComponent("Keybinds").Add("Player",  "+playerWink", "-playerWink", "Wink")
 
-	-- exports["comet-keybinds"]:registerKeyMapping("", _L("keybinds-player", "Player"), _L("keybinds-passive", "Passive Mode"), "+passiveMode", "-passiveMode")
+	
 	RegisterCommand('+passiveMode', passiveMode, false)
 	RegisterCommand('-passiveMode', function() end, false)
     exports["comet-base"]:FetchComponent("Keybinds").Add("Player",  "+passiveMode", "-passiveMode", "Passive Mode")
@@ -378,11 +378,11 @@ AddEventHandler('equipWeaponID', function(hash,newInformation,sqlID,itemToRemove
 	
 	if armed then
 		armed = false
-		TriggerEvent("hud-display-item",tonumber(hash), _L("actionbar-holster", "Holster"))
+		TriggerEvent("hud-display-item",tonumber(hash), "Holster")
 		holster1h()		
 	else
 		armed = true
-		TriggerEvent("hud-display-item",tonumber(hash), _L("actionbar-equip", "Equip"))
+		TriggerEvent("hud-display-item",tonumber(hash),"Equip")
 		print(json.encode(newInformation))
 		unholster1h(tonumber(hash),true, json.decode(newInformation))
 	end	
@@ -732,23 +732,23 @@ function unholster1h(weaponHash, a, info)
 		return
 	end
 
-	-- local effect = exports['comet-galleria']:GetEffect('WEAPON_PULL')
-	-- if not effect then
-	-- 	effect = {
-	-- 		level = 0
-	-- 	}
-	-- end
-	-- if weaponHash ~= -538741184 and weaponHash ~= 615608432 then
-	--     loadAnimDict(dict)
-	--     TaskPlayAnim(ped, dict, anim, 1.0, 1.0, -1, 50, effect.level / 100, 0, 0, 0)
-	-- 	local time = 900 - (900 * effect.level / 100)
-	--     Citizen.Wait(time)
-	--     GiveWeaponToPed(ped, weaponHash, getAmmo(weaponHash), 0, 1)
-	--     SetCurrentPedWeapon(ped, weaponHash, 1)
-	-- else
-    --   GiveWeaponToPed(ped, weaponHash, getAmmo(weaponHash), 1, 0)
-    --   SetCurrentPedWeapon(ped, weaponHash, 0)
-	-- end
+	local effect = nil
+	if not effect then
+		effect = {
+			level = 0
+		}
+	end
+	if weaponHash ~= -538741184 and weaponHash ~= 615608432 then
+	    loadAnimDict(dict)
+	    TaskPlayAnim(ped, dict, anim, 1.0, 1.0, -1, 50, effect.level / 100, 0, 0, 0)
+		local time = 900 - (900 * effect.level / 100)
+	    Citizen.Wait(time)
+	    GiveWeaponToPed(ped, weaponHash, getAmmo(weaponHash), 0, 1)
+	    SetCurrentPedWeapon(ped, weaponHash, 1)
+	else
+      GiveWeaponToPed(ped, weaponHash, getAmmo(weaponHash), 1, 0)
+      SetCurrentPedWeapon(ped, weaponHash, 0)
+	end
 
   if weaponHash == 218362403 then
       SetPedWeaponTintIndex(ped, weaponHash, 6)
