@@ -167,13 +167,17 @@ local function GetVehicleSpeed(vehicle)
     return (speed * conversionNum)
 end
 
+local recentViewMode = 0
+local changedViewMode = false
+
+
 CreateThread(function()
 	while true do
 		Wait(1)
 
 		playerPed = PlayerPedId()
 		car = GetVehiclePedIsIn(playerPed, false)
-		if car then
+		if car and IsPedInAnyVehicle(playerPed) then
 			if GetPedInVehicleSeat(car, -1) == playerPed then
                 if GetVehicleSpeed(car) < minSpeedDriver then
 				    SetPlayerCanDoDriveBy(PlayerId(), true)
@@ -186,6 +190,20 @@ CreateThread(function()
                 end
 			else
 				SetPlayerCanDoDriveBy(PlayerId(), false)
+			end
+
+            if IsPedDoingDriveby(playerPed) then
+                if GetFollowVehicleCamViewMode() ~= 4 then
+					recentViewMode = GetFollowVehicleCamViewMode()
+					local context = GetCamActiveViewModeContext()
+					SetCamViewModeForContext(context, 4)
+					changedViewMode = true
+				end
+            end
+            if changedViewMode and not IsPedDoingDriveby(ped) then
+				local context = GetCamActiveViewModeContext()
+				SetCamViewModeForContext(context, recentViewMode)
+				changedViewMode = false
 			end
 		end
 	end
