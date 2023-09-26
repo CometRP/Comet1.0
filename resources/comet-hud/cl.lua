@@ -19,8 +19,7 @@ Citizen.CreateThread(function()  -- Thread to remove health and armour hud
     end
 end)
 
-Citizen.CreateThread(	 -- Thread to move the minimap position and disable north blip
-  function()
+Citizen.CreateThread(function()
     local minimap = RequestScaleformMovie("minimap")
     while not HasScaleformMovieLoaded(minimap) do
       Wait(0)
@@ -29,41 +28,34 @@ Citizen.CreateThread(	 -- Thread to move the minimap position and disable north 
     SetMinimapComponentPosition("minimap_mask", "L", "B", 0.020, 0.032, 0.111, 0.159)
     SetMinimapComponentPosition("minimap_blur", "L", "B", -0.03, 0.002, 0.266, 0.237)
 	SetBlipAlpha(GetNorthRadarBlip(), 0)
-
-  end
-)
-
-AddEventHandler('playerSpawned', function()  -- Enable hud only after player spawn
-	Citizen.CreateThread(function()
-		Wait(100)
-		while true do 
-			Wait(1000)
-			if IsEntityDead(PlayerPedId()) then
-				health = 0
-			else
-				health = math.ceil(GetEntityHealth(PlayerPedId()) - 100)
-			end
-			armor = math.ceil(GetPedArmour(PlayerPedId()))
-			oxygen = math.ceil(GetPlayerUnderwaterTimeRemaining(PlayerId())) * 4
-			food = 75
-			thirst = 75
-			tension = 75
-			
-			Wait(100)
-
-			SendNUIMessage({
-				posi = posi,
-				show = IsPauseMenuActive(),  -- Disable hud if settings menu is active
-				health = health,
-				armor = armor,
-				food = food,
-				thirst = thirst,
-				oxygen = oxygen,
-				tension = tension
-			})
-		end
-	end)
 end)
 
+Citizen.CreateThread(function()
+	Wait(100)
+	while true do 
+		Wait(1000)
+		if IsEntityDead(PlayerPedId()) then
+			health = 0
+		else
+			health = math.ceil(GetEntityHealth(PlayerPedId()) - 100)
+		end
+		armor = math.ceil(GetPedArmour(PlayerPedId()))
+		oxygen = math.ceil(GetPlayerUnderwaterTimeRemaining(PlayerId())) * 4
+		food = 75
+		thirst = 75
+		tension = 75
+		
+		Wait(100)
 
-
+		SendNUIMessage({
+			posi = posi,
+			show = IsPauseMenuActive(),  -- Disable hud if settings menu is active
+			health = health,
+			armor = armor,
+			food = food,
+			thirst = thirst,
+			oxygen = oxygen,
+			tension = tension
+		})
+	end
+end)
