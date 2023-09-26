@@ -2,11 +2,11 @@ RegisterServerEvent("comet-base:sync:ready", function()
     -- do nothing
 end)
 
-RegisterServerEvent("sync:request", function(native, netID, ...)
-    TriggerClientEvent("sync:execute", -1, native, netID, ...)
+RegisterServerEvent("comet-base:sync:request", function(native, netID, ...)
+    TriggerClientEvent("comet-base:sync:execute", -1, native, netID, ...)
 end)
 
-RegisterServerEvent("sync:execute:aborted", function(native, netID)
+RegisterServerEvent("comet-base:sync:execute:aborted", function(native, netID)
     -- do nothing
 end)
 

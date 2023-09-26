@@ -16,7 +16,7 @@ end)
 
 function RequestSyncExecution(native, entity, ...)
     if DoesEntityExist(entity) then
-        TriggerServerEvent('sync:request', GetInvokingResource(), native, GetPlayerServerId(NetworkGetEntityOwner(entity)), NetworkGetNetworkIdFromEntity(entity), ...)
+        TriggerServerEvent('comet-base:sync:request', GetInvokingResource(), native, GetPlayerServerId(NetworkGetEntityOwner(entity)), NetworkGetNetworkIdFromEntity(entity), ...)
     end
 end
 
@@ -114,11 +114,11 @@ Components.Sync.SetVehicleDoorShut = function (vehicle, doorIndex, closeInstantl
 end
 
 Components.Sync.SetVehicleDoorOpen = function (vehicle, doorIndex, loose, openInstantly)
-  if NetworkHasControlOfEntity(vehicle) then
-      SetVehicleDoorOpen(vehicle, doorIndex, loose, openInstantly)
-  else
-      RequestSyncExecution("SetVehicleDoorOpen", vehicle, doorIndex, loose, openInstantly)
-  end
+    if NetworkHasControlOfEntity(vehicle) then
+        SetVehicleDoorOpen(vehicle, doorIndex, loose, openInstantly)
+    else
+        RequestSyncExecution("SetVehicleDoorOpen", vehicle, doorIndex, loose, openInstantly)
+    end
 end
 
 Components.Sync.SetVehicleDoorBroken = function (vehicle, doorIndex, deleteDoor)
