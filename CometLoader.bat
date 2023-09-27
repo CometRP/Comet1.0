@@ -7,4 +7,4 @@ timeout /t 3 /nobreak >nul
 color 07
 cls
 
-D:\[Comet]\Comet1.0\server-files\FXServer.exe +exec cfg/server.cfg
+D:\[Comet]\Comet1.0\server-files\FXServer.exe +exec cfg/server.cfg +set onesync on
