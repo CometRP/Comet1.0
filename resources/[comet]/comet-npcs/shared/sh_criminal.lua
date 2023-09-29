@@ -57,7 +57,7 @@ Config.Peds["hitmna"] = {
                 label = 'Hit Contracts',
                 action = function(entity)
                     print(entity)
-              
+                    
                 end,
             },
         },
