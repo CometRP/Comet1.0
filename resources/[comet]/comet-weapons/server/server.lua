@@ -14,21 +14,27 @@ AddEventHandler("comet-weapons:processGiveCashAmount", function(pTarget, pAmount
             
 end)
 
+CreateThread(function()
+    local Callback = exports['comet-base']:FetchComponent("Callback")
+    
+    while not Callback do Wait(25) end
 
-RegisterNetEvent("weapons:getAmmo", function(pSource)
-    local ammoTable = {}
-    local Player = exports['comet-base']:FetchComponent("Player").GetBySource(pSource)
-    exports.oxmysql:execute("SELECT type, ammo FROM characters_weapons WHERE id = @id", {['id'] = Player.PlayerData.cid}, function(result)
-        for i = 1, #result do
-            if ammoTable["" .. result[i].type .. ""] == nil then
-                ammoTable["" .. result[i].type .. ""] = {}
-                ammoTable["" .. result[i].type .. ""]["ammo"] = result[i].ammo
-                ammoTable["" .. result[i].type .. ""]["type"] = ""..result[i].type..""
+    Callback.Register("weapons:getAmmo", function(pSource)
+        local ammoTable = {}
+        local Player = exports['comet-base']:FetchComponent("Player").GetBySource(pSource)
+        exports.oxmysql:execute("SELECT type, ammo FROM characters_weapons WHERE id = @id", {['id'] = Player.PlayerData.cid}, function(result)
+            for i = 1, #result do
+                if ammoTable["" .. result[i].type .. ""] == nil then
+                    ammoTable["" .. result[i].type .. ""] = {}
+                    ammoTable["" .. result[i].type .. ""]["ammo"] = result[i].ammo
+                    ammoTable["" .. result[i].type .. ""]["type"] = ""..result[i].type..""
+                end
             end
-        end
-        TriggerClientEvent('comet-items:SetAmmo', pSource, ammoTable)
+            TriggerClientEvent('comet-items:SetAmmo', pSource, ammoTable)
+        end)
     end)
 end)
+
 
 RegisterNetEvent('comet-weapons:getAmmo')
 AddEventHandler('comet-weapons:getAmmo', function()
